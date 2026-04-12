@@ -49,6 +49,7 @@
   --font-heading: "Fraunces", "Manrope", Georgia, serif;
   --font-body: "Manrope", system-ui, -apple-system, sans-serif;
   --font-display: "Fraunces", Georgia, serif;
+  --font-hand: "Caveat", "Segoe Script", cursive;
 }
 
 @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
@@ -180,7 +181,69 @@ h2 { font-weight: 600; letter-spacing: -0.025em; }
 }
 
 .font-display { font-family: var(--font-display); font-optical-sizing: auto; }
+.font-hand { font-family: var(--font-hand); font-weight: 500; }
 .text-balance { text-wrap: balance; }
+
+/* Scrapbook paper texture — subtle warm grain */
+.paper-texture {
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0.32  0 0 0 0 0.27  0 0 0 0 0.18  0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n2'><feTurbulence type='fractalNoise' baseFrequency='0.2' numOctaves='1'/><feColorMatrix values='0 0 0 0 0.7  0 0 0 0 0.6  0 0 0 0 0.4  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n2)'/></svg>");
+  background-blend-mode: multiply;
+}
+
+/* Graph paper — like a notebook */
+.paper-grid {
+  background-image:
+    linear-gradient(to right, rgba(107, 114, 87, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(107, 114, 87, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Ruled notebook — horizontal lines only */
+.paper-ruled {
+  background-image: linear-gradient(to bottom, transparent 27px, rgba(46, 91, 184, 0.12) 28px);
+  background-size: 100% 28px;
+}
+
+/* Polaroid soft shadow layered look */
+.polaroid {
+  background: #FFFDF8;
+  padding: 14px 14px 48px;
+  box-shadow:
+    0 1px 2px rgba(42, 45, 37, 0.05),
+    0 6px 20px -4px rgba(42, 45, 37, 0.18),
+    0 22px 50px -12px rgba(42, 45, 37, 0.22);
+}
+.polaroid--rotate-left { transform: rotate(-2.2deg); }
+.polaroid--rotate-right { transform: rotate(1.8deg); }
+
+/* Stamp rubber look */
+.stamp {
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: 0.05em;
+  border: 2px solid currentColor;
+  padding: 6px 14px;
+  border-radius: 4px;
+  transform: rotate(-6deg);
+  opacity: 0.82;
+}
+
+/* Handwritten underline scribble (SVG bg) */
+.scribble-underline {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12'><path d='M2 8 Q 50 2, 100 6 T 198 7' stroke='%23E54CA2' stroke-width='3' stroke-linecap='round' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position: left 95%;
+  background-size: 100% 0.32em;
+  padding-bottom: 0.18em;
+}
+
+/* Highlighted marker */
+.marker-highlight {
+  background: linear-gradient(180deg, transparent 55%, rgba(245,144,66,0.38) 55%, rgba(245,144,66,0.38) 92%, transparent 92%);
+  padding: 0 4px;
+}
 
 .noise {
   position: absolute;
