@@ -1,0 +1,1 @@
+{"version":"0.0.1","configurations":[{"name":"dynamo-dev","runtimeExecutable":"/usr/local/bin/npm","runtimeArgs":["run","dev"],"port":3003,"cwd":"/Users/javierbadaracco/Nueva web de DYNAMO 2026/dynamo-site"}]}
