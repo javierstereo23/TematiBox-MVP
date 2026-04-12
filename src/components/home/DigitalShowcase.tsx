@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { digitalCategories, formatPrice } from "@/data/themes";
+import { digitalCategories } from "@/data/themes";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
 
 export function DigitalShowcase() {
@@ -54,10 +54,9 @@ export function DigitalShowcase() {
                     <p className="text-xs text-text-secondary leading-relaxed mb-4 flex-1 line-clamp-2">
                       {cat.description}
                     </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-bold text-text-primary">{formatPrice(cat.price)}</span>
+                    <div className="flex items-center justify-end">
                       <span className="text-xs font-semibold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all">
-                        Ver <span>→</span>
+                        Elegir tema <span>→</span>
                       </span>
                     </div>
                   </div>
