@@ -39,7 +39,7 @@ export async function POST(req: Request) {
   }
 
   const persNote = body.personalization
-    ? `Personalizacion: ${body.personalization.name} (${body.personalization.age} anos)` +
+    ? `Personalizacion: ${body.personalization.name} (${body.personalization.age} años)` +
       (body.personalization.eventDate ? ` | Fecha: ${body.personalization.eventDate}` : "") +
       (body.personalization.eventTime ? ` | Hora: ${body.personalization.eventTime}` : "") +
       (body.personalization.venue ? ` | Lugar: ${body.personalization.venue}` : "")

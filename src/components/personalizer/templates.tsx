@@ -78,7 +78,7 @@ export function InvitacionTemplate({ palette, personalization, themeName }: Temp
         {age}
       </text>
       <text x="300" y="380" textAnchor="middle" fill={palette.accent} fontSize="22" fontWeight="500" fontFamily="Inter, system-ui, sans-serif">
-        anos de
+        años de
       </text>
 
       {/* name */}
@@ -195,7 +195,7 @@ export function ColorearTemplate({ palette, personalization, themeName, themeEmo
       <g transform="translate(300, 700)">
         <rect x="-70" y="0" width="140" height="36" rx="18" fill={palette.secondary} />
         <text x="0" y="24" textAnchor="middle" fill={palette.dark} fontSize="16" fontWeight="700" fontFamily="Inter, system-ui, sans-serif">
-          {age} anos
+          {age} años
         </text>
       </g>
 
@@ -251,7 +251,7 @@ export function EscolaresTemplate({ palette, personalization, themeName, themeEm
       <g transform="translate(400, 560)">
         <rect x="-180" y="-20" width="360" height="36" rx="18" fill={palette.accent} />
         <text x="0" y="4" textAnchor="middle" fill="white" fontSize="14" fontWeight="700" fontFamily="Inter, system-ui, sans-serif">
-          {themeName} · {age} anos · Pack completo
+          {themeName} · {age} años · Pack completo
         </text>
       </g>
     </svg>
@@ -355,7 +355,7 @@ export function EtiquetasTemplate({ palette, personalization, themeName, themeEm
         ETIQUETAS ESCOLARES · PACK COMPLETO
       </text>
       <text x="40" y="72" fill="white" fontSize="22" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">
-        Utiles de {name} · {age} anos
+        Utiles de {name} · {age} años
       </text>
       <text x="760" y="58" textAnchor="end" fontSize="42">{themeEmoji}</text>
 

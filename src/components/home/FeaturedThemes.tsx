@@ -30,8 +30,8 @@ export function FeaturedThemes() {
                 Temas populares
               </p>
               <h2 className="text-3xl md:text-5xl font-extrabold text-text-primary text-balance max-w-xl">
-                Lo que le hace brillar{" "}
-                <span className="font-display italic font-normal text-gradient-primary">los ojos al chico.</span>
+                Lo que te hace{" "}
+                <span className="font-display italic font-normal text-gradient-primary">brillar.</span>
               </h2>
             </div>
             <Link

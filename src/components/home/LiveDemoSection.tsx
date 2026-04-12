@@ -49,7 +49,7 @@ export function LiveDemoSection() {
               <div className="space-y-4 mb-6">
                 <div>
                   <label className="block text-xs font-semibold text-text-secondary mb-1.5 tracking-wide uppercase">
-                    Nombre del cumpleanero
+                    Nombre del cumpleañero
                   </label>
                   <input
                     type="text"

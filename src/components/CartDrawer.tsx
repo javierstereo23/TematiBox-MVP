@@ -67,7 +67,7 @@ export function CartDrawer() {
                         {item.personalization?.name && (
                           <p className="text-xs text-primary mt-0.5 truncate">
                             Para {item.personalization.name}
-                            {item.personalization.age ? `, ${item.personalization.age} anos` : ""}
+                            {item.personalization.age ? `, ${item.personalization.age} años` : ""}
                           </p>
                         )}
                       </div>
