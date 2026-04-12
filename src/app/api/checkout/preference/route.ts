@@ -53,7 +53,7 @@ export async function POST(req: Request) {
     const client = new MercadoPagoConfig({ accessToken: token });
     const preference = new Preference(client);
 
-    const prefBody: Record<string, unknown> = {
+    const prefBody = {
       items: [
         {
           id: body.productId,
@@ -77,12 +77,11 @@ export async function POST(req: Request) {
         personalization_note: persNote,
       },
       statement_descriptor: "TEMATIBOX",
+      ...(isPublic && {
+        auto_return: "approved" as const,
+        notification_url: `${baseUrl}/api/mp/webhook`,
+      }),
     };
-
-    if (isPublic) {
-      prefBody.auto_return = "approved";
-      prefBody.notification_url = `${baseUrl}/api/mp/webhook`;
-    }
 
     const result = await preference.create({ body: prefBody });
 

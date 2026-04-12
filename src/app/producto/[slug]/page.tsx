@@ -7,6 +7,7 @@ import {
 } from "@/data/products";
 import { getThemeBySlug, getDigitalCategory } from "@/data/themes";
 import { ProductDetail } from "@/components/personalizer/ProductDetail";
+import { ProductJsonLd } from "@/components/seo/ProductJsonLd";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -34,6 +35,7 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
 
   return (
     <section className="py-10 md:py-14 px-6">
+      <ProductJsonLd product={product} theme={theme} category={category} />
       <div className="max-w-6xl mx-auto">
         <nav className="flex items-center gap-2 text-sm text-text-secondary mb-8">
           <Link href="/" className="hover:text-primary">Inicio</Link>

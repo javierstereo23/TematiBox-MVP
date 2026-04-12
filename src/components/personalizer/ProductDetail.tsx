@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -9,6 +9,7 @@ import type { ThemeData, DigitalCategoryMeta, Personalization } from "@/data/the
 import { formatPrice, getDiscount } from "@/data/themes";
 import { useCart } from "@/components/CartProvider";
 import { waLink } from "@/lib/config";
+import { track } from "@/components/Analytics";
 
 interface Props {
   product: RealProduct;
@@ -39,6 +40,24 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
 
   const isValid = (pers.name?.trim().length ?? 0) > 0 && pers.age !== "" && pers.age !== undefined;
 
+  // Track view_item once on mount
+  useEffect(() => {
+    track("view_item", {
+      currency: "ARS",
+      value: product.price || 0,
+      items: [
+        {
+          item_id: product.id,
+          item_name: product.title,
+          item_category: product.primaryCategory,
+          item_brand: product.primaryTheme || "general",
+          price: product.price || 0,
+        },
+      ],
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product.id]);
+
   function update<K extends keyof Personalization>(key: K, value: string) {
     setPers((prev) => ({ ...prev, [key]: key === "age" ? (value === "" ? "" : Number(value)) : value }));
   }
@@ -46,6 +65,18 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
   async function handleBuyNow() {
     if (!isValid || !product.price) return;
     setPaying(true);
+    track("begin_checkout", {
+      currency: "ARS",
+      value: product.price,
+      items: [
+        {
+          item_id: product.id,
+          item_name: product.title,
+          item_category: product.primaryCategory,
+          price: product.price,
+        },
+      ],
+    });
     try {
       const res = await fetch("/api/checkout/preference", {
         method: "POST",
@@ -106,6 +137,18 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
       gradient: category?.gradient || theme?.gradient || "from-primary to-accent-pink",
       image: product.image,
       personalization,
+    });
+    track("add_to_cart", {
+      currency: "ARS",
+      value: product.price,
+      items: [
+        {
+          item_id: product.id,
+          item_name: product.title,
+          item_category: product.primaryCategory,
+          price: product.price,
+        },
+      ],
     });
     router.push("/checkout");
   }
