@@ -62,8 +62,22 @@ export function FeaturedThemes() {
                       sizes="(max-width: 768px) 50vw, 25vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-t ${t.gradient} opacity-20 mix-blend-multiply`} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${t.gradient} opacity-15 mix-blend-multiply`} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+
+                    {/* licensed logo overlay (if available) */}
+                    {t.logoImage && (
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-1/3 flex items-center justify-center">
+                        <Image
+                          src={t.logoImage}
+                          alt={`${t.name} logo`}
+                          width={240}
+                          height={96}
+                          className="w-full h-full object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]"
+                        />
+                      </div>
+                    )}
+
                     {t.trending && (
                       <span className="absolute top-3 right-3 inline-block px-2.5 py-1 rounded-full bg-red-500/95 text-white text-[10px] font-bold shadow">
                         TENDENCIA
@@ -71,7 +85,7 @@ export function FeaturedThemes() {
                     )}
                     <div className="absolute bottom-0 left-0 right-0 p-4">
                       <h3 className="text-white text-lg font-extrabold drop-shadow mb-0.5">{t.name}</h3>
-                      <p className="text-white/80 text-xs font-medium">{t.ageRange}</p>
+                      <p className="text-white/85 text-xs font-medium drop-shadow">{t.ageRange}</p>
                     </div>
                   </div>
                 </Link>

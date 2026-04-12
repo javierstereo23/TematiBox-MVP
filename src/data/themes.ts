@@ -17,6 +17,13 @@ export interface ThemeData {
   popular: boolean;
   trending?: boolean;
   image: string;
+  /**
+   * Optional path to the licensed brand logo (transparent PNG).
+   * Drop file at /public/images/licenses/{slug}.png and set this field.
+   * If absent, the FeaturedThemes card falls back to the editorial
+   * image + theme name text.
+   */
+  logoImage?: string;
   palette: ThemePalette;
 }
 
