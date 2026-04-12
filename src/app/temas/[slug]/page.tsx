@@ -6,9 +6,12 @@ import {
   getThemeBySlug,
   getCombosByTheme,
   digitalCategories,
+  getDigitalCategory,
   formatPrice,
 } from "@/data/themes";
+import { getProductsByTheme } from "@/data/products";
 import { ComboCard } from "@/components/ComboCard";
+import { ProductCard } from "@/components/ProductCard";
 
 export function generateStaticParams() {
   return themes.map((t) => ({ slug: t.slug }));
@@ -19,13 +22,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const theme = getThemeBySlug(slug);
   if (!theme) return { title: "Tema no encontrado" };
   return {
-    title: `${theme.name} - Combos e imprimibles | Tematibox`,
+    title: `${theme.name} | Combos e imprimibles | Tematibox`,
     description: theme.description,
-    openGraph: {
-      title: `${theme.name} | Tematibox`,
-      description: theme.description,
-      images: [theme.image],
-    },
+    openGraph: { title: `${theme.name} | Tematibox`, description: theme.description, images: [theme.image] },
   };
 }
 
@@ -35,25 +34,34 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
   if (!theme) notFound();
 
   const physicalCombos = getCombosByTheme(slug);
-  const related = themes.filter((t) => t.category === theme.category && t.slug !== theme.slug).slice(0, 3);
+  const themeProducts = getProductsByTheme(slug);
+
+  // Group products by primary category
+  const byCategory = new Map<string, typeof themeProducts>();
+  for (const p of themeProducts) {
+    const arr = byCategory.get(p.primaryCategory) || [];
+    arr.push(p);
+    byCategory.set(p.primaryCategory, arr);
+  }
+  // Categories that have products, in declared order
+  const catsWithProducts = digitalCategories.filter((c) => byCategory.has(c.id));
+  const catsEmpty = digitalCategories.filter((c) => !byCategory.has(c.id));
+
+  const related = themes.filter((t) => t.category === theme.category && t.slug !== theme.slug).slice(0, 4);
 
   return (
     <>
       <section className="relative overflow-hidden py-16 md:py-24 px-6">
         <div className="absolute inset-0">
           <Image src={theme.image} alt="" fill priority sizes="100vw" className="object-cover" />
-          <div className={`absolute inset-0 bg-gradient-to-br ${theme.gradient} opacity-40 mix-blend-multiply`} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/30" />
+          <div className={`absolute inset-0 bg-gradient-to-br ${theme.gradient} opacity-45 mix-blend-multiply`} />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
         </div>
         <div className="relative max-w-5xl mx-auto">
           <nav className="flex items-center gap-2 text-sm text-white/70 mb-8">
-            <Link href="/" className="hover:text-white transition-colors">
-              Inicio
-            </Link>
+            <Link href="/" className="hover:text-white transition-colors">Inicio</Link>
             <span>/</span>
-            <Link href="/temas" className="hover:text-white transition-colors">
-              Temas
-            </Link>
+            <Link href="/temas" className="hover:text-white transition-colors">Temas</Link>
             <span>/</span>
             <span className="text-white/95">{theme.name}</span>
           </nav>
@@ -73,7 +81,7 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
                   {theme.ageRange}
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-sm text-sm text-white font-medium">
-                  {physicalCombos.length + digitalCategories.length} opciones
+                  {themeProducts.length} imprimibles · {physicalCombos.length} combos fisicos
                 </span>
               </div>
             </div>
@@ -104,67 +112,95 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
         </section>
       )}
 
-      <section className="py-16 px-6 bg-gradient-to-br from-violet-50 via-pink-50 to-amber-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-10">
-            <span className="inline-block text-xs font-bold text-violet-700 bg-violet-100 px-3 py-1 rounded-full mb-3">
-              DIGITAL . DESCARGA AL INSTANTE
-            </span>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-text-primary mb-2">
-              Imprimibles personalizados de {theme.name}
-            </h2>
-            <p className="text-text-secondary max-w-xl">
-              Cada uno se personaliza con el nombre, edad y datos del evento. Elegi el que necesites.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {digitalCategories.map((cat) => (
-              <Link
-                key={cat.id}
-                href={`/imprimibles/${cat.id}/${theme.slug}`}
-                className="group relative overflow-hidden rounded-2xl bg-bg-white border border-border-light card-hover"
-              >
-                <div className={`h-32 bg-gradient-to-br ${cat.gradient} flex items-center justify-center relative`}>
-                  <span className="text-5xl drop-shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    {cat.emoji}
-                  </span>
-                  {cat.badge && (
-                    <span className="absolute top-3 right-3 bg-white/95 text-text-primary text-xs font-bold px-2.5 py-1 rounded-full shadow">
-                      {cat.badge}
-                    </span>
-                  )}
-                </div>
-                <div className="p-5">
-                  <h3 className="font-bold text-text-primary mb-1 group-hover:text-primary transition-colors">
-                    {cat.name}
-                  </h3>
-                  <p className="text-sm text-text-secondary leading-relaxed mb-3 line-clamp-2">{cat.description}</p>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <span className="text-xs text-text-tertiary line-through mr-1.5">
-                        {formatPrice(cat.originalPrice)}
-                      </span>
-                      <span className="text-lg font-bold text-text-primary">{formatPrice(cat.price)}</span>
+      {themeProducts.length > 0 && (
+        <section className="py-16 px-6 bg-gradient-to-br from-violet-50 via-pink-50 to-amber-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-10">
+              <span className="inline-block text-xs font-bold text-violet-700 bg-violet-100 px-3 py-1 rounded-full mb-3">
+                DIGITAL · DESCARGA AL INSTANTE
+              </span>
+              <h2 className="text-2xl md:text-3xl font-extrabold text-text-primary mb-2">
+                Imprimibles de {theme.name}
+              </h2>
+              <p className="text-text-secondary max-w-xl">
+                {themeProducts.length} disenos personalizables con el nombre del chico, edad y datos del evento.
+              </p>
+            </div>
+
+            {catsWithProducts.map((cat) => {
+              const items = byCategory.get(cat.id) || [];
+              return (
+                <div key={cat.id} className="mb-12">
+                  <div className="flex items-end justify-between mb-5">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center text-xl shadow`}>
+                        {cat.emoji}
+                      </div>
+                      <div>
+                        <h3 className="text-lg md:text-xl font-extrabold text-text-primary">{cat.name}</h3>
+                        <p className="text-xs text-text-secondary">{items.length} {items.length === 1 ? "diseno" : "disenos"}</p>
+                      </div>
                     </div>
-                    <span className="text-primary text-sm font-semibold flex items-center gap-1">
-                      Personalizar
-                      <svg className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </span>
+                    <Link
+                      href={`/imprimibles/${cat.id}/${theme.slug}`}
+                      className="text-sm font-semibold text-primary hover:text-primary-dark whitespace-nowrap"
+                    >
+                      Ver todos →
+                    </Link>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+                    {items.slice(0, 4).map((p, i) => (
+                      <ProductCard key={p.id} product={p} index={i} />
+                    ))}
                   </div>
                 </div>
-              </Link>
-            ))}
+              );
+            })}
+
+            {catsEmpty.length > 0 && (
+              <div className="mt-10 pt-10 border-t border-border-light">
+                <p className="text-sm font-bold text-text-tertiary mb-4 tracking-wide uppercase">
+                  Mas categorias para {theme.name}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {catsEmpty.map((cat) => (
+                    <Link
+                      key={cat.id}
+                      href={`/imprimibles/${cat.id}/${theme.slug}`}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border-light text-sm font-semibold text-text-secondary hover:border-primary hover:text-primary"
+                    >
+                      <span>{cat.emoji}</span>
+                      <span>{cat.shortName}</span>
+                      <span className="text-xs text-text-tertiary">(a medida)</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {themeProducts.length === 0 && physicalCombos.length === 0 && (
+        <section className="py-20 px-6">
+          <div className="max-w-2xl mx-auto text-center">
+            <span className="text-6xl mb-4 block">🧩</span>
+            <h2 className="text-2xl font-extrabold text-text-primary mb-3">
+              Todavia no tenemos productos de {theme.name}
+            </h2>
+            <p className="text-text-secondary mb-8">
+              Escribinos y armamos una propuesta a medida para el cumple.
+            </p>
+            <Link href="/imprimibles" className="btn-primary">Ver todos los imprimibles</Link>
+          </div>
+        </section>
+      )}
 
       {related.length > 0 && (
         <section className="py-16 px-6 bg-bg-white border-t border-border-light">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-2xl font-extrabold text-text-primary mb-8">Otros temas que te pueden gustar</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {related.map((t) => (
                 <Link
                   key={t.slug}

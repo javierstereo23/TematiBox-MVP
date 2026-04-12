@@ -51,7 +51,13 @@ export type DigitalCategoryId =
   | "colorear"
   | "escolares"
   | "cliparts"
-  | "etiquetas";
+  | "etiquetas"
+  | "toppers"
+  | "stickers"
+  | "cotillon-banderines"
+  | "mega-kit"
+  | "souvenirs"
+  | "otros";
 
 export interface DigitalCategoryMeta {
   id: DigitalCategoryId;
@@ -295,6 +301,81 @@ export const themes: ThemeData[] = [
     image: "/images/themes/among-us/cover.png",
     palette: { primary: "#312e81", secondary: "#06b6d4", accent: "#1e1b4b", light: "#eef2ff", dark: "#1e1b4b" },
   },
+  {
+    slug: "guerreras-kpop",
+    name: "Guerreras K-Pop",
+    category: "musica",
+    description: "Huntrix, Saja Boys y la saga de Demon Hunters. Ramen, soda pop y magia.",
+    emoji: "🗡️",
+    gradient: "from-fuchsia-500 via-red-500 to-blue-600",
+    ageRange: "9-16 anos",
+    popular: true,
+    trending: true,
+    image: "/images/themes/guerreras-kpop/cover.png",
+    palette: { primary: "#d946ef", secondary: "#ef4444", accent: "#1e3a8a", light: "#fdf4ff", dark: "#701a75" },
+  },
+  {
+    slug: "italian-brainrot",
+    name: "Italian Brainrot",
+    category: "gaming",
+    description: "Tralalero Tralala, Tung Tung Sahur, Bombardino. El viral que aman.",
+    emoji: "🦈",
+    gradient: "from-teal-400 via-pink-400 to-yellow-400",
+    ageRange: "7-13 anos",
+    popular: true,
+    trending: true,
+    image: "/images/themes/italian-brainrot/cover.png",
+    palette: { primary: "#14b8a6", secondary: "#ec4899", accent: "#f59e0b", light: "#f0fdfa", dark: "#134e4a" },
+  },
+  {
+    slug: "99-noches-bosque",
+    name: "99 Noches en el Bosque",
+    category: "gaming",
+    description: "El juego de Roblox que esta rompiendola. Misterio y aventura.",
+    emoji: "🌲",
+    gradient: "from-emerald-800 via-slate-900 to-amber-800",
+    ageRange: "7-14 anos",
+    popular: true,
+    trending: true,
+    image: "/images/themes/99-noches-bosque/cover.png",
+    palette: { primary: "#065f46", secondary: "#b45309", accent: "#1e293b", light: "#f0fdf4", dark: "#022c22" },
+  },
+  {
+    slug: "cinnamoroll",
+    name: "Cinnamoroll",
+    category: "animacion",
+    description: "Cinnamoroll y el universo Sanrio. Ultra tierno, pastel y celestial.",
+    emoji: "☁️",
+    gradient: "from-sky-200 via-pink-200 to-purple-200",
+    ageRange: "4-10 anos",
+    popular: true,
+    image: "/images/themes/cinnamoroll/cover.png",
+    palette: { primary: "#7dd3fc", secondary: "#f9a8d4", accent: "#a78bfa", light: "#f0f9ff", dark: "#0c4a6e" },
+  },
+  {
+    slug: "fortnite",
+    name: "Fortnite",
+    category: "gaming",
+    description: "Battle royale en su cumple. Neon, skins y victory royale.",
+    emoji: "🎮",
+    gradient: "from-violet-600 via-orange-500 to-cyan-500",
+    ageRange: "7-14 anos",
+    popular: true,
+    image: "/images/themes/fortnite/cover.png",
+    palette: { primary: "#7c3aed", secondary: "#f97316", accent: "#06b6d4", light: "#faf5ff", dark: "#4c1d95" },
+  },
+  {
+    slug: "chicas-superpoderosas",
+    name: "Chicas Superpoderosas",
+    category: "animacion",
+    description: "Bombon, Burbuja y Bellota: tres chicas, tres colores, un cumple epico.",
+    emoji: "💖",
+    gradient: "from-pink-400 via-emerald-300 to-sky-400",
+    ageRange: "4-10 anos",
+    popular: false,
+    image: "/images/themes/chicas-superpoderosas/cover.png",
+    palette: { primary: "#f472b6", secondary: "#6ee7b7", accent: "#60a5fa", light: "#fdf2f8", dark: "#831843" },
+  },
 ];
 
 export const digitalCategories: DigitalCategoryMeta[] = [
@@ -360,6 +441,79 @@ export const digitalCategories: DigitalCategoryMeta[] = [
     originalPrice: 7020,
     requiresEvent: false,
   },
+  {
+    id: "toppers",
+    name: "Toppers para torta",
+    shortName: "Toppers",
+    description: "Toppers imprimibles para la torta del cumple.",
+    longDescription: "Pack de toppers en PDF alta calidad listos para imprimir y pegar en palillos. Ideal para torta central y cupcakes. Personalizable con nombre y edad.",
+    emoji: "🎂",
+    gradient: "from-amber-400 via-orange-500 to-red-500",
+    price: 3500,
+    originalPrice: 6500,
+    requiresEvent: false,
+  },
+  {
+    id: "stickers",
+    name: "Stickers",
+    shortName: "Stickers",
+    description: "Stickers imprimibles para decorar todo.",
+    longDescription: "Pack de stickers en PDF listos para imprimir en papel adhesivo o vinilo. Para cuadernos, mochilas, regalos y deco.",
+    emoji: "✨",
+    gradient: "from-purple-400 via-pink-400 to-rose-400",
+    price: 3500,
+    originalPrice: 6300,
+    requiresEvent: false,
+  },
+  {
+    id: "cotillon-banderines",
+    name: "Banderines y cotillon",
+    shortName: "Cotillon",
+    description: "Banderines, guirnaldas y decoracion imprimible.",
+    longDescription: "Pack de cotillon imprimible: banderines, guirnaldas, individuales y deco de mesa. Solo imprimir, recortar y armar.",
+    emoji: "🎉",
+    gradient: "from-pink-400 via-purple-500 to-indigo-500",
+    price: 4500,
+    originalPrice: 8100,
+    requiresEvent: false,
+  },
+  {
+    id: "mega-kit",
+    name: "Mega Kit",
+    shortName: "Mega Kit",
+    description: "Packs grandes con 99+ disenos incluidos.",
+    longDescription: "Mega Kits con 99, 110 o 127 disenos HD en PNG transparente y PDF. Ideal para sublimar en masa, emprendedores y mamas que quieren tener todo.",
+    emoji: "📦",
+    gradient: "from-indigo-600 via-purple-600 to-fuchsia-600",
+    price: 12900,
+    originalPrice: 23000,
+    requiresEvent: false,
+    badge: "Mejor valor",
+  },
+  {
+    id: "souvenirs",
+    name: "Souvenirs",
+    shortName: "Souvenirs",
+    description: "Detalles de agradecimiento para invitados.",
+    longDescription: "Souvenirs imprimibles con personalizacion: 'Gracias por venir', cajitas, tarjetas, etiquetas para golosinas. El toque final del cumple.",
+    emoji: "🎁",
+    gradient: "from-rose-400 via-amber-400 to-yellow-400",
+    price: 2900,
+    originalPrice: 5200,
+    requiresEvent: false,
+  },
+  {
+    id: "otros",
+    name: "Otros imprimibles",
+    shortName: "Otros",
+    description: "Juegos, wellness, afirmaciones y mas.",
+    longDescription: "Imprimibles variados: juegos de rol, tarjetas de afirmaciones, wellness, organizadores y mucho mas.",
+    emoji: "🧩",
+    gradient: "from-slate-400 via-gray-500 to-zinc-500",
+    price: 3900,
+    originalPrice: 7000,
+    requiresEvent: false,
+  },
 ];
 
 const defaultFiestaItems: ComboItem[] = [
@@ -422,26 +576,8 @@ export const combos: Combo[] = [
   makeFiesta("sprunki", "Sprunki", 38000, defaultFiestaItems, "Viral"),
 ];
 
-function buildDigitalProducts(): DigitalProduct[] {
-  const list: DigitalProduct[] = [];
-  for (const theme of themes) {
-    for (const cat of digitalCategories) {
-      list.push({
-        id: `${cat.id}-${theme.slug}`,
-        themeSlug: theme.slug,
-        category: cat.id,
-        name: `${cat.name} ${theme.name}`,
-        description: `${cat.description} Tema ${theme.name}.`,
-        price: cat.price,
-        originalPrice: cat.originalPrice,
-        coverImage: theme.image,
-      });
-    }
-  }
-  return list;
-}
-
-export const digitalProducts: DigitalProduct[] = buildDigitalProducts();
+// Legacy auto-generated products removed. Real catalog now lives in src/data/products.ts
+export const digitalProducts: DigitalProduct[] = [];
 
 export function getThemeBySlug(slug: string): ThemeData | undefined {
   return themes.find((t) => t.slug === slug);
@@ -457,18 +593,6 @@ export function getComboById(id: string): Combo | undefined {
 
 export function getDigitalCategory(id: string): DigitalCategoryMeta | undefined {
   return digitalCategories.find((c) => c.id === id);
-}
-
-export function getDigitalProduct(categoryId: DigitalCategoryId, themeSlug: string): DigitalProduct | undefined {
-  return digitalProducts.find((p) => p.category === categoryId && p.themeSlug === themeSlug);
-}
-
-export function getDigitalProductsByTheme(themeSlug: string): DigitalProduct[] {
-  return digitalProducts.filter((p) => p.themeSlug === themeSlug);
-}
-
-export function getDigitalProductsByCategory(categoryId: DigitalCategoryId): DigitalProduct[] {
-  return digitalProducts.filter((p) => p.category === categoryId);
 }
 
 export function formatPrice(price: number): string {

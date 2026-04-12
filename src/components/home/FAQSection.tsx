@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "@/components/motion/Reveal";
+import { waLink } from "@/lib/config";
 
 const FAQS = [
   {
@@ -94,7 +95,7 @@ export function FAQSection() {
           <div className="mt-10 text-center">
             <p className="text-sm text-text-secondary mb-3">No encontraste tu pregunta?</p>
             <a
-              href="https://wa.me/5491100000000"
+              href={waLink("Hola! Tengo una pregunta sobre Tematibox")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 btn-secondary !py-2.5 !px-5 !text-sm"
