@@ -20,7 +20,7 @@ function getCategoryShowcase(catId: DigitalCategoryId | string): string | null {
 export default function ImprimiblesPage() {
   return (
     <>
-      {/* HERO con imagen de persona real */}
+      {/* HERO editorial con imagen lateral */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -31,41 +31,57 @@ export default function ImprimiblesPage() {
             sizes="100vw"
             className="object-cover"
           />
-          {/* side-gradient editorial: dark left where text lives, image breathes on the right */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/45 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/82 via-black/55 to-transparent" />
         </div>
 
-        <div className="relative max-w-6xl mx-auto px-6 py-24 md:py-36">
+        <div className="relative max-w-7xl mx-auto px-6 py-24 md:py-36">
           <div className="max-w-2xl text-white">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/30 text-xs font-semibold mb-6 tracking-wide shadow-lg">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-green" />
-              <span>DESCARGA AL INSTANTE · CON TU NOMBRE</span>
+            {/* Editorial eyebrow */}
+            <div className="flex items-center gap-4 mb-8">
+              <span className="font-display italic text-white/75 text-sm">N.º 02</span>
+              <span className="h-px w-10 bg-white/40" />
+              <span className="text-[11px] font-bold tracking-[0.22em] uppercase text-white/85">
+                Catálogo de Imprimibles
+              </span>
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold leading-[1.05] mb-5 text-white" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.35)" }}>
+
+            <h1
+              className="font-display text-[44px] sm:text-[56px] md:text-[72px] font-light leading-[0.95] tracking-[-0.03em] mb-6 text-white"
+              style={{ textShadow: "0 2px 16px rgba(0,0,0,0.35)" }}
+            >
               Imprimibles que se sienten{" "}
               <span className="italic font-normal">hechos a mano.</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/95 leading-relaxed max-w-lg mb-8" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.35)" }}>
-              Del cumple al cuaderno del cole, cada archivo lo personalizamos con el nombre de tu hijo. Descarga en 30 segundos y lo imprimís las veces que necesites.
+
+            <p
+              className="text-lg md:text-xl text-white/92 leading-[1.6] max-w-xl mb-10"
+              style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
+            >
+              Del cumple al cuaderno del cole, cada archivo lo personalizamos con el nombre de tu hijo.
+              Descarga en 30 segundos y lo imprimís las veces que necesites.
             </p>
-            <div className="flex flex-wrap gap-6 text-sm">
-              <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-accent-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-white/90">Entrega en 30 segundos</span>
+
+            {/* Trust band — hairline dividers, Fraunces numerals */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-4 pt-7 border-t border-white/25 max-w-[36rem]">
+              <div className="flex items-baseline gap-2">
+                <span className="font-display text-3xl font-normal text-white">30s</span>
+                <span className="text-[11px] uppercase tracking-wider text-white/80">
+                  entrega al instante
+                </span>
               </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-accent-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-white/90">+2.000 mamás confían</span>
+              <div className="h-8 w-px bg-white/25 hidden sm:block" />
+              <div className="flex items-baseline gap-2">
+                <span className="font-display text-3xl font-normal text-white">2k+</span>
+                <span className="text-[11px] uppercase tracking-wider text-white/80">
+                  mamás confían
+                </span>
               </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-accent-green flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-                <span className="text-white/90">Imprimís las veces que quieras</span>
+              <div className="h-8 w-px bg-white/25 hidden sm:block" />
+              <div className="flex items-baseline gap-2">
+                <span className="font-display text-3xl font-normal text-white">∞</span>
+                <span className="text-[11px] uppercase tracking-wider text-white/80">
+                  reimprimís las veces que quieras
+                </span>
               </div>
             </div>
           </div>
