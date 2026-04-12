@@ -31,10 +31,8 @@ export default function ImprimiblesPage() {
             sizes="100vw"
             className="object-cover"
           />
-          {/* multi-layer overlay for guaranteed text contrast */}
-          <div className="absolute inset-0 bg-black/55" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/60" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
+          {/* side-gradient editorial: dark left where text lives, image breathes on the right */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/45 to-transparent" />
         </div>
 
         <div className="relative max-w-6xl mx-auto px-6 py-24 md:py-36">
@@ -43,11 +41,11 @@ export default function ImprimiblesPage() {
               <span className="w-1.5 h-1.5 rounded-full bg-accent-green" />
               <span>DESCARGA AL INSTANTE · CON TU NOMBRE</span>
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.05] mb-5 text-white" style={{ textShadow: "0 2px 24px rgba(0,0,0,0.65), 0 1px 4px rgba(0,0,0,0.5)" }}>
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold leading-[1.05] mb-5 text-white" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.35)" }}>
               Imprimibles que se sienten{" "}
               <span className="italic font-normal">hechos a mano.</span>
             </h1>
-            <p className="text-lg md:text-xl text-white leading-relaxed max-w-lg mb-8" style={{ textShadow: "0 1px 6px rgba(0,0,0,0.5)" }}>
+            <p className="text-lg md:text-xl text-white/95 leading-relaxed max-w-lg mb-8" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.35)" }}>
               Del cumple al cuaderno del cole, cada archivo lo personalizamos con el nombre de tu hijo. Descarga en 30 segundos y lo imprimís las veces que necesites.
             </p>
             <div className="flex flex-wrap gap-6 text-sm">
