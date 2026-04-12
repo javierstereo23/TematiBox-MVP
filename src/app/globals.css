@@ -46,9 +46,9 @@
   --color-accent-green: var(--accent-green);
   --color-accent-blue: var(--accent-blue);
   --color-accent-cyan: var(--accent-cyan);
-  --font-heading: "Inter", system-ui, -apple-system, sans-serif;
-  --font-body: "Inter", system-ui, -apple-system, sans-serif;
-  --font-display: "Fraunces", "Inter", Georgia, serif;
+  --font-heading: "Fraunces", "Manrope", Georgia, serif;
+  --font-body: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
 }
 
 @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
@@ -70,11 +70,14 @@ body {
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.15;
+  font-weight: 600;
+  font-optical-sizing: auto;
+  line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--text-primary);
 }
+h1 { font-weight: 600; letter-spacing: -0.03em; }
+h2 { font-weight: 600; letter-spacing: -0.025em; }
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }

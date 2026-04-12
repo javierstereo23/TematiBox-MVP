@@ -1,9 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { products, type RealProduct } from "@/data/products";
+import { formatPrice } from "@/data/themes";
 
-type Msg = { role: "user" | "assistant"; content: string };
+type Msg = {
+  role: "user" | "assistant";
+  content: string;
+  productSlugs?: string[];
+};
 
 const INITIAL_GREETING: Msg = {
   role: "assistant",
@@ -12,14 +20,40 @@ const INITIAL_GREETING: Msg = {
 };
 
 function getDesignersOnline(): number {
-  // 2-4 "online" in business hours AR (10am-8pm), 1-2 outside
   const now = new Date();
-  const hour = now.getUTCHours() - 3; // approx AR
+  const hour = now.getUTCHours() - 3;
   const day = now.getDay();
   const isWeekend = day === 0 || day === 6;
   const isBusinessHours = hour >= 10 && hour <= 20 && !isWeekend;
   if (isBusinessHours) return 2 + Math.floor(Math.random() * 3);
   return 1 + Math.floor(Math.random() * 2);
+}
+
+function ProductCard({ product }: { product: RealProduct }) {
+  return (
+    <Link
+      href={`/producto/${product.slug}`}
+      className="group shrink-0 w-36 rounded-2xl overflow-hidden bg-bg-white border border-border-light hover:border-primary hover:shadow-md transition-all flex flex-col"
+    >
+      <div className="relative aspect-square bg-[#FAF6EE] overflow-hidden">
+        <Image
+          src={product.image}
+          alt={product.title}
+          fill
+          sizes="144px"
+          className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+        />
+      </div>
+      <div className="p-2.5 flex-1 flex flex-col">
+        <p className="text-[11px] font-semibold text-text-primary line-clamp-2 leading-tight mb-1.5 min-h-[28px]">
+          {product.title}
+        </p>
+        {product.price && (
+          <p className="text-xs font-bold text-primary mt-auto">{formatPrice(product.price)}</p>
+        )}
+      </div>
+    </Link>
+  );
 }
 
 export function ChatBot() {
@@ -55,7 +89,9 @@ export function ChatBot() {
     setMessages(newMessages);
     setStreaming(true);
 
-    const apiMessages = newMessages.filter((m) => m !== INITIAL_GREETING || newMessages.indexOf(m) > 0);
+    const apiMessages = newMessages
+      .filter((m) => m !== INITIAL_GREETING || newMessages.indexOf(m) > 0)
+      .map((m) => ({ role: m.role, content: m.content }));
 
     try {
       const res = await fetch("/api/chat", {
@@ -64,23 +100,56 @@ export function ChatBot() {
         body: JSON.stringify({ messages: apiMessages }),
       });
 
-      if (!res.ok || !res.body) {
-        throw new Error(`HTTP ${res.status}`);
-      }
+      if (!res.ok || !res.body) throw new Error(`HTTP ${res.status}`);
 
-      // Add an empty assistant message we'll fill via streaming
-      setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+      setMessages((prev) => [...prev, { role: "assistant", content: "", productSlugs: [] }]);
 
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
-      let acc = "";
+      let rawBuffer = "";
+      let metaParsed = false;
+      let productSlugs: string[] = [];
+      let textContent = "";
+
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
-        acc += decoder.decode(value, { stream: true });
+        rawBuffer += decoder.decode(value, { stream: true });
+
+        if (!metaParsed) {
+          const match = rawBuffer.match(/^__META__(.*?)__END__/s);
+          if (match) {
+            try {
+              const meta = JSON.parse(match[1]);
+              productSlugs = Array.isArray(meta.products) ? meta.products : [];
+            } catch {
+              productSlugs = [];
+            }
+            textContent = rawBuffer.slice(match[0].length);
+            metaParsed = true;
+          } else if (!rawBuffer.startsWith("__META__") && rawBuffer.length > 0) {
+            // no meta prefix → treat buffer as plain text
+            textContent = rawBuffer;
+            metaParsed = true;
+          }
+        } else {
+          textContent = rawBuffer.includes("__END__")
+            ? rawBuffer.split("__END__").slice(1).join("__END__")
+            : textContent + decoder.decode(value, { stream: true });
+          // Simpler: rebuild from full raw buffer each time
+          const endMatch = rawBuffer.match(/^__META__.*?__END__/s);
+          textContent = endMatch ? rawBuffer.slice(endMatch[0].length) : rawBuffer;
+        }
+
+        const currentSlugs = productSlugs.slice();
+        const currentText = textContent;
         setMessages((prev) => {
           const next = [...prev];
-          next[next.length - 1] = { role: "assistant", content: acc };
+          next[next.length - 1] = {
+            role: "assistant",
+            content: currentText,
+            productSlugs: currentSlugs,
+          };
           return next;
         });
       }
@@ -91,7 +160,7 @@ export function ChatBot() {
         {
           role: "assistant",
           content:
-            "Uy, tuve un problema técnico. Mejor pasate con Daniela directo (botón WhatsApp acá abajo).",
+            "Uy, tuve un problema técnico. Mejor pasate con Daniela directo — tocá el botón WhatsApp acá abajo.",
         },
       ]);
     } finally {
@@ -106,7 +175,7 @@ export function ChatBot() {
       const res = await fetch("/api/chat/handoff", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: messages.slice(-12) }),
+        body: JSON.stringify({ messages: messages.slice(-12).map((m) => ({ role: m.role, content: m.content })) }),
       });
       const data = await res.json();
       if (data.wa_url) {
@@ -134,7 +203,7 @@ export function ChatBot() {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             onClick={() => setOpen(true)}
             aria-label="Abrir chat"
-            className="fixed bottom-5 right-5 z-[90] flex items-center gap-3 pl-2 pr-4 py-2 rounded-full bg-bg-white shadow-xl border border-border-light hover:shadow-2xl transition-shadow group"
+            className="fixed bottom-5 right-5 z-[90] flex items-center gap-3 pl-2 pr-4 py-2 rounded-full bg-bg-white shadow-xl border border-border-light hover:shadow-2xl transition-shadow"
           >
             <span className="relative flex items-center justify-center w-11 h-11 rounded-full bg-gradient-to-br from-primary to-accent-pink text-white">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -168,7 +237,7 @@ export function ChatBot() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 40, scale: 0.95 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed z-[96] bottom-0 right-0 md:bottom-5 md:right-5 w-full md:w-[400px] h-[90vh] md:h-[640px] max-h-[calc(100vh-2rem)] bg-bg-white md:rounded-3xl shadow-2xl border border-border-light flex flex-col overflow-hidden"
+              className="fixed z-[96] bottom-0 right-0 md:bottom-5 md:right-5 w-full md:w-[420px] h-[90vh] md:h-[660px] max-h-[calc(100vh-2rem)] bg-bg-white md:rounded-3xl shadow-2xl border border-border-light flex flex-col overflow-hidden"
             >
               {/* Header */}
               <div className="p-4 bg-gradient-to-br from-primary to-primary-dark text-white flex items-center gap-3">
@@ -195,19 +264,36 @@ export function ChatBot() {
 
               {/* Messages */}
               <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3 bg-bg">
-                {messages.map((m, i) => (
-                  <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-                    <div
-                      className={`max-w-[85%] px-3.5 py-2 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
-                        m.role === "user"
-                          ? "bg-primary text-white rounded-br-sm"
-                          : "bg-bg-white border border-border-light text-text-primary rounded-bl-sm"
-                      }`}
-                    >
-                      {m.content || (streaming && i === messages.length - 1 ? "..." : "")}
+                {messages.map((m, i) => {
+                  const matched =
+                    m.role === "assistant" && m.productSlugs
+                      ? (m.productSlugs
+                          .map((s) => products.find((p) => p.slug === s))
+                          .filter(Boolean) as RealProduct[])
+                      : [];
+                  return (
+                    <div key={i} className="space-y-2">
+                      <div className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+                        <div
+                          className={`max-w-[85%] px-3.5 py-2 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
+                            m.role === "user"
+                              ? "bg-primary text-white rounded-br-sm"
+                              : "bg-bg-white border border-border-light text-text-primary rounded-bl-sm"
+                          }`}
+                        >
+                          {m.content || (streaming && i === messages.length - 1 ? "..." : "")}
+                        </div>
+                      </div>
+                      {matched.length > 0 && (
+                        <div className="flex gap-2 overflow-x-auto pb-1 pl-1 -mx-1 scrollbar-thin">
+                          {matched.map((p) => (
+                            <ProductCard key={p.id} product={p} />
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
                 {streaming && messages[messages.length - 1]?.role === "user" && (
                   <div className="flex justify-start">
                     <div className="bg-bg-white border border-border-light px-3.5 py-2 rounded-2xl rounded-bl-sm text-sm">
@@ -221,7 +307,7 @@ export function ChatBot() {
                 )}
               </div>
 
-              {/* Quick actions / handoff */}
+              {/* Handoff */}
               <div className="px-4 py-2 border-t border-border-light bg-bg-white">
                 <button
                   onClick={handoff}

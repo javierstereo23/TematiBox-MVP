@@ -2,6 +2,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { SYSTEM_PROMPT } from "@/lib/chat/system-prompt";
 import { searchCatalog } from "@/lib/chat/search";
 import { NextResponse } from "next/server";
+import type { RealProduct } from "@/data/products";
 
 export const runtime = "nodejs";
 
@@ -16,36 +17,6 @@ function formatPrice(n: number | null): string {
   return new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 }).format(n);
 }
 
-/**
- * Augment the last user message with a compact block of products relevant
- * to their query. Lets the bot recommend specific items with real URLs
- * without needing tool-use (keeps streaming simple + latency low).
- */
-function augmentWithCatalogContext(
-  messages: ChatBody["messages"]
-): ChatBody["messages"] {
-  if (messages.length === 0) return messages;
-  const last = messages[messages.length - 1];
-  if (last.role !== "user") return messages;
-
-  const relevant = searchCatalog(last.content, 5);
-  if (relevant.length === 0) return messages;
-
-  const ctx = relevant
-    .map((p) => {
-      const price = p.price ? ` · ${formatPrice(p.price)}` : "";
-      return `- ${p.title}${price} → ${SITE_URL}/producto/${p.slug}`;
-    })
-    .join("\n");
-
-  const augmentedContent = `${last.content}
-
-<productos_relacionados>
-${ctx}
-</productos_relacionados>`;
-
-  return [...messages.slice(0, -1), { role: "user", content: augmentedContent }];
-}
 
 export async function POST(req: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -80,13 +51,48 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "First message must be from user" }, { status: 400 });
   }
 
-  const messages = augmentWithCatalogContext(baseMessages);
-  const client = new Anthropic({ apiKey });
+  // Find relevant products from the catalog for the user's latest message
+  const lastUser = baseMessages[baseMessages.length - 1];
+  const relevant: RealProduct[] = lastUser ? searchCatalog(lastUser.content, 5) : [];
+  const relevantSlugs = relevant.map((p) => p.slug);
 
+  // Build the augmented conversation for the model (text-only, no URLs)
+  const relevantLines = relevant
+    .map((p) => {
+      const price = p.price ? ` · ${formatPrice(p.price)}` : "";
+      return `- ${p.title}${price}`;
+    })
+    .join("\n");
+
+  const messages = [...baseMessages];
+  if (relevant.length > 0 && messages.length > 0) {
+    const last = messages[messages.length - 1];
+    if (last.role === "user") {
+      messages[messages.length - 1] = {
+        role: "user",
+        content: `${last.content}
+
+<productos_relacionados>
+${relevantLines}
+
+(Nota: estos productos ya se muestran automáticamente como cards con imagen y link debajo de tu mensaje. Mencionalos por nombre en tu respuesta pero NO escribas URLs ni repitas precios.)
+</productos_relacionados>`,
+      };
+    }
+  }
+
+  const client = new Anthropic({ apiKey });
   const encoder = new TextEncoder();
+
   const stream = new ReadableStream({
     async start(controller) {
       try {
+        // Emit metadata first so frontend can render product cards
+        if (relevantSlugs.length > 0) {
+          const meta = JSON.stringify({ products: relevantSlugs });
+          controller.enqueue(encoder.encode(`__META__${meta}__END__`));
+        }
+
         const response = client.messages.stream({
           model: "claude-haiku-4-5",
           max_tokens: 1024,

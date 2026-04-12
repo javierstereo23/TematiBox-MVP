@@ -31,21 +31,23 @@ export default function ImprimiblesPage() {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/50" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
+          {/* multi-layer overlay for guaranteed text contrast */}
+          <div className="absolute inset-0 bg-black/55" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
         </div>
 
         <div className="relative max-w-6xl mx-auto px-6 py-24 md:py-36">
           <div className="max-w-2xl text-white">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 text-xs font-semibold mb-6 tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/30 text-xs font-semibold mb-6 tracking-wide shadow-lg">
               <span className="w-1.5 h-1.5 rounded-full bg-accent-green" />
               <span>DESCARGA AL INSTANTE · CON TU NOMBRE</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.05] mb-5 drop-shadow-lg">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.05] mb-5 text-white" style={{ textShadow: "0 2px 24px rgba(0,0,0,0.65), 0 1px 4px rgba(0,0,0,0.5)" }}>
               Imprimibles que se sienten{" "}
-              <span className="font-display italic font-normal">hechos a mano.</span>
+              <span className="italic font-normal">hechos a mano.</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-lg drop-shadow mb-8">
+            <p className="text-lg md:text-xl text-white leading-relaxed max-w-lg mb-8" style={{ textShadow: "0 1px 6px rgba(0,0,0,0.5)" }}>
               Del cumple al cuaderno del cole, cada archivo lo personalizamos con el nombre de tu hijo. Descarga en 30 segundos y lo imprimís las veces que necesites.
             </p>
             <div className="flex flex-wrap gap-6 text-sm">
