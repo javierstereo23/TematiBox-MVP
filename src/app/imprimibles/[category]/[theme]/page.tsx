@@ -51,7 +51,7 @@ export default async function CategoryThemePage({
   return (
     <>
       <section className={`relative overflow-hidden py-16 md:py-20 px-6 bg-gradient-to-br ${theme.gradient}`}>
-        <div className="absolute inset-0 bg-black/25" />
+        <div className="absolute inset-0 bg-black/50" />
         <div className="relative max-w-5xl mx-auto text-center text-white">
           <nav className="flex items-center justify-center gap-2 text-sm text-white/80 mb-6">
             <Link href="/" className="hover:text-white">Inicio</Link>

@@ -48,8 +48,8 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
       <section className="relative overflow-hidden py-16 md:py-24 px-6">
         <div className="absolute inset-0">
           <Image src={theme.image} alt="" fill priority sizes="100vw" className="object-cover" />
-          <div className={`absolute inset-0 bg-gradient-to-br ${theme.gradient} opacity-45 mix-blend-multiply`} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
+          <div className={`absolute inset-0 bg-gradient-to-br ${theme.gradient} opacity-35 mix-blend-multiply`} />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/65 to-black/45" />
         </div>
         <div className="relative max-w-5xl mx-auto">
           <nav className="flex items-center gap-2 text-sm text-white/70 mb-8">

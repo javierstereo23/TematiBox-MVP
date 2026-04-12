@@ -10,7 +10,8 @@ export function FinalCTA() {
     <section className="relative py-24 md:py-32 px-6 overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <Image src="/images/home/birthday-aesthetic.png" alt="" fill sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-primary/40 to-accent-pink/50" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-black/75" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-transparent to-accent-pink/20 mix-blend-overlay" />
       </div>
 
       <Reveal>
