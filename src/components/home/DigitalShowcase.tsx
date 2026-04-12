@@ -8,19 +8,19 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
 
 export function DigitalShowcase() {
   return (
-    <section className="py-20 md:py-28 px-6 bg-gradient-to-b from-amber-50/40 to-white">
+    <section className="py-16 md:py-24 px-6 bg-gradient-to-b from-amber-50/40 to-white">
       <div className="max-w-7xl mx-auto">
         <Reveal>
-          <div className="text-center mb-14">
+          <div className="text-center mb-12 md:mb-14">
             <p className="inline-block text-xs font-bold text-primary tracking-widest uppercase mb-3">
-              Imprimibles personalizados
+              Empezá por aquí
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold text-text-primary text-balance">
-              Cinco tipos para todo lo que{" "}
-              <span className="font-display italic font-normal text-gradient-primary">necesites imprimir</span>
+              Elegí tu categoría y{" "}
+              <span className="font-display italic font-normal text-gradient-primary">armá tu pedido.</span>
             </h2>
             <p className="text-text-secondary text-lg max-w-2xl mx-auto mt-4">
-              Todos se personalizan con el nombre del chico. Descarga al instante en alta calidad.
+              11 categorías de imprimibles personalizables. Tocá la que necesitás y elegí el tema favorito de tu hijo.
             </p>
           </div>
         </Reveal>
