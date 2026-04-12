@@ -29,7 +29,6 @@ export function DualSplitSection() {
               subtitle: "Invitaciones, toppers y cotillon",
               copy: "Invitaciones digitales, toppers para torta, banderines y souvenirs. Todo personalizado con el nombre del chico. Descargas al instante.",
               image: "/images/home/birthday-aesthetic.png",
-              emoji: "🎉",
               chip: "Digital · Al instante",
               cta: "Ver imprimibles del cumple",
               accent: "from-pink-400 to-amber-400",
@@ -40,7 +39,6 @@ export function DualSplitSection() {
               subtitle: "Etiquetas, escolares y cliparts",
               copy: "Etiquetas para carátulas, material escolar, flashcards educativas y cliparts para sublimar. Con el nombre del chico. Listos para imprimir.",
               image: "/images/home/school-flatlay.png",
-              emoji: "📚",
               chip: "Digital · Al instante",
               cta: "Ver imprimibles del cole",
               accent: "from-violet-400 to-sky-400",
@@ -59,22 +57,21 @@ export function DualSplitSection() {
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  {/* readability overlay: dark gradient + bottom scrim */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/20" />
+                  <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 to-transparent" />
                   <motion.div
-                    className={`absolute inset-0 bg-gradient-to-br ${card.accent} opacity-0 group-hover:opacity-15 transition-opacity duration-500 mix-blend-screen`}
+                    className={`absolute inset-0 bg-gradient-to-br ${card.accent} opacity-0 group-hover:opacity-20 transition-opacity duration-500 mix-blend-screen`}
                   />
                 </div>
                 <div className="relative h-full flex flex-col justify-end p-8 md:p-10 text-white">
-                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs font-semibold w-fit mb-4">
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-xs font-semibold w-fit mb-4 shadow">
                     {card.chip}
                   </span>
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-4xl md:text-5xl">{card.emoji}</span>
-                    <h3 className="text-3xl md:text-4xl font-extrabold">{card.title}</h3>
-                  </div>
-                  <p className="text-lg text-white/85 font-medium mb-1">{card.subtitle}</p>
-                  <p className="text-base text-white/75 leading-relaxed max-w-md mb-6">{card.copy}</p>
-                  <div className="inline-flex items-center gap-2 text-white font-semibold group-hover:gap-3 transition-all">
+                  <h3 className="text-3xl md:text-4xl font-extrabold mb-3 drop-shadow-lg">{card.title}</h3>
+                  <p className="text-lg text-white font-semibold mb-2 drop-shadow">{card.subtitle}</p>
+                  <p className="text-base text-white/95 leading-relaxed max-w-md mb-6 drop-shadow">{card.copy}</p>
+                  <div className="inline-flex items-center gap-2 text-white font-bold group-hover:gap-3 transition-all drop-shadow">
                     {card.cta}
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
