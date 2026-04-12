@@ -14,25 +14,45 @@ export default async function SearchPage({
   const results = q.length >= 2 ? products.filter((p) => p.title.toLowerCase().includes(q)) : [];
 
   return (
-    <section className="py-12 md:py-16 px-6">
+    <section className="py-14 md:py-20 px-6">
       <div className="max-w-7xl mx-auto">
-        <nav className="flex items-center gap-2 text-sm text-text-secondary mb-6">
+        <nav className="flex items-center gap-2 text-sm text-text-secondary mb-8">
           <Link href="/" className="hover:text-primary">Inicio</Link>
           <span>/</span>
           <span className="text-text-primary">Buscar</span>
         </nav>
 
-        <h1 className="text-3xl md:text-4xl font-extrabold text-text-primary mb-3">
-          {q ? `Resultados para "${sp.q}"` : "Buscar productos"}
+        <div className="flex items-center gap-4 mb-5">
+          <span className="font-display italic text-primary/70 text-sm">Búsqueda</span>
+          <span className="h-px w-10 bg-primary/30" />
+          <span className="text-[11px] font-bold tracking-[0.22em] uppercase text-text-secondary">
+            En el catálogo
+          </span>
+        </div>
+
+        <h1 className="font-display text-[38px] md:text-[56px] font-light text-text-primary leading-[0.98] tracking-[-0.025em] mb-4 text-balance">
+          {q ? (
+            <>
+              Resultados para{" "}
+              <span className="italic font-normal text-gradient-primary">&ldquo;{sp.q}&rdquo;</span>
+            </>
+          ) : (
+            <>
+              Buscá lo que{" "}
+              <span className="italic font-normal text-gradient-primary">querés imprimir</span>
+            </>
+          )}
         </h1>
         {q && (
-          <p className="text-text-secondary mb-8">
-            {results.length} {results.length === 1 ? "resultado" : "resultados"}
+          <p className="text-text-secondary mb-10">
+            {results.length} {results.length === 1 ? "resultado encontrado" : "resultados encontrados"}
           </p>
         )}
 
         {!q && (
-          <p className="text-text-secondary">Escribi en la barra de busqueda el nombre del tema o imprimible que necesitas.</p>
+          <p className="text-text-secondary text-base md:text-lg max-w-xl mb-10">
+            Escribí en la barra de arriba el nombre del tema o imprimible que necesitás.
+          </p>
         )}
 
         {q && results.length === 0 && (

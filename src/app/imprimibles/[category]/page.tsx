@@ -41,24 +41,46 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   return (
     <>
-      <section className={`relative overflow-hidden py-16 md:py-20 px-6 bg-gradient-to-br ${cat.gradient}`}>
-        <div className="absolute inset-0 bg-black/45" />
+      <section className={`relative overflow-hidden py-20 md:py-28 px-6 bg-gradient-to-br ${cat.gradient}`}>
+        <div className="absolute inset-0 bg-black/55" />
         <div className="relative max-w-5xl mx-auto text-center text-white">
-          <nav className="flex items-center justify-center gap-2 text-sm text-white/80 mb-6">
+          <nav className="flex items-center justify-center gap-2 text-sm text-white/80 mb-8">
             <Link href="/" className="hover:text-white">Inicio</Link>
             <span>/</span>
             <Link href="/imprimibles" className="hover:text-white">Imprimibles</Link>
             <span>/</span>
             <span className="text-white">{cat.shortName}</span>
           </nav>
-          <div className="w-24 h-24 mx-auto mb-5 rounded-2xl overflow-hidden bg-white/95 backdrop-blur-sm shadow-xl flex items-center justify-center">
+
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <span className="font-display italic text-white/75 text-sm">Categoría</span>
+            <span className="h-px w-10 bg-white/40" />
+            <span className="text-[11px] font-bold tracking-[0.22em] uppercase text-white/85">
+              {cat.shortName}
+            </span>
+          </div>
+
+          <div className="w-24 h-24 mx-auto mb-7 rounded-2xl overflow-hidden bg-white/95 backdrop-blur-sm shadow-xl flex items-center justify-center">
             <Image src={cat.iconImage} alt={cat.name} width={96} height={96} className="object-cover" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-3 drop-shadow">{cat.name}</h1>
-          <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto mb-5">{cat.longDescription}</p>
-          <div className="inline-flex items-center gap-3 bg-white/15 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-            <span className="text-xs text-white/80 line-through">{formatPrice(cat.originalPrice)}</span>
-            <span className="text-xl font-bold">desde {formatPrice(cat.price)}</span>
+
+          <h1
+            className="font-display text-[44px] md:text-[68px] font-light leading-[0.95] tracking-[-0.03em] mb-5 text-balance"
+            style={{ textShadow: "0 2px 16px rgba(0,0,0,0.3)" }}
+          >
+            {cat.name}
+          </h1>
+          <p
+            className="text-base md:text-lg text-white/92 max-w-2xl mx-auto mb-7 leading-[1.6]"
+            style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
+          >
+            {cat.longDescription}
+          </p>
+          <div className="inline-flex items-baseline gap-3 bg-white/15 backdrop-blur-sm rounded-full px-5 py-2.5 border border-white/25">
+            <span className="text-xs text-white/75 line-through">{formatPrice(cat.originalPrice)}</span>
+            <span className="font-display text-2xl font-normal text-white">
+              desde {formatPrice(cat.price)}
+            </span>
           </div>
         </div>
       </section>
