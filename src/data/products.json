@@ -186,9 +186,11 @@
     "themes": [
       "guerreras-kpop"
     ],
-    "categories": [],
+    "categories": [
+      "mascaras"
+    ],
     "primaryTheme": "guerreras-kpop",
-    "primaryCategory": "otros"
+    "primaryCategory": "mascaras"
   },
   {
     "id": "94025793388",
@@ -262,10 +264,11 @@
       "99-noches-bosque"
     ],
     "categories": [
+      "cotillon-banderines",
       "mega-kit"
     ],
     "primaryTheme": "roblox",
-    "primaryCategory": "mega-kit"
+    "primaryCategory": "cotillon-banderines"
   },
   {
     "id": "102394893446",
@@ -300,7 +303,8 @@
       "futbol-argentina"
     ],
     "categories": [
-      "cliparts"
+      "cliparts",
+      "mega-kit"
     ],
     "primaryTheme": "futbol-argentina",
     "primaryCategory": "cliparts"
@@ -319,7 +323,8 @@
       "stranger-things"
     ],
     "categories": [
-      "escolares"
+      "escolares",
+      "etiquetas"
     ],
     "primaryTheme": "stranger-things",
     "primaryCategory": "escolares"
@@ -396,7 +401,8 @@
       "guerreras-kpop"
     ],
     "categories": [
-      "stickers"
+      "stickers",
+      "mascaras"
     ],
     "primaryTheme": "guerreras-kpop",
     "primaryCategory": "stickers"
@@ -451,9 +457,11 @@
     "themes": [
       "fortnite"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "fortnite",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "98745081681",
@@ -468,9 +476,11 @@
     "themes": [
       "guerreras-kpop"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "guerreras-kpop",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "97100149972",
@@ -542,9 +552,11 @@
     "themes": [
       "sonic"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "sonic",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "108583155331",
@@ -559,9 +571,11 @@
     "themes": [
       "pokemon"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "pokemon",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "94816527500",
@@ -576,9 +590,11 @@
     "themes": [
       "hello-kitty"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "hello-kitty",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "95246069741",
@@ -785,9 +801,11 @@
     "themes": [
       "pokemon"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "pokemon",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "99578603472",
@@ -1086,7 +1104,8 @@
     "sold": null,
     "rating": null,
     "themes": [
-      "navidad"
+      "navidad",
+      "dia-padre"
     ],
     "categories": [
       "colorear"
@@ -1182,9 +1201,11 @@
     "themes": [
       "roblox"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "roblox",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "109161737027",
@@ -1256,9 +1277,11 @@
     "themes": [
       "fortnite"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "fortnite",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "106133504604",
@@ -1369,9 +1392,11 @@
     "themes": [
       "guerreras-kpop"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "guerreras-kpop",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "94811591952",
@@ -1461,9 +1486,11 @@
     "themes": [
       "guerreras-kpop"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "guerreras-kpop",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "107422495551",
@@ -1514,9 +1541,11 @@
     "themes": [
       "stranger-things"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "stranger-things",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "94927338378",
@@ -1550,9 +1579,11 @@
     "themes": [
       "roblox"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "roblox",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "107470458905",
@@ -1703,9 +1734,11 @@
     "themes": [
       "cinnamoroll"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "cinnamoroll",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "110224832361",
@@ -1893,9 +1926,11 @@
     "themes": [
       "mario"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "mario",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "100395898981",
@@ -1908,7 +1943,8 @@
     "sold": null,
     "rating": null,
     "themes": [
-      "navidad"
+      "navidad",
+      "dia-padre"
     ],
     "categories": [
       "stickers"
@@ -1949,9 +1985,11 @@
     "themes": [
       "roblox"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "roblox",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "106748235314",
@@ -2202,6 +2240,25 @@
     "primaryCategory": "etiquetas"
   },
   {
+    "id": "95361127035",
+    "slug": "invitacion-cumpleanos-pikachu-pokemon-digital-o-imprimible-95361127035",
+    "title": "Invitación Cumpleaños Pikachú Pokémon Digital O Imprimible",
+    "image": "/images/products/95361127035.webp",
+    "mlPermalink": "https://www.mercadolibre.com.ar/invitacion-cumpleanos-pikachu-pokemon-digital-o-imprimible/up/MLAU3070472523?pdp_filters=seller_id%3A257195099",
+    "price": 6900,
+    "originalPrice": 6900,
+    "sold": null,
+    "rating": null,
+    "themes": [
+      "pokemon"
+    ],
+    "categories": [
+      "invitaciones"
+    ],
+    "primaryTheme": "pokemon",
+    "primaryCategory": "invitaciones"
+  },
+  {
     "id": "104159060827",
     "slug": "10-imagenes-stranger-things-png-san-valentin-steve-imprimir-104159060827",
     "title": "10 Imágenes Stranger Things Png San Valentín Steve Imprimir",
@@ -2328,9 +2385,11 @@
     "themes": [
       "guerreras-kpop"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "guerreras-kpop",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "95960846989",
@@ -2574,9 +2633,11 @@
     "themes": [
       "italian-brainrot"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "italian-brainrot",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "106196869968",
@@ -2592,9 +2653,11 @@
       "guerreras-kpop",
       "fortnite"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "guerreras-kpop",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "95364656985",
@@ -2872,9 +2935,11 @@
     "themes": [
       "italian-brainrot"
     ],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": "italian-brainrot",
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "106586086069",
@@ -3009,7 +3074,8 @@
     "rating": null,
     "themes": [],
     "categories": [
-      "cliparts"
+      "cliparts",
+      "mega-kit"
     ],
     "primaryTheme": null,
     "primaryCategory": "cliparts"
@@ -3094,9 +3160,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "106862073583",
@@ -3602,10 +3670,11 @@
     "rating": null,
     "themes": [],
     "categories": [
+      "invitaciones",
       "stickers"
     ],
     "primaryTheme": null,
-    "primaryCategory": "stickers"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "89497852820",
@@ -3856,9 +3925,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "95491217996",
@@ -3904,9 +3975,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "95943749140",
@@ -3936,9 +4009,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "95941889167",
@@ -4210,10 +4285,11 @@
     "rating": null,
     "themes": [],
     "categories": [
+      "invitaciones",
       "toppers"
     ],
     "primaryTheme": null,
-    "primaryCategory": "toppers"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "97614699360",
@@ -4308,9 +4384,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "107092966041",
@@ -4425,9 +4503,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "101583859525",
@@ -4524,10 +4604,11 @@
     "rating": null,
     "themes": [],
     "categories": [
+      "invitaciones",
       "stickers"
     ],
     "primaryTheme": null,
-    "primaryCategory": "stickers"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "85351919022",
@@ -4577,10 +4658,12 @@
     "rating": null,
     "themes": [],
     "categories": [
-      "toppers"
+      "invitaciones",
+      "toppers",
+      "cotillon-banderines"
     ],
     "primaryTheme": null,
-    "primaryCategory": "toppers"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "107510161019",
@@ -4610,9 +4693,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "94813240522",
@@ -4643,9 +4728,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "90832163278",
@@ -4793,9 +4880,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "90367573852",
@@ -4857,9 +4946,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "etiquetas"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "etiquetas"
   },
   {
     "id": "95361751995",
@@ -4993,9 +5084,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "95499029242",
@@ -5209,9 +5302,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "92143572387",
@@ -5224,9 +5319,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "106099821233",
@@ -5273,9 +5370,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "escolares"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "escolares"
   },
   {
     "id": "89881566613",
@@ -5339,9 +5438,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "escolares"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "escolares"
   },
   {
     "id": "94924809884",
@@ -5371,9 +5472,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "escolares"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "escolares"
   },
   {
     "id": "107809056881",
@@ -5489,9 +5592,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "95246374533",
@@ -5786,21 +5891,6 @@
     "primaryCategory": "cliparts"
   },
   {
-    "id": "95361127035",
-    "slug": "invitacion-cumpleanos-pikachu-pokemon-digital-o-imprimible-95361127035",
-    "title": "Invitación Cumpleaños Pikachú Pokémon Digital O Imprimible",
-    "image": "/images/products/95361127035.webp",
-    "mlPermalink": "https://www.mercadolibre.com.ar/invitacion-cumpleanos-pikachu-pokemon-digital-o-imprimible/up/MLAU3070472523?pdp_filters=seller_id%3A257195099",
-    "price": 6900,
-    "originalPrice": 6900,
-    "sold": null,
-    "rating": null,
-    "themes": [],
-    "categories": [],
-    "primaryTheme": null,
-    "primaryCategory": "otros"
-  },
-  {
     "id": "107183906537",
     "slug": "imprimible-para-pintar-primo-shelly-bibi-colt-jessie-poco-le-107183906537",
     "title": "Imprimible Para Pintar Primo Shelly Bibi Colt Jessie Poco Le",
@@ -5828,9 +5918,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "103141313635",
@@ -5912,10 +6004,11 @@
     "rating": null,
     "themes": [],
     "categories": [
+      "invitaciones",
       "toppers"
     ],
     "primaryTheme": null,
-    "primaryCategory": "toppers"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "95499644680",
@@ -5945,9 +6038,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "82716817093",
@@ -5977,9 +6072,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "94974258321",
@@ -6041,9 +6138,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "105367680875",
@@ -6127,10 +6226,11 @@
     "rating": null,
     "themes": [],
     "categories": [
+      "invitaciones",
       "stickers"
     ],
     "primaryTheme": null,
-    "primaryCategory": "stickers"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "93898098277",
@@ -6262,9 +6362,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "97217447133",
@@ -6310,9 +6412,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "93841815609",
@@ -6342,9 +6446,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "escolares"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "escolares"
   },
   {
     "id": "95364640671",
@@ -6425,9 +6531,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "99008782725",
@@ -6509,9 +6617,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "invitaciones"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "invitaciones"
   },
   {
     "id": "88233858400",
@@ -6559,7 +6669,8 @@
     "rating": null,
     "themes": [],
     "categories": [
-      "cliparts"
+      "cliparts",
+      "mega-kit"
     ],
     "primaryTheme": null,
     "primaryCategory": "cliparts"
@@ -6593,7 +6704,8 @@
     "rating": null,
     "themes": [],
     "categories": [
-      "cliparts"
+      "cliparts",
+      "mega-kit"
     ],
     "primaryTheme": null,
     "primaryCategory": "cliparts"
@@ -6705,9 +6817,11 @@
     "sold": null,
     "rating": null,
     "themes": [],
-    "categories": [],
+    "categories": [
+      "escolares"
+    ],
     "primaryTheme": null,
-    "primaryCategory": "otros"
+    "primaryCategory": "escolares"
   },
   {
     "id": "105751223700",
@@ -6722,6 +6836,7 @@
     "themes": [],
     "categories": [
       "toppers",
+      "cotillon-banderines",
       "mega-kit"
     ],
     "primaryTheme": null,
