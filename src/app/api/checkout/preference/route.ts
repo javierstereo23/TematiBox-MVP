@@ -45,49 +45,68 @@ export async function POST(req: Request) {
       (body.personalization.venue ? ` | Lugar: ${body.personalization.venue}` : "")
     : "";
 
+  // auto_return requires a publicly reachable HTTPS URL; MP rejects localhost.
+  const isPublic = /^https:\/\//i.test(baseUrl) && !/localhost|127\.0\.0\.1/i.test(baseUrl);
+
   try {
     const { MercadoPagoConfig, Preference } = await import("mercadopago");
     const client = new MercadoPagoConfig({ accessToken: token });
     const preference = new Preference(client);
 
-    const result = await preference.create({
-      body: {
-        items: [
-          {
-            id: body.productId,
-            title: body.title.slice(0, 256),
-            description: persNote.slice(0, 256) || "Imprimible digital personalizable",
-            picture_url: body.image && body.image.startsWith("http") ? body.image : undefined,
-            quantity: 1,
-            unit_price: Number(body.price),
-            currency_id: "ARS",
-            category_id: "art",
-          },
-        ],
-        back_urls: {
-          success: `${baseUrl}/checkout/success`,
-          failure: `${baseUrl}/checkout/failure`,
-          pending: `${baseUrl}/checkout/success?status=pending`,
+    const prefBody: Record<string, unknown> = {
+      items: [
+        {
+          id: body.productId,
+          title: body.title.slice(0, 256),
+          description: persNote.slice(0, 256) || "Imprimible digital personalizable",
+          picture_url: body.image && body.image.startsWith("http") ? body.image : undefined,
+          quantity: 1,
+          unit_price: Number(body.price),
+          currency_id: "ARS",
+          category_id: "art",
         },
-        auto_return: "approved",
-        external_reference: body.productId,
-        metadata: {
-          product_id: body.productId,
-          personalization_note: persNote,
-        },
-        notification_url: `${baseUrl}/api/mp/webhook`,
-        statement_descriptor: "TEMATIBOX",
+      ],
+      back_urls: {
+        success: `${baseUrl}/checkout/success`,
+        failure: `${baseUrl}/checkout/failure`,
+        pending: `${baseUrl}/checkout/success?status=pending`,
       },
-    });
+      external_reference: body.productId,
+      metadata: {
+        product_id: body.productId,
+        personalization_note: persNote,
+      },
+      statement_descriptor: "TEMATIBOX",
+    };
 
+    if (isPublic) {
+      prefBody.auto_return = "approved";
+      prefBody.notification_url = `${baseUrl}/api/mp/webhook`;
+    }
+
+    const result = await preference.create({ body: prefBody });
+
+    // If TEST token, prefer sandbox_init_point (requires test buyer user).
+    const isTest = token.startsWith("TEST-");
     return NextResponse.json({
-      init_point: result.init_point,
+      init_point: isTest ? result.sandbox_init_point : result.init_point,
       sandbox_init_point: result.sandbox_init_point,
       preference_id: result.id,
+      mode: isTest ? "sandbox" : "production",
     });
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : String(e);
-    console.error("MP preference error:", msg);
-    return NextResponse.json({ mlFallback: true, reason: `MP error: ${msg}` });
+  } catch (e: unknown) {
+    const err = e as { message?: string; status?: number; cause?: unknown; error?: string };
+    const detail = {
+      message: err?.message || String(e),
+      status: err?.status,
+      cause: err?.cause,
+      error: err?.error,
+    };
+    console.error("MP preference error:", JSON.stringify(detail, null, 2));
+    return NextResponse.json({
+      mlFallback: true,
+      reason: detail.message || "MP error",
+      detail,
+    });
   }
 }
