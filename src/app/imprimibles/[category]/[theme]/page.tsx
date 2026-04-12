@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import {
   digitalCategories,
   themes,
@@ -61,8 +62,11 @@ export default async function CategoryThemePage({
             <span>/</span>
             <span className="text-white">{theme.name}</span>
           </nav>
-          <div className="text-5xl mb-3">
-            {cat.emoji} {theme.emoji}
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <div className="w-16 h-16 rounded-xl overflow-hidden bg-white/95 backdrop-blur-sm shadow-xl">
+              <Image src={cat.iconImage} alt={cat.name} width={64} height={64} className="object-cover" />
+            </div>
+            <span className="text-5xl drop-shadow-lg">{theme.emoji}</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-extrabold mb-3 drop-shadow text-balance">
             {cat.name} de {theme.name}

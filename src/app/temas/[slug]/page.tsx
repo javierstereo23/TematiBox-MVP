@@ -138,9 +138,11 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
                     <Link
                       key={cat.id}
                       href={`/imprimibles/${cat.id}/${theme.slug}`}
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-border-light text-sm font-semibold text-text-secondary hover:border-primary hover:text-primary"
+                      className="inline-flex items-center gap-2 pl-1.5 pr-3 py-1 rounded-full bg-white border border-border-light text-sm font-semibold text-text-secondary hover:border-primary hover:text-primary"
                     >
-                      <span>{cat.emoji}</span>
+                      <span className="relative w-7 h-7 rounded-full overflow-hidden bg-[#FAF6EE]">
+                        <Image src={cat.iconImage} alt="" fill sizes="28px" className="object-cover" />
+                      </span>
                       <span>{cat.shortName}</span>
                       <span className="text-xs text-text-tertiary">(a medida)</span>
                     </Link>

@@ -51,7 +51,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
             <span>/</span>
             <span className="text-white">{cat.shortName}</span>
           </nav>
-          <div className="text-6xl mb-4 drop-shadow-xl">{cat.emoji}</div>
+          <div className="w-24 h-24 mx-auto mb-5 rounded-2xl overflow-hidden bg-white/95 backdrop-blur-sm shadow-xl flex items-center justify-center">
+            <Image src={cat.iconImage} alt={cat.name} width={96} height={96} className="object-cover" />
+          </div>
           <h1 className="text-4xl md:text-5xl font-extrabold mb-3 drop-shadow">{cat.name}</h1>
           <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto mb-5">{cat.longDescription}</p>
           <div className="inline-flex items-center gap-3 bg-white/15 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
@@ -130,9 +132,11 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                 <Link
                   key={other.id}
                   href={`/imprimibles/${other.id}`}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-bg border border-border-light hover:border-primary hover:text-primary text-sm font-semibold transition-colors"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-bg border border-border-light hover:border-primary hover:text-primary text-sm font-semibold transition-colors"
                 >
-                  <span>{other.emoji}</span>
+                  <span className="relative w-6 h-6 rounded-md overflow-hidden bg-[#FAF6EE]">
+                    <Image src={other.iconImage} alt="" fill sizes="24px" className="object-cover" />
+                  </span>
                   <span>{other.shortName}</span>
                 </Link>
               ))}

@@ -46,6 +46,7 @@ export interface DigitalCategoryMeta {
   description: string;
   longDescription: string;
   emoji: string;
+  iconImage: string;
   gradient: string;
   price: number;
   originalPrice: number;
@@ -355,6 +356,7 @@ export const digitalCategories: DigitalCategoryMeta[] = [
     description: "Invitacion personalizada lista para mandar por WhatsApp.",
     longDescription: "Invitacion digital en PDF y PNG 4K con el nombre del cumpleañero, edad, fecha, hora y lugar. Entrega al instante apenas compras, lista para compartir por WhatsApp o redes.",
     emoji: "💌",
+    iconImage: "/images/categories/invitaciones.png",
     gradient: "from-rose-400 via-pink-400 to-fuchsia-500",
     price: 2500,
     originalPrice: 4500,
@@ -368,6 +370,7 @@ export const digitalCategories: DigitalCategoryMeta[] = [
     description: "Libro de 20 paginas para colorear personalizado.",
     longDescription: "Libro digital de 20 paginas en formato PDF con ilustraciones tematicas para colorear, personalizado con el nombre del chico. Listo para imprimir en A4.",
     emoji: "🎨",
+    iconImage: "/images/categories/colorear.png",
     gradient: "from-amber-400 via-orange-400 to-pink-400",
     price: 3500,
     originalPrice: 6300,
@@ -380,6 +383,7 @@ export const digitalCategories: DigitalCategoryMeta[] = [
     description: "Abecedario, flashcards y actividades didacticas.",
     longDescription: "Pack educativo digital: abecedario ilustrado, tarjetas de numeros, flashcards de vocabulario y actividades cognitivas, todo personalizado con el nombre del chico.",
     emoji: "📚",
+    iconImage: "/images/categories/escolares.png",
     gradient: "from-sky-400 via-blue-500 to-indigo-500",
     price: 4500,
     originalPrice: 8100,
@@ -392,6 +396,7 @@ export const digitalCategories: DigitalCategoryMeta[] = [
     description: "30+ PNG transparente en alta resolucion.",
     longDescription: "Pack profesional de 30 cliparts en PNG transparente 300dpi, ideal para sublimar en tazas, remeras y bolsos. Uso personal y comercial permitido.",
     emoji: "🖼️",
+    iconImage: "/images/categories/cliparts.png",
     gradient: "from-violet-500 via-purple-500 to-fuchsia-500",
     price: 5500,
     originalPrice: 9900,
@@ -405,6 +410,7 @@ export const digitalCategories: DigitalCategoryMeta[] = [
     description: "Caratulas, cuadernos, utiles y cartuchera.",
     longDescription: "Pack completo de etiquetas personalizadas para caratulas, cuadernos, lapices, cartuchera, botella y mochila. Con el nombre del chico, listas para imprimir y recortar.",
     emoji: "🏷️",
+    iconImage: "/images/categories/etiquetas.png",
     gradient: "from-teal-400 via-cyan-400 to-sky-500",
     price: 3900,
     originalPrice: 7020,
@@ -417,6 +423,7 @@ export const digitalCategories: DigitalCategoryMeta[] = [
     description: "Toppers imprimibles para la torta del cumple.",
     longDescription: "Pack de toppers en PDF alta calidad listos para imprimir y pegar en palillos. Ideal para torta central y cupcakes. Personalizable con nombre y edad.",
     emoji: "🎂",
+    iconImage: "/images/categories/toppers.png",
     gradient: "from-amber-400 via-orange-500 to-red-500",
     price: 3500,
     originalPrice: 6500,
@@ -429,6 +436,7 @@ export const digitalCategories: DigitalCategoryMeta[] = [
     description: "Stickers imprimibles para decorar todo.",
     longDescription: "Pack de stickers en PDF listos para imprimir en papel adhesivo o vinilo. Para cuadernos, mochilas, regalos y deco.",
     emoji: "✨",
+    iconImage: "/images/categories/stickers.png",
     gradient: "from-purple-400 via-pink-400 to-rose-400",
     price: 3500,
     originalPrice: 6300,
@@ -441,6 +449,7 @@ export const digitalCategories: DigitalCategoryMeta[] = [
     description: "Banderines, guirnaldas y decoracion imprimible.",
     longDescription: "Pack de cotillon imprimible: banderines, guirnaldas, individuales y deco de mesa. Solo imprimir, recortar y armar.",
     emoji: "🎉",
+    iconImage: "/images/categories/cotillon-banderines.png",
     gradient: "from-pink-400 via-purple-500 to-indigo-500",
     price: 4500,
     originalPrice: 8100,
@@ -453,6 +462,7 @@ export const digitalCategories: DigitalCategoryMeta[] = [
     description: "Packs grandes con 99+ disenos incluidos.",
     longDescription: "Mega Kits con 99, 110 o 127 disenos HD en PNG transparente y PDF. Ideal para sublimar en masa, emprendedores y mamas que quieren tener todo.",
     emoji: "📦",
+    iconImage: "/images/categories/mega-kit.png",
     gradient: "from-indigo-600 via-purple-600 to-fuchsia-600",
     price: 12900,
     originalPrice: 23000,
@@ -466,6 +476,7 @@ export const digitalCategories: DigitalCategoryMeta[] = [
     description: "Detalles de agradecimiento para invitados.",
     longDescription: "Souvenirs imprimibles con personalizacion: 'Gracias por venir', cajitas, tarjetas, etiquetas para golosinas. El toque final del cumple.",
     emoji: "🎁",
+    iconImage: "/images/categories/souvenirs.png",
     gradient: "from-rose-400 via-amber-400 to-yellow-400",
     price: 2900,
     originalPrice: 5200,
@@ -478,6 +489,7 @@ export const digitalCategories: DigitalCategoryMeta[] = [
     description: "Juegos, wellness, afirmaciones y mas.",
     longDescription: "Imprimibles variados: juegos de rol, tarjetas de afirmaciones, wellness, organizadores y mucho mas.",
     emoji: "🧩",
+    iconImage: "/images/categories/otros.png",
     gradient: "from-slate-400 via-gray-500 to-zinc-500",
     price: 3900,
     originalPrice: 7000,

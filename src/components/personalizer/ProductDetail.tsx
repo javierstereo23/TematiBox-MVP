@@ -191,9 +191,11 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
             {category && (
               <Link
                 href={`/imprimibles/${category.id}`}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r ${gradient} text-white text-xs font-bold hover:opacity-90`}
+                className="inline-flex items-center gap-2 pl-1 pr-3 py-1 rounded-full bg-bg border border-border-light text-xs font-bold text-text-primary hover:border-primary hover:text-primary"
               >
-                <span>{category.emoji}</span>
+                <span className="relative w-6 h-6 rounded-full overflow-hidden bg-[#FAF6EE]">
+                  <Image src={category.iconImage} alt="" fill sizes="24px" className="object-cover" />
+                </span>
                 <span>{category.shortName.toUpperCase()}</span>
               </Link>
             )}

@@ -38,8 +38,10 @@ export function ProductCard({ product, index = 0 }: Props) {
             className="object-contain transition-transform duration-500 group-hover:scale-105"
           />
           {category && (
-            <span className="absolute top-3 left-3 inline-flex items-center gap-1 bg-white/95 backdrop-blur-sm text-[10px] font-bold text-text-primary px-2 py-1 rounded-full shadow">
-              <span>{category.emoji}</span>
+            <span className="absolute top-3 left-3 inline-flex items-center gap-1 bg-white/95 backdrop-blur-sm text-[10px] font-bold text-text-primary pl-1 pr-2 py-0.5 rounded-full shadow">
+              <span className="relative w-5 h-5 rounded-full overflow-hidden bg-[#FAF6EE]">
+                <Image src={category.iconImage} alt="" fill sizes="20px" className="object-cover" />
+              </span>
               <span>{category.shortName.toUpperCase()}</span>
             </span>
           )}

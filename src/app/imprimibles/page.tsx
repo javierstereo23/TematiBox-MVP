@@ -42,12 +42,16 @@ export default function ImprimiblesPage() {
                 href={`/imprimibles/${cat.id}`}
                 className="group rounded-3xl overflow-hidden bg-bg-white border border-border-light card-hover flex flex-col"
               >
-                <div className={`h-44 bg-gradient-to-br ${cat.gradient} relative flex items-center justify-center`}>
-                  <span className="text-7xl drop-shadow-xl group-hover:scale-110 transition-transform duration-300">
-                    {cat.emoji}
-                  </span>
+                <div className="h-44 bg-[#FAF6EE] relative flex items-center justify-center">
+                  <Image
+                    src={cat.iconImage}
+                    alt={cat.name}
+                    width={180}
+                    height={180}
+                    className="object-contain group-hover:scale-105 transition-transform duration-300"
+                  />
                   {cat.badge && (
-                    <span className="absolute top-4 right-4 bg-white/95 text-text-primary text-xs font-bold px-3 py-1 rounded-full shadow">
+                    <span className="absolute top-4 right-4 bg-white text-text-primary text-xs font-bold px-3 py-1 rounded-full shadow">
                       {cat.badge}
                     </span>
                   )}

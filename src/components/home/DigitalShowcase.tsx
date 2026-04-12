@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { digitalCategories, formatPrice } from "@/data/themes";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
@@ -32,18 +33,19 @@ export function DigitalShowcase() {
                   href={`/imprimibles/${cat.id}`}
                   className="group relative block h-full rounded-3xl overflow-hidden bg-bg-white border border-border-light flex flex-col"
                 >
-                  <div
-                    className={`relative h-40 bg-gradient-to-br ${cat.gradient} flex items-center justify-center overflow-hidden`}
-                  >
-                    <span className="text-6xl drop-shadow-lg group-hover:scale-110 transition-transform duration-500">
-                      {cat.emoji}
-                    </span>
+                  <div className="relative h-40 bg-[#FAF6EE] flex items-center justify-center overflow-hidden">
+                    <Image
+                      src={cat.iconImage}
+                      alt={cat.name}
+                      width={160}
+                      height={160}
+                      className="object-contain transition-transform duration-500 group-hover:scale-105"
+                    />
                     {cat.badge && (
-                      <span className="absolute top-3 right-3 bg-white/95 text-text-primary text-[10px] font-bold px-2.5 py-1 rounded-full shadow">
+                      <span className="absolute top-3 right-3 bg-white text-text-primary text-[10px] font-bold px-2.5 py-1 rounded-full shadow">
                         {cat.badge.toUpperCase()}
                       </span>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   </div>
                   <div className="p-5 flex-1 flex flex-col">
                     <h3 className="text-base font-bold text-text-primary mb-1 group-hover:text-primary transition-colors">
