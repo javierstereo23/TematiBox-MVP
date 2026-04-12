@@ -4,7 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CartProvider } from "@/components/CartProvider";
 import { CartDrawer } from "@/components/CartDrawer";
-import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { ChatBot } from "@/components/ChatBot";
 import { Analytics } from "@/components/Analytics";
 import { OrganizationJsonLd } from "@/components/seo/ProductJsonLd";
 
@@ -68,7 +68,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <main className="flex-1 pt-16">{children}</main>
           <Footer />
           <CartDrawer />
-          <WhatsAppFloat />
+          <ChatBot />
         </CartProvider>
       </body>
     </html>
