@@ -6,32 +6,27 @@ import { CartProvider } from "@/components/CartProvider";
 import { CartDrawer } from "@/components/CartDrawer";
 
 export const metadata: Metadata = {
-  title: "Tematibox | Su tema favorito, listo para festejar",
+  title: "Tematibox | Cumples y utiles escolares, sin dolor de cabeza",
   description:
-    "Combos tematicos para el cumple o regalo de tus hijos. Fisicos o digitales. De Stranger Things a Bluey, todo en un solo lugar.",
+    "Combos tematicos listos + imprimibles personalizados con el nombre del chico. De Bluey a Stranger Things, del cumple al salon de clases. Hecho por mamas, para mamas.",
   openGraph: {
     type: "website",
     siteName: "Tematibox",
-    title: "Tematibox | Su tema favorito, listo para festejar",
+    title: "Tematibox | Cumples y utiles, sin dolor de cabeza",
     description:
-      "Combos tematicos para cumpleanos: cotillon, regalos, tortas e imprimibles digitales.",
+      "Combos tematicos listos + imprimibles personalizados. De Bluey a Stranger Things. Hecho por mamas, para mamas.",
+    locale: "es_AR",
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" className="h-full antialiased">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600;1,9..144,700&display=swap"
           rel="stylesheet"
         />
       </head>
