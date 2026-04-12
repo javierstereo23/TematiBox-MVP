@@ -57,25 +57,25 @@ export function DualSplitSection() {
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  {/* readability overlay: dark gradient + bottom scrim */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/20" />
-                  <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 to-transparent" />
                   <motion.div
-                    className={`absolute inset-0 bg-gradient-to-br ${card.accent} opacity-0 group-hover:opacity-20 transition-opacity duration-500 mix-blend-screen`}
+                    className={`absolute inset-0 bg-gradient-to-br ${card.accent} opacity-0 group-hover:opacity-15 transition-opacity duration-500 mix-blend-screen`}
                   />
                 </div>
-                <div className="relative h-full flex flex-col justify-end p-8 md:p-10 text-white">
-                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-xs font-semibold w-fit mb-4 shadow">
-                    {card.chip}
-                  </span>
-                  <h3 className="text-3xl md:text-4xl font-extrabold mb-3 drop-shadow-lg">{card.title}</h3>
-                  <p className="text-lg text-white font-semibold mb-2 drop-shadow">{card.subtitle}</p>
-                  <p className="text-base text-white/95 leading-relaxed max-w-md mb-6 drop-shadow">{card.copy}</p>
-                  <div className="inline-flex items-center gap-2 text-white font-bold group-hover:gap-3 transition-all drop-shadow">
-                    {card.cta}
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
+                <div className="relative h-full flex flex-col justify-end">
+                  {/* solid dark panel for text readability */}
+                  <div className="bg-gradient-to-t from-black via-black/90 to-transparent px-8 md:px-10 pt-16 pb-8 md:pb-10 text-white">
+                    <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 text-[11px] font-bold tracking-wide w-fit mb-4">
+                      {card.chip}
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-extrabold mb-3 leading-tight">{card.title}</h3>
+                    <p className="text-base md:text-lg font-semibold mb-2 text-white/95">{card.subtitle}</p>
+                    <p className="text-sm md:text-base leading-relaxed max-w-md mb-6 text-white/85">{card.copy}</p>
+                    <div className="inline-flex items-center gap-2 font-bold group-hover:gap-3 transition-all">
+                      {card.cta}
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </Link>
