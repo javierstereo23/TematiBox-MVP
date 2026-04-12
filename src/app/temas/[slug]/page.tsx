@@ -4,13 +4,9 @@ import Image from "next/image";
 import {
   themes,
   getThemeBySlug,
-  getCombosByTheme,
   digitalCategories,
-  getDigitalCategory,
-  formatPrice,
 } from "@/data/themes";
 import { getProductsByTheme } from "@/data/products";
-import { ComboCard } from "@/components/ComboCard";
 import { ProductCard } from "@/components/ProductCard";
 
 export function generateStaticParams() {
@@ -22,8 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const theme = getThemeBySlug(slug);
   if (!theme) return { title: "Tema no encontrado" };
   return {
-    title: `${theme.name} | Combos e imprimibles | Tematibox`,
-    description: theme.description,
+    title: `${theme.name} | Imprimibles personalizados | Tematibox`,
+    description: `Imprimibles personalizados de ${theme.name}. ${theme.description}`,
     openGraph: { title: `${theme.name} | Tematibox`, description: theme.description, images: [theme.image] },
   };
 }
@@ -33,7 +29,6 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
   const theme = getThemeBySlug(slug);
   if (!theme) notFound();
 
-  const physicalCombos = getCombosByTheme(slug);
   const themeProducts = getProductsByTheme(slug);
 
   // Group products by primary category
@@ -43,7 +38,6 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
     arr.push(p);
     byCategory.set(p.primaryCategory, arr);
   }
-  // Categories that have products, in declared order
   const catsWithProducts = digitalCategories.filter((c) => byCategory.has(c.id));
   const catsEmpty = digitalCategories.filter((c) => !byCategory.has(c.id));
 
@@ -81,7 +75,7 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
                   {theme.ageRange}
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-sm text-sm text-white font-medium">
-                  {themeProducts.length} imprimibles · {physicalCombos.length} combos fisicos
+                  {themeProducts.length} imprimibles personalizables
                 </span>
               </div>
             </div>
@@ -89,30 +83,7 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
         </div>
       </section>
 
-      {physicalCombos.length > 0 && (
-        <section className="py-16 px-6">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-10">
-              <h2 className="text-2xl md:text-3xl font-extrabold text-text-primary mb-2">Combos fisicos</h2>
-              <p className="text-text-secondary">Recibi todo listo en tu casa. Envio gratis en CABA y GBA.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {physicalCombos.map((combo) => (
-                <ComboCard
-                  key={combo.id}
-                  combo={combo}
-                  themeName={theme.name}
-                  themeEmoji={theme.emoji}
-                  themeGradient={theme.gradient}
-                  themeImage={theme.image}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {themeProducts.length > 0 && (
+      {themeProducts.length > 0 ? (
         <section className="py-16 px-6 bg-gradient-to-br from-violet-50 via-pink-50 to-amber-50">
           <div className="max-w-7xl mx-auto">
             <div className="mb-10">
@@ -179,17 +150,15 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
             )}
           </div>
         </section>
-      )}
-
-      {themeProducts.length === 0 && physicalCombos.length === 0 && (
+      ) : (
         <section className="py-20 px-6">
           <div className="max-w-2xl mx-auto text-center">
             <span className="text-6xl mb-4 block">🧩</span>
             <h2 className="text-2xl font-extrabold text-text-primary mb-3">
-              Todavia no tenemos productos de {theme.name}
+              Todavia no tenemos imprimibles de {theme.name}
             </h2>
             <p className="text-text-secondary mb-8">
-              Escribinos y armamos una propuesta a medida para el cumple.
+              Escribinos y armamos una propuesta a medida.
             </p>
             <Link href="/imprimibles" className="btn-primary">Ver todos los imprimibles</Link>
           </div>

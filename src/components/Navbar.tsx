@@ -49,8 +49,8 @@ export function Navbar() {
             {totalItems > 0 && (<span className="absolute -top-0.5 -right-0.5 w-5 h-5 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center">{totalItems > 9 ? "9+" : totalItems}</span>)}
           </button>
 
-          <Link href="/temas" className="hidden lg:inline-flex btn-primary !py-2.5 !px-4 !text-xs whitespace-nowrap">
-            Armar cumple
+          <Link href="/imprimibles" className="hidden lg:inline-flex btn-primary !py-2.5 !px-4 !text-xs whitespace-nowrap">
+            Ver imprimibles
           </Link>
 
           <button className="md:hidden p-2 rounded-lg hover:bg-primary-bg transition-colors" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
@@ -73,7 +73,7 @@ export function Navbar() {
         <div className="md:hidden bg-bg-white border-t border-border-light px-6 py-4 space-y-3">
           <Link href="/temas" className="block py-2 text-sm font-medium text-text-secondary hover:text-primary" onClick={() => setMobileOpen(false)}>Explorar temas</Link>
           <Link href="/imprimibles" className="block py-2 text-sm font-medium text-text-secondary hover:text-primary" onClick={() => setMobileOpen(false)}>Imprimibles</Link>
-          <Link href="/temas" className="btn-primary w-full !text-sm mt-2" onClick={() => setMobileOpen(false)}>Armar cumple</Link>
+          <Link href="/imprimibles" className="btn-primary w-full !text-sm mt-2" onClick={() => setMobileOpen(false)}>Ver imprimibles</Link>
         </div>
       )}
     </nav>

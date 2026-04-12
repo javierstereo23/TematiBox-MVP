@@ -24,12 +24,12 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Mi hijo es fanatico de Stranger Things y no encontraba cotillon en ningun lado. Aca tenian todo: vasos, platos, el cumple le quedo igual al de la serie. Estaba re contento.",
+      "Mi hijo es fanatico de Stranger Things y no encontraba nada tematico. Compre los stickers y el libro para colorear personalizados con su nombre, y quedo fascinado. Imprimi desde casa.",
     name: "Veronica",
     meta: "Mama de Tomas (11), Recoleta",
     initials: "VR",
     gradient: "from-red-500 to-amber-600",
-    tag: "Combo Completo Stranger Things",
+    tag: "Stickers + Colorear Stranger Things",
   },
 ];
 

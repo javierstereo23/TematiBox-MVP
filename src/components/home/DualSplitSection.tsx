@@ -15,8 +15,8 @@ export function DualSplitSection() {
               Dos mundos, una sola web
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold text-text-primary text-balance">
-              Todo lo que el cumple necesita.{" "}
-              <span className="font-display italic font-normal text-gradient-primary">Y todo lo que el cole pide.</span>
+              Imprimibles para el cumple.{" "}
+              <span className="font-display italic font-normal text-gradient-primary">Imprimibles para el cole.</span>
             </h2>
           </div>
         </Reveal>
@@ -24,25 +24,25 @@ export function DualSplitSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {[
             {
-              href: "/temas",
+              href: "/imprimibles/invitaciones",
               title: "Para el cumple",
-              subtitle: "Combos tematicos listos",
-              copy: "Cotillon, regalos, torta y bolsitas. Elegis el tema favorito y recibis todo en casa en 24hs.",
+              subtitle: "Invitaciones, toppers y cotillon",
+              copy: "Invitaciones digitales, toppers para torta, banderines y souvenirs. Todo personalizado con el nombre del chico. Descargas al instante.",
               image: "/images/home/birthday-aesthetic.png",
-              emoji: "🎁",
-              chip: "Fisico · Envio 24hs",
-              cta: "Ver combos",
+              emoji: "🎉",
+              chip: "Digital · Al instante",
+              cta: "Ver imprimibles del cumple",
               accent: "from-pink-400 to-amber-400",
             },
             {
-              href: "/imprimibles",
+              href: "/imprimibles/etiquetas",
               title: "Para el cole",
-              subtitle: "Imprimibles personalizados",
-              copy: "Etiquetas, invitaciones, libros para colorear y material escolar. Con el nombre del chico. Al instante.",
+              subtitle: "Etiquetas, escolares y cliparts",
+              copy: "Etiquetas para carátulas, material escolar, flashcards educativas y cliparts para sublimar. Con el nombre del chico. Listos para imprimir.",
               image: "/images/home/school-flatlay.png",
               emoji: "📚",
               chip: "Digital · Al instante",
-              cta: "Ver imprimibles",
+              cta: "Ver imprimibles del cole",
               accent: "from-violet-400 to-sky-400",
             },
           ].map((card, i) => (

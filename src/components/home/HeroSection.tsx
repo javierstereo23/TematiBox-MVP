@@ -54,30 +54,29 @@ export function HeroSection() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur border border-border-light shadow-sm mb-7">
             <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
             <span className="text-xs md:text-sm font-medium text-text-secondary tracking-wide">
-              Hecho por mamas, para mamas · +2.000 cumples armados
+              Tematibox Digital · Descarga al instante · +2.000 mamas confian
             </span>
           </div>
 
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-extrabold text-text-primary leading-[0.95] tracking-tight mb-6 text-balance">
-            Organiza el cumple <br className="hidden sm:block" />
-            y los utiles del cole,{" "}
-            <span className="font-display italic font-normal text-gradient-primary">sin dolor de cabeza.</span>
+            Imprimibles personalizados,{" "}
+            <span className="font-display italic font-normal text-gradient-primary">al instante.</span>
           </h1>
 
           <p className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-2xl mb-10 text-balance">
-            Combos tematicos listos e imprimibles personalizados con el nombre de tu hijo. De Bluey a Stranger Things,
-            del cumple al salon de clases. Todo en un solo lugar.
+            Invitaciones, etiquetas, libros para colorear y material escolar con el nombre personalizado. De Bluey a
+            Stranger Things. Descarga en 30 segundos, imprimis las veces que quieras.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12">
-            <Link href="/temas" className="btn-primary !py-4 !px-8 !text-base group">
-              🎁 Armar el cumple
+            <Link href="/imprimibles" className="btn-primary !py-4 !px-8 !text-base group">
+              Ver todos los imprimibles
               <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </Link>
-            <Link href="/imprimibles" className="btn-secondary !py-4 !px-8 !text-base group">
-              📚 Imprimibles del cole
+            <Link href="/imprimibles/invitaciones" className="btn-secondary !py-4 !px-8 !text-base group">
+              💌 Invitaciones digitales
               <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
@@ -98,17 +97,17 @@ export function HeroSection() {
             </div>
             <div className="w-px h-4 bg-border hidden sm:block" />
             <div className="flex items-center gap-2 text-text-secondary">
-              <svg className="w-4 h-4 text-accent-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-              </svg>
-              <span>Entrega 24hs CABA y GBA</span>
-            </div>
-            <div className="w-px h-4 bg-border hidden sm:block" />
-            <div className="flex items-center gap-2 text-text-secondary">
               <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
-              <span>Digital al instante</span>
+              <span>Descarga en 30 segundos</span>
+            </div>
+            <div className="w-px h-4 bg-border hidden sm:block" />
+            <div className="flex items-center gap-2 text-text-secondary">
+              <svg className="w-4 h-4 text-accent-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              <span>396 disenos personalizables</span>
             </div>
           </div>
         </motion.div>

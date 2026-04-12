@@ -7,12 +7,8 @@ import { waLink } from "@/lib/config";
 
 const FAQS = [
   {
-    q: "Cuanto tarda el envio de los combos fisicos?",
-    a: "24 a 48hs habiles a CABA y GBA. Resto del pais 3-5 dias habiles. Envio gratis en CABA y GBA en compras mayores a $40.000.",
-  },
-  {
-    q: "Y los imprimibles digitales?",
-    a: "Apenas se confirma el pago te llega un email con los archivos en PDF y PNG. Tambien quedan disponibles en tu perfil para descargar las veces que necesites.",
+    q: "Cuanto tarda en llegar el archivo?",
+    a: "Al instante. Apenas se confirma el pago te llega un email con los archivos en PDF y PNG listos para descargar. Si es personalizado con datos especiales, en menos de 24hs.",
   },
   {
     q: "Puedo imprimir los archivos en cualquier impresora?",
@@ -23,7 +19,7 @@ const FAQS = [
     a: "Si, hasta 24hs despues de la compra sin costo. Escribinos por WhatsApp y te reenviamos los archivos con los datos corregidos.",
   },
   {
-    q: "Hacen cumples con temas fuera del catalogo?",
+    q: "Hacen imprimibles con temas fuera del catalogo?",
     a: "Si. Escribinos por WhatsApp contandonos el tema que necesitas y te armamos una propuesta en menos de 24hs.",
   },
   {
@@ -33,6 +29,10 @@ const FAQS = [
   {
     q: "Como pago?",
     a: "Aceptamos Mercado Pago (tarjeta, debito, dinero en cuenta) con opcion de hasta 12 cuotas. Tambien transferencia bancaria para descuento adicional.",
+  },
+  {
+    q: "Cuantas veces puedo imprimir cada imprimible?",
+    a: "Las veces que necesites. Pagas una vez y los archivos quedan tuyos. Podes reimprimir si se arruinan, hacer copias para la familia, etc.",
   },
 ];
 

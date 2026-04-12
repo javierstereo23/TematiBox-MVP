@@ -1,7 +1,6 @@
-# Tematibox
+# Tematibox Digital
 
-Marketplace de combos tematicos para cumpleanos y regalos de chicos.
-Combos fisicos (cotillon, regalos, torta) y digitales (imprimibles PDF).
+Marketplace de imprimibles personalizados para cumpleaños y útiles escolares.
 
 ## Stack
 
@@ -9,29 +8,41 @@ Combos fisicos (cotillon, regalos, torta) y digitales (imprimibles PDF).
 - React 19
 - TypeScript
 - Tailwind CSS v4
+- Framer Motion
+- Mercado Pago Checkout Pro
+
+## Branches
+
+| Branch | Versión | Scope |
+|---|---|---|
+| `main` | Tematibox FULL FLAVOR | Combos físicos + imprimibles |
+| `full-flavor` | Snapshot del FULL | Archivo |
+| `digital` | **Tematibox Digital** | Solo imprimibles (este branch) |
 
 ## Arrancar en local
 
 ```bash
 npm install
+cp .env.local.example .env.local
+# editar .env.local con tus credenciales de Mercado Pago
 npm run dev
 ```
 
 Abrir http://localhost:3000
 
-## Features
+## Features Digital
 
-- 16 temas validados (Stranger Things, Wicked, Bluey, Minecraft, etc)
-- 4 tipos de combo: Fiesta, Regalo, Completo, Digital (imprimible PDF)
+- 396 productos reales del catálogo DBEDICIONES (imágenes HD locales)
+- 23 temas (Stranger Things, Bluey, K-Pop, Guerreras K-Pop, Italian Brainrot, etc.)
+- 11 categorías: invitaciones, colorear, escolares, cliparts, etiquetas, toppers, stickers, cotillón-banderines, mega-kit, souvenirs, otros
+- Personalización con nombre, edad, fecha del evento
+- Checkout Mercado Pago (1 click desde detalle)
 - Carrito persistente (localStorage)
-- Checkout funcional con calculo de envio
-- Diseño Apple-like, responsive, mobile-first
+- Buscador global con autocomplete
+- SEO: sitemap dinámico, robots, schema.org Product + BreadcrumbList
+- Analytics: GA4 + Meta Pixel (condicional por env var)
+- WhatsApp flotante para soporte
 
-## Proximos pasos
+## Deploy
 
-- [ ] Integracion con API de Mercado Libre
-- [ ] Integracion con Mercado Pago (checkout real)
-- [ ] Panel admin para gestionar combos
-- [ ] Sistema de busqueda
-- [ ] Autenticacion de usuarios
-- [ ] Integracion con Temu (dropshipping)
+Ver [DEPLOY.md](./DEPLOY.md) para instrucciones paso a paso de Vercel.

@@ -25,25 +25,25 @@ export function FinalCTA() {
             Tu proximo cumple empieza aca
           </motion.p>
           <h2 className="text-4xl md:text-6xl font-extrabold leading-[1.05] mb-5 drop-shadow-lg text-balance">
-            El cumple que tu hijo{" "}
-            <span className="font-display italic font-normal">va a recordar siempre.</span>
+            Personalizá el imprimible{" "}
+            <span className="font-display italic font-normal">perfecto para tu hijo.</span>
           </h2>
           <p className="text-lg md:text-xl text-white/90 max-w-xl mx-auto mb-10 leading-relaxed">
-            Elegi el tema, personalizalo con su nombre y dejanos el resto a nosotros.
+            Elegi el tema, poné el nombre y descargás al instante. Imprimís las veces que necesites.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link href="/temas" className="btn-primary !py-4 !px-8 !text-base !bg-white !text-primary hover:!bg-primary-bg group">
-              Armar el cumple ahora
+            <Link href="/imprimibles" className="btn-primary !py-4 !px-8 !text-base !bg-white !text-primary hover:!bg-primary-bg group">
+              Ver los 396 imprimibles
               <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </Link>
-            <Link href="/imprimibles" className="btn-secondary !py-4 !px-8 !text-base !bg-white/10 !border-white/40 !text-white backdrop-blur hover:!bg-white/20">
-              Ver imprimibles
+            <Link href="/imprimibles/invitaciones" className="btn-secondary !py-4 !px-8 !text-base !bg-white/10 !border-white/40 !text-white backdrop-blur hover:!bg-white/20">
+              Empezá por invitaciones
             </Link>
           </div>
           <p className="mt-8 text-sm text-white/70">
-            ★ 4.9 en Google · +2.000 cumples armados · Envio 24hs
+            ★ 4.9 en Google · +2.000 mamas confian · Descarga al instante
           </p>
         </div>
       </Reveal>

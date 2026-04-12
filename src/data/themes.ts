@@ -20,26 +20,6 @@ export interface ThemeData {
   palette: ThemePalette;
 }
 
-export interface ComboItem {
-  name: string;
-  emoji: string;
-}
-
-export type ComboType = "fiesta" | "regalo" | "completo";
-
-export interface Combo {
-  id: string;
-  themeSlug: string;
-  name: string;
-  type: ComboType;
-  description: string;
-  price: number;
-  originalPrice: number;
-  items: ComboItem[];
-  badge?: string;
-  popular?: boolean;
-}
-
 export interface Category {
   id: string;
   name: string;
@@ -71,17 +51,6 @@ export interface DigitalCategoryMeta {
   originalPrice: number;
   requiresEvent: boolean;
   badge?: string;
-}
-
-export interface DigitalProduct {
-  id: string;
-  themeSlug: string;
-  category: DigitalCategoryId;
-  name: string;
-  description: string;
-  price: number;
-  originalPrice: number;
-  coverImage: string;
 }
 
 export interface Personalization {
@@ -516,79 +485,8 @@ export const digitalCategories: DigitalCategoryMeta[] = [
   },
 ];
 
-const defaultFiestaItems: ComboItem[] = [
-  { name: "Banner tematico", emoji: "🎉" },
-  { name: "20 globos impresos", emoji: "🎈" },
-  { name: "Platos x12", emoji: "🍽️" },
-  { name: "Vasos x12", emoji: "🥤" },
-  { name: "Servilletas x20", emoji: "🧻" },
-  { name: "Mantel tematico", emoji: "🎨" },
-  { name: "Toppers para torta", emoji: "🎂" },
-];
-const defaultCompletoItems: ComboItem[] = [
-  { name: "Todo el Combo Fiesta", emoji: "🎉" },
-  { name: "Todo el Combo Regalo", emoji: "🎁" },
-  { name: "Torta tematica para 15", emoji: "🎂" },
-  { name: "Bolsitas sorpresa x10", emoji: "🛍️" },
-  { name: "Pinata tematica", emoji: "🪅" },
-];
-
-function makeFiesta(id: string, theme: string, price: number, items: ComboItem[], badge?: string): Combo {
-  return { id: `${id}-fiesta`, themeSlug: id, name: "Combo Fiesta", type: "fiesta", description: `Cotillon y decoracion ${theme}.`, price, originalPrice: Math.round(price * 1.35), items, badge, popular: !!badge };
-}
-function makeRegalo(id: string, theme: string, price: number, items: ComboItem[], badge?: string): Combo {
-  return { id: `${id}-regalo`, themeSlug: id, name: "Combo Regalo", type: "regalo", description: `Los mejores regalos tematicos de ${theme}.`, price, originalPrice: Math.round(price * 1.3), items, badge };
-}
-function makeCompleto(id: string, theme: string, price: number, items: ComboItem[]): Combo {
-  return { id: `${id}-completo`, themeSlug: id, name: "Combo Cumple Completo", type: "completo", description: `Fiesta + regalos + torta ${theme}.`, price, originalPrice: Math.round(price * 1.4), items, badge: "Mejor valor", popular: true };
-}
-
-export const combos: Combo[] = [
-  makeFiesta("stranger-things", "Stranger Things", 45000, defaultFiestaItems, "Mas vendido"),
-  makeRegalo("stranger-things", "Stranger Things", 68000, [{ name: "Remera Stranger Things", emoji: "👕" }, { name: "Funko Pop Eleven", emoji: "🎭" }, { name: "Set stickers", emoji: "🏷️" }, { name: "Mochila", emoji: "🎒" }, { name: "Gorra bordada", emoji: "🧢" }]),
-  makeCompleto("stranger-things", "Stranger Things", 135000, defaultCompletoItems),
-  makeFiesta("wicked", "Wicked", 43000, defaultFiestaItems, "Nuevo"),
-  makeRegalo("wicked", "Wicked", 62000, [{ name: "Varita magica luminosa", emoji: "✨" }, { name: "Capa de Elphaba", emoji: "🧙‍♀️" }, { name: "Libro de canciones", emoji: "📖" }, { name: "Set maquillaje verde", emoji: "💚" }, { name: "Diadema Glinda", emoji: "🎀" }]),
-  makeCompleto("wicked", "Wicked", 125000, defaultCompletoItems),
-  makeFiesta("kpop-bts", "K-Pop", 42000, defaultFiestaItems),
-  makeRegalo("kpop-bts", "K-Pop", 72000, [{ name: "Lightstick oficial", emoji: "🔦" }, { name: "Photocards", emoji: "🃏" }, { name: "Remera BTS", emoji: "👕" }, { name: "Set pulseras", emoji: "📿" }, { name: "Poster", emoji: "🖼️" }], "Mas vendido"),
-  makeCompleto("kpop-bts", "K-Pop", 139000, defaultCompletoItems),
-  makeFiesta("minecraft", "Minecraft", 38000, defaultFiestaItems),
-  makeRegalo("minecraft", "Minecraft", 58000, [{ name: "Espada de diamante", emoji: "⚔️" }, { name: "Remera Creeper", emoji: "👕" }, { name: "Set LEGO Minecraft", emoji: "🧱" }, { name: "Peluche Creeper", emoji: "🧸" }, { name: "Lampara bloque", emoji: "💡" }]),
-  makeCompleto("minecraft", "Minecraft", 119000, defaultCompletoItems),
-  makeFiesta("futbol-argentina", "Argentina", 40000, defaultFiestaItems, "Mas vendido"),
-  makeRegalo("futbol-argentina", "Argentina", 75000, [{ name: "Camiseta Seleccion", emoji: "👕" }, { name: "Pelota N5", emoji: "⚽" }, { name: "Medias", emoji: "🧦" }, { name: "Botella AFA", emoji: "🥤" }, { name: "Album de figuritas", emoji: "🃏" }]),
-  makeCompleto("futbol-argentina", "Argentina", 145000, defaultCompletoItems),
-  makeFiesta("bluey", "Bluey", 39000, defaultFiestaItems, "Tendencia"),
-  makeRegalo("bluey", "Bluey", 55000, [{ name: "Peluche Bluey", emoji: "🐕" }, { name: "Peluche Bingo", emoji: "🐶" }, { name: "Juegos familiares", emoji: "🎲" }, { name: "Remera Bluey", emoji: "👕" }, { name: "Libro actividades", emoji: "📖" }]),
-  makeCompleto("bluey", "Bluey", 115000, defaultCompletoItems),
-  makeFiesta("disney-princesas", "Princesas", 43000, defaultFiestaItems),
-  makeRegalo("disney-princesas", "Princesas", 65000, [{ name: "Vestido de princesa", emoji: "👗" }, { name: "Corona con brillos", emoji: "👑" }, { name: "Muneca Disney", emoji: "🧸" }, { name: "Set joyeria", emoji: "💎" }, { name: "Varita luminosa", emoji: "✨" }]),
-  makeCompleto("disney-princesas", "Princesas", 129000, defaultCompletoItems),
-  makeFiesta("spider-man", "Spider-Man", 41000, defaultFiestaItems),
-  makeRegalo("spider-man", "Spider-Man", 62000, [{ name: "Disfraz Spider-Man", emoji: "🦸" }, { name: "Lanzador de telaranas", emoji: "🕸️" }, { name: "Figura de accion", emoji: "🧸" }, { name: "Remera Spider-Man", emoji: "👕" }, { name: "Mochila", emoji: "🎒" }]),
-  makeCompleto("spider-man", "Spider-Man", 125000, defaultCompletoItems),
-  makeFiesta("dragon-ball", "Dragon Ball", 41000, defaultFiestaItems, "Tendencia"),
-  makeRegalo("dragon-ball", "Dragon Ball", 65000, [{ name: "7 esferas del dragon", emoji: "🔮" }, { name: "Figura Goku", emoji: "🥋" }, { name: "Remera Kame House", emoji: "👕" }, { name: "Gorra Z", emoji: "🧢" }, { name: "Manga Dragon Ball #1", emoji: "📖" }]),
-  makeCompleto("dragon-ball", "Dragon Ball", 127000, defaultCompletoItems),
-  makeFiesta("taylor-swift", "Taylor Swift", 44000, defaultFiestaItems),
-  makeFiesta("pokemon", "Pokemon", 40000, defaultFiestaItems),
-  makeFiesta("sprunki", "Sprunki", 38000, defaultFiestaItems, "Viral"),
-];
-
-// Legacy auto-generated products removed. Real catalog now lives in src/data/products.ts
-export const digitalProducts: DigitalProduct[] = [];
-
 export function getThemeBySlug(slug: string): ThemeData | undefined {
   return themes.find((t) => t.slug === slug);
-}
-
-export function getCombosByTheme(themeSlug: string): Combo[] {
-  return combos.filter((c) => c.themeSlug === themeSlug);
-}
-
-export function getComboById(id: string): Combo | undefined {
-  return combos.find((c) => c.id === id);
 }
 
 export function getDigitalCategory(id: string): DigitalCategoryMeta | undefined {

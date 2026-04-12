@@ -12,7 +12,7 @@ const PILLARS = [
   {
     icon: "⚡",
     title: "Al instante",
-    body: "Digital lo descargas en 30 segundos. Fisico a tu casa en 24hs (CABA y GBA).",
+    body: "Pagas con Mercado Pago y descargas los archivos en 30 segundos. Sin esperar envio ni nada.",
   },
   {
     icon: "💌",

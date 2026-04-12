@@ -18,9 +18,9 @@ const STEPS = [
   },
   {
     n: "03",
-    emoji: "📦",
-    title: "Recibi o descarga",
-    body: "Digital en 30 segundos. Fisico en tu casa en 24hs (CABA y GBA) con envio gratis.",
+    emoji: "⚡",
+    title: "Descarga al instante",
+    body: "Pagas con Mercado Pago y descargas los archivos listos para imprimir en menos de 30 segundos.",
   },
 ];
 
