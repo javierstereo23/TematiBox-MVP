@@ -10,23 +10,34 @@ interface ComboCardProps {
   themeName: string;
   themeEmoji: string;
   themeGradient: string;
+  themeImage?: string;
 }
 
 const typeLabels: Record<string, { label: string; color: string }> = {
   fiesta: { label: "Cotillon & Deco", color: "bg-amber-100 text-amber-800" },
   regalo: { label: "Regalos", color: "bg-blue-100 text-blue-800" },
   completo: { label: "Todo incluido", color: "bg-emerald-100 text-emerald-800" },
-  digital: { label: "Digital . Imprimible", color: "bg-violet-100 text-violet-800" },
 };
 
-export function ComboCard({ combo, themeName, themeEmoji, themeGradient }: ComboCardProps) {
+export function ComboCard({ combo, themeName, themeEmoji, themeGradient, themeImage }: ComboCardProps) {
   const discount = getDiscount(combo.price, combo.originalPrice);
   const typeInfo = typeLabels[combo.type];
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
 
   const handleAdd = () => {
-    addItem({ comboId: combo.id, themeSlug: combo.themeSlug, themeName, comboName: combo.name, comboType: combo.type, price: combo.price, emoji: themeEmoji, gradient: themeGradient });
+    addItem({
+      itemId: `combo-${combo.id}`,
+      kind: "combo",
+      themeSlug: combo.themeSlug,
+      themeName,
+      name: combo.name,
+      subtype: combo.type,
+      price: combo.price,
+      emoji: themeEmoji,
+      gradient: themeGradient,
+      image: themeImage,
+    });
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
   };
@@ -36,7 +47,9 @@ export function ComboCard({ combo, themeName, themeEmoji, themeGradient }: Combo
       <div className="p-6 pb-4">
         <div className="flex items-start justify-between gap-3 mb-3">
           <div>
-            <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${typeInfo.color}`}>{typeInfo.label}</span>
+            <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-2 ${typeInfo.color}`}>
+              {typeInfo.label}
+            </span>
             <h3 className="text-lg font-bold text-text-primary">{combo.name}</h3>
           </div>
           {combo.badge && <span className="badge-popular">{combo.badge}</span>}

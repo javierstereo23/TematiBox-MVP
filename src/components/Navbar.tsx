@@ -19,7 +19,7 @@ export function Navbar() {
         </Link>
         <div className="hidden md:flex items-center gap-8">
           <Link href="/temas" className="text-sm font-medium text-text-secondary hover:text-primary transition-colors">Explorar temas</Link>
-          <Link href="/temas?tipo=digital" className="text-sm font-medium text-text-secondary hover:text-primary transition-colors">Imprimibles</Link>
+          <Link href="/imprimibles" className="text-sm font-medium text-text-secondary hover:text-primary transition-colors">Imprimibles</Link>
           <a href="#como-funciona" className="text-sm font-medium text-text-secondary hover:text-primary transition-colors">Como funciona</a>
         </div>
         <div className="flex items-center gap-2">
@@ -40,7 +40,7 @@ export function Navbar() {
       {mobileOpen && (
         <div className="md:hidden bg-bg-white border-t border-border-light px-6 py-4 space-y-3">
           <Link href="/temas" className="block py-2 text-sm font-medium text-text-secondary hover:text-primary" onClick={() => setMobileOpen(false)}>Explorar temas</Link>
-          <Link href="/temas?tipo=digital" className="block py-2 text-sm font-medium text-text-secondary hover:text-primary" onClick={() => setMobileOpen(false)}>Imprimibles</Link>
+          <Link href="/imprimibles" className="block py-2 text-sm font-medium text-text-secondary hover:text-primary" onClick={() => setMobileOpen(false)}>Imprimibles</Link>
           <Link href="/temas" className="btn-primary w-full !text-sm mt-2" onClick={() => setMobileOpen(false)}>Armar combo</Link>
         </div>
       )}

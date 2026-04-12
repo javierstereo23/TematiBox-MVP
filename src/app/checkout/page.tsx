@@ -10,7 +10,7 @@ export default function CheckoutPage() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ nombre: "", email: "", telefono: "", direccion: "", ciudad: "", cp: "", notas: "" });
 
-  const hasDigitalOnly = items.length > 0 && items.every((i) => i.comboType === "digital");
+  const hasDigitalOnly = items.length > 0 && items.every((i) => i.kind === "digital");
   const shippingCost = hasDigitalOnly ? 0 : items.length > 0 ? 2500 : 0;
   const finalTotal = totalPrice + shippingCost;
 
@@ -108,13 +108,16 @@ export default function CheckoutPage() {
               </div>
               <ul className="divide-y divide-border-light max-h-80 overflow-y-auto">
                 {items.map((item) => (
-                  <li key={item.comboId} className="p-4 flex gap-3">
+                  <li key={item.itemId} className="p-4 flex gap-3">
                     <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${item.gradient} flex items-center justify-center flex-shrink-0`}>
                       <span className="text-xl">{item.emoji}</span>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-xs text-text-secondary truncate">{item.themeName}</p>
-                      <p className="text-sm font-semibold text-text-primary truncate">{item.comboName}</p>
+                      <p className="text-sm font-semibold text-text-primary truncate">{item.name}</p>
+                      {item.personalization?.name && (
+                        <p className="text-xs text-primary truncate">Para {item.personalization.name}{item.personalization.age ? `, ${item.personalization.age} anos` : ""}</p>
+                      )}
                       <p className="text-xs text-text-tertiary">Cant: {item.quantity}</p>
                     </div>
                     <p className="text-sm font-bold text-text-primary whitespace-nowrap">{formatPrice(item.price * item.quantity)}</p>
