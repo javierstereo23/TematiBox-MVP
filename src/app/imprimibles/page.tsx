@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { digitalCategories, themes, type DigitalCategoryId } from "@/data/themes";
+import { digitalCategories, themes, type DigitalCategoryId, formatPrice } from "@/data/themes";
 import { products } from "@/data/products";
 import { WashiTape } from "@/components/scrapbook/WashiTape";
 import { HandStar } from "@/components/scrapbook/HandDrawn";
@@ -226,9 +226,21 @@ export default function ImprimiblesPage() {
                       <p className="text-sm text-text-secondary leading-relaxed mb-4">
                         {cat.longDescription.split(".")[0]}.
                       </p>
-                      <span className="inline-flex items-center gap-2 font-hand text-xl text-primary group-hover:text-primary-dark">
-                        ver diseños →
-                      </span>
+                      <div className="flex items-end justify-between gap-2">
+                        <div className="flex items-baseline gap-2">
+                          {cat.originalPrice && (
+                            <span className="font-hand text-sm text-text-tertiary line-through">
+                              {formatPrice(cat.originalPrice)}
+                            </span>
+                          )}
+                          <span className="font-display text-xl font-medium text-text-primary leading-none">
+                            desde {formatPrice(cat.price)}
+                          </span>
+                        </div>
+                        <span className="font-hand text-lg text-primary group-hover:text-primary-dark">
+                          ver diseños →
+                        </span>
+                      </div>
                     </div>
                   </Link>
                 </div>

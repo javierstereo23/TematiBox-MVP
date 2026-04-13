@@ -366,6 +366,9 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
                     placeholder="Martina"
                     className="w-full px-4 py-3 rounded-xl border border-border bg-bg text-base font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-bg-white transition-colors"
                   />
+                  <p className="font-hand text-sm text-text-secondary mt-1.5 -rotate-[0.3deg]">
+                    como va a aparecer en el diseño
+                  </p>
                 </div>
                 <div>
                   <label className="block text-[11px] font-semibold text-text-primary mb-1.5 uppercase tracking-wide">
@@ -380,6 +383,9 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
                     placeholder="5"
                     className="w-full px-4 py-3 rounded-xl border border-border bg-bg text-base font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-bg-white transition-colors"
                   />
+                  <p className="font-hand text-sm text-text-secondary mt-1.5 -rotate-[0.3deg]">
+                    para elegir tono y colores
+                  </p>
                 </div>
               </div>
               {category?.requiresEvent && (
