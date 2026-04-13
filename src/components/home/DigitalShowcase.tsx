@@ -5,65 +5,91 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { digitalCategories } from "@/data/themes";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
+import { SectionHeader } from "@/components/scrapbook/SectionHeader";
+import { WashiTape } from "@/components/scrapbook/WashiTape";
+
+const TILTS = [-1.4, 0.8, -0.6, 1.2, -0.4, 0.6, -1.0, 0.4, -0.8, 1.0, -0.6];
+const TAPES = ["pink", "mustard", "sage", "blue", "cream"] as const;
 
 export function DigitalShowcase() {
   return (
-    <section className="py-16 md:py-24 px-6 bg-gradient-to-b from-amber-50/40 to-white">
+    <section className="relative py-20 md:py-28 px-6 overflow-hidden">
+      <div className="absolute inset-0 -z-10 bg-[#FBF6EA]" />
+      <div className="absolute inset-0 -z-10 paper-grid opacity-60" />
+      <div className="absolute inset-0 -z-10 paper-texture opacity-60 mix-blend-multiply" />
+
       <div className="max-w-7xl mx-auto">
         <Reveal>
-          <div className="text-center mb-12 md:mb-14">
-            <p className="inline-block text-xs font-bold text-primary tracking-widest uppercase mb-3">
-              Empezá por aquí
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-text-primary text-balance">
-              Elegí tu categoría y{" "}
-              <span className="font-display italic font-normal text-gradient-primary">armá tu pedido.</span>
-            </h2>
-            <p className="text-text-secondary text-lg max-w-2xl mx-auto mt-4">
-              11 categorías de imprimibles personalizables. Tocá la que necesitás y elegí el tema favorito de tu hijo.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="empezá por acá"
+            title="Elegí tu categoría y armá tu pedido."
+            circleWord="armá"
+            circleColor="#E54CA2"
+            tapeColor="mustard"
+            align="center"
+            description="11 categorías de imprimibles personalizables. Tocá la que necesitás y elegí el tema favorito del chico."
+            className="mx-auto mb-14"
+          />
         </Reveal>
 
-        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5">
-          {digitalCategories.map((cat) => (
-            <StaggerItem key={cat.id}>
-              <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.3 }} className="h-full">
-                <Link
-                  href={`/imprimibles/${cat.id}`}
-                  className="group relative block h-full rounded-3xl overflow-hidden bg-bg-white border border-border-light flex flex-col"
+        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-7">
+          {digitalCategories.map((cat, i) => {
+            const tilt = TILTS[i % TILTS.length];
+            const tape = TAPES[i % TAPES.length];
+            return (
+              <StaggerItem key={cat.id}>
+                <motion.div
+                  whileHover={{ y: -8, rotate: 0 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ rotate: tilt }}
+                  className="h-full relative"
                 >
-                  <div className="relative h-40 bg-[#FAF6EE] flex items-center justify-center overflow-hidden">
-                    <Image
-                      src={cat.iconImage}
-                      alt={cat.name}
-                      width={160}
-                      height={160}
-                      className="object-contain transition-transform duration-500 group-hover:scale-105"
-                    />
-                    {cat.badge && (
-                      <span className="absolute top-3 right-3 bg-white text-text-primary text-[10px] font-bold px-2.5 py-1 rounded-full shadow">
-                        {cat.badge.toUpperCase()}
-                      </span>
-                    )}
-                  </div>
-                  <div className="p-5 flex-1 flex flex-col">
-                    <h3 className="text-base font-bold text-text-primary mb-1 group-hover:text-primary transition-colors">
-                      {cat.name}
-                    </h3>
-                    <p className="text-xs text-text-secondary leading-relaxed mb-4 flex-1 line-clamp-2">
-                      {cat.description}
-                    </p>
-                    <div className="flex items-center justify-end">
-                      <span className="text-xs font-semibold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all">
-                        Elegir tema <span>→</span>
-                      </span>
+                  <WashiTape
+                    color={tape}
+                    rotate={tilt > 0 ? -20 : 20}
+                    width={56}
+                    height={18}
+                    className="absolute -top-2 left-1/2 -translate-x-1/2 z-20"
+                  />
+                  <Link
+                    href={`/imprimibles/${cat.id}`}
+                    className="group relative block h-full polaroid flex flex-col"
+                  >
+                    <div className="relative aspect-square bg-[#EFE9DC] rounded-[2px] overflow-hidden flex items-center justify-center">
+                      <Image
+                        src={cat.iconImage}
+                        alt={cat.name}
+                        width={160}
+                        height={160}
+                        className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.06]"
+                      />
+                      {cat.badge && (
+                        <span
+                          className="absolute top-2 right-2 bg-accent-pink text-white text-[10px] font-bold px-2.5 py-1"
+                          style={{ transform: "rotate(5deg)", boxShadow: "0 2px 6px rgba(42,45,37,0.18)" }}
+                        >
+                          {cat.badge.toUpperCase()}
+                        </span>
+                      )}
                     </div>
-                  </div>
-                </Link>
-              </motion.div>
-            </StaggerItem>
-          ))}
+                    <div className="pt-3 pb-1 px-1 flex-1 flex flex-col">
+                      <h3 className="font-hand text-xl text-text-primary leading-tight group-hover:text-primary transition-colors">
+                        {cat.name}
+                      </h3>
+                      <p className="text-xs text-text-secondary leading-relaxed mt-1 line-clamp-2">
+                        {cat.description}
+                      </p>
+                      <div className="mt-2 flex items-center justify-end">
+                        <span className="font-hand text-base text-primary/80 group-hover:text-primary flex items-center gap-1">
+                          ver temas →
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              </StaggerItem>
+            );
+          })}
         </Stagger>
       </div>
     </section>

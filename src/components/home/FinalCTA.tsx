@@ -4,47 +4,78 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Reveal } from "@/components/motion/Reveal";
+import { WashiTape } from "@/components/scrapbook/WashiTape";
+import { HandStar, HandArrow } from "@/components/scrapbook/HandDrawn";
 
 export function FinalCTA() {
   return (
     <section className="relative py-24 md:py-32 px-6 overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <Image src="/images/home/birthday-aesthetic.png" alt="" fill sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-black/75" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-transparent to-accent-pink/20 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/75 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-transparent to-accent-pink/25 mix-blend-overlay" />
       </div>
 
+      {/* Corner tapes */}
+      <WashiTape
+        color="pink"
+        rotate={-12}
+        width={180}
+        height={32}
+        className="absolute -top-1 left-[8%] z-10"
+      />
+      <WashiTape
+        color="mustard"
+        rotate={10}
+        width={150}
+        height={28}
+        className="absolute -top-2 right-[10%] z-10"
+      />
+
       <Reveal>
-        <div className="max-w-3xl mx-auto text-center text-white">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-xs font-bold tracking-widest uppercase mb-4 text-white/80"
+        <div className="relative max-w-3xl mx-auto text-center text-white">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <HandStar className="w-6 h-6" color="#E0B252" />
+            <p className="font-hand text-2xl md:text-3xl text-white/90 -rotate-1">
+              tu próximo cumple empieza acá
+            </p>
+            <HandStar className="w-6 h-6" color="#E54CA2" />
+          </div>
+
+          <h2
+            className="font-display text-[40px] md:text-[64px] font-light leading-[0.95] tracking-[-0.03em] mb-6 drop-shadow-lg text-balance"
+            style={{ textShadow: "0 2px 16px rgba(0,0,0,0.35)" }}
           >
-            Tu proximo cumple empieza aca
-          </motion.p>
-          <h2 className="text-4xl md:text-6xl font-extrabold leading-[1.05] mb-5 drop-shadow-lg text-balance">
             Personalizá el imprimible{" "}
-            <span className="font-display italic font-normal">perfecto para tu hijo.</span>
+            <span className="italic font-normal">perfecto para él.</span>
           </h2>
-          <p className="text-lg md:text-xl text-white/90 max-w-xl mx-auto mb-10 leading-relaxed">
-            Elegi el tema, poné el nombre y descargás al instante. Imprimís las veces que necesites.
+
+          <p
+            className="text-lg md:text-xl text-white/92 max-w-xl mx-auto mb-10 leading-[1.6]"
+            style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
+          >
+            Elegí el tema, poné el nombre y descargás al instante. Imprimís las veces que necesites.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link href="/imprimibles" className="btn-primary !py-4 !px-8 !text-base !bg-white !text-primary hover:!bg-primary-bg group">
-              Ver los 396 imprimibles
-              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/imprimibles"
+              className="group relative inline-flex items-center gap-2 px-8 py-4 bg-white text-text-primary font-semibold rounded-[4px] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px]"
+              style={{ boxShadow: "6px 6px 0 0 #E54CA2" }}
+            >
+              Ver los 412 imprimibles
+              <HandArrow className="w-5 h-3 opacity-70" color="currentColor" />
             </Link>
-            <Link href="/imprimibles/invitaciones" className="btn-secondary !py-4 !px-8 !text-base !bg-white/10 !border-white/40 !text-white backdrop-blur hover:!bg-white/20">
-              Empezá por invitaciones
+            <Link
+              href="/imprimibles/invitaciones"
+              className="font-hand text-2xl text-white hover:text-white/80 underline decoration-dotted underline-offset-4"
+            >
+              o empezá por invitaciones
             </Link>
           </div>
-          <p className="mt-8 text-sm text-white/70">
-            ★ 4.9 en Google · +2.000 mamas confian · Descarga al instante
+
+          <p className="mt-10 font-hand text-xl text-white/85">
+            ★ 4.9 en Google · + de 2k familias · descarga al instante
           </p>
         </div>
       </Reveal>
