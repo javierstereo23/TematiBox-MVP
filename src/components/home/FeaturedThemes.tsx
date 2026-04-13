@@ -94,13 +94,33 @@ export function FeaturedThemes() {
                         TENDENCIA
                       </span>
                     )}
+
+                    {/* Age post-it — upper-left, always legible */}
+                    <span
+                      className="absolute top-3 left-3 px-2.5 py-1 font-hand text-sm text-text-primary"
+                      style={{
+                        background: "#FFF3A8",
+                        transform: "rotate(-3deg)",
+                        boxShadow: "0 2px 6px rgba(42,45,37,0.22)",
+                      }}
+                    >
+                      {t.ageRange}
+                    </span>
+
+                    {/* Stronger bottom gradient for title legibility */}
+                    <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 via-black/50 to-transparent" />
+
                     <div className="absolute bottom-0 left-0 right-0 p-3">
-                      <h3 className="font-display text-white text-xl font-normal drop-shadow leading-tight">
+                      <h3
+                        className="font-display text-white text-xl md:text-[22px] font-normal leading-tight"
+                        style={{
+                          WebkitTextStroke: "0.55px rgba(42,45,37,0.5)",
+                          textShadow:
+                            "0 2px 14px rgba(0,0,0,0.6), 0 0 2px rgba(0,0,0,0.9)",
+                        }}
+                      >
                         {t.name}
                       </h3>
-                      <p className="font-hand text-white/90 text-base drop-shadow leading-tight">
-                        {t.ageRange}
-                      </p>
                     </div>
                   </div>
                 </Link>

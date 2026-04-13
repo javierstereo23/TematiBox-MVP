@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Reveal } from "@/components/motion/Reveal";
 import { WashiTape } from "@/components/scrapbook/WashiTape";
 import { HandStar, HandArrow } from "@/components/scrapbook/HandDrawn";
@@ -10,13 +9,10 @@ import { HandStar, HandArrow } from "@/components/scrapbook/HandDrawn";
 export function FinalCTA() {
   return (
     <section className="relative py-24 md:py-32 px-6 overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <Image src="/images/home/birthday-aesthetic.png" alt="" fill sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/75 to-black/80" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-transparent to-accent-pink/25 mix-blend-overlay" />
-      </div>
+      <div className="absolute inset-0 -z-10 bg-[#FBF6EA]" />
+      <div className="absolute inset-0 -z-10 paper-grid opacity-45" />
+      <div className="absolute inset-0 -z-10 paper-texture opacity-45 mix-blend-multiply" />
 
-      {/* Corner tapes */}
       <WashiTape
         color="pink"
         rotate={-12}
@@ -33,54 +29,76 @@ export function FinalCTA() {
       />
 
       <Reveal>
-        <div className="relative max-w-3xl mx-auto text-center text-white">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <HandStar className="w-6 h-6" color="#E0B252" />
-            <p className="font-hand text-2xl md:text-3xl text-white/90 -rotate-1">
-              tu próximo cumple empieza acá
+        <div className="relative max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+          {/* Polaroid photo */}
+          <div className="md:col-span-5 flex justify-center md:justify-start">
+            <div
+              className="relative polaroid"
+              style={{ transform: "rotate(-3deg)" }}
+            >
+              <WashiTape
+                color="cream"
+                rotate={-10}
+                width={110}
+                height={22}
+                className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-10"
+              />
+              <div className="relative aspect-[4/5] w-[260px] md:w-[300px] overflow-hidden bg-[#EFE9DC] rounded-[2px]">
+                <Image
+                  src="/images/home/birthday-aesthetic.png"
+                  alt=""
+                  fill
+                  sizes="300px"
+                  className="object-cover"
+                />
+              </div>
+              <p className="absolute bottom-3 left-0 right-0 text-center font-hand text-lg text-text-primary/80">
+                tu próximo cumple
+              </p>
+            </div>
+          </div>
+
+          {/* Copy */}
+          <div className="md:col-span-7 text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-3 mb-5">
+              <HandStar className="w-6 h-6" color="#E0B252" />
+              <p className="font-hand text-2xl md:text-3xl text-primary/85 -rotate-1">
+                tu próximo cumple empieza acá
+              </p>
+              <HandStar className="w-6 h-6" color="#E54CA2" />
+            </div>
+
+            <h2 className="font-display text-[42px] md:text-[66px] font-light leading-[0.94] tracking-[-0.03em] mb-5 text-balance text-text-primary">
+              Personalizá el imprimible{" "}
+              <span className="italic font-normal text-gradient-primary">perfecto para él.</span>
+            </h2>
+
+            <p className="text-lg md:text-xl text-text-primary/75 max-w-xl mb-10 leading-[1.6]">
+              Elegí el tema, poné el nombre y descargás al instante. Imprimís las veces que
+              necesites.
             </p>
-            <HandStar className="w-6 h-6" color="#E54CA2" />
+
+            <div className="flex flex-col sm:flex-row items-center md:items-start justify-center md:justify-start gap-4">
+              <Link
+                href="/imprimibles"
+                className="group inline-flex items-center gap-2 px-8 py-4 bg-text-primary text-[#FBF6EA] font-semibold rounded-[4px] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px]"
+                style={{ boxShadow: "6px 6px 0 0 #E54CA2" }}
+              >
+                Ver los 412 imprimibles
+                <HandArrow className="w-5 h-3 opacity-80" color="currentColor" />
+              </Link>
+              <Link
+                href="/imprimibles/invitaciones"
+                className="font-hand text-2xl text-primary hover:text-primary-dark underline decoration-dotted underline-offset-4"
+              >
+                o empezá por invitaciones
+              </Link>
+            </div>
+
+            <p className="mt-8 font-hand text-xl text-text-secondary -rotate-[0.5deg]">
+              ★ 4.9 en Google · + de 2k familias · descarga al instante
+            </p>
           </div>
-
-          <h2
-            className="font-display text-[40px] md:text-[64px] font-light leading-[0.95] tracking-[-0.03em] mb-6 text-balance text-white"
-            style={{
-              WebkitTextStroke: "0.7px rgba(42,45,37,0.45)",
-              textShadow:
-                "0 2px 18px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.8)",
-            }}
-          >
-            Personalizá el imprimible{" "}
-            <span className="italic font-normal">perfecto para él.</span>
-          </h2>
-
-          <p
-            className="text-lg md:text-xl text-white/92 max-w-xl mx-auto mb-10 leading-[1.6]"
-            style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
-          >
-            Elegí el tema, poné el nombre y descargás al instante. Imprimís las veces que necesites.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/imprimibles"
-              className="group relative inline-flex items-center gap-2 px-8 py-4 bg-white text-text-primary font-semibold rounded-[4px] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px]"
-              style={{ boxShadow: "6px 6px 0 0 #E54CA2" }}
-            >
-              Ver los 412 imprimibles
-              <HandArrow className="w-5 h-3 opacity-70" color="currentColor" />
-            </Link>
-            <Link
-              href="/imprimibles/invitaciones"
-              className="font-hand text-2xl text-white hover:text-white/80 underline decoration-dotted underline-offset-4"
-            >
-              o empezá por invitaciones
-            </Link>
-          </div>
-
-          <p className="mt-10 font-hand text-xl text-white/85">
-            ★ 4.9 en Google · + de 2k familias · descarga al instante
-          </p>
         </div>
       </Reveal>
     </section>

@@ -46,13 +46,10 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
 
   return (
     <>
-      <section className="relative overflow-hidden py-24 md:py-32 px-6">
-        <div className="absolute inset-0">
-          <Image src={theme.image} alt="" fill priority sizes="100vw" className="object-cover" />
-          <div className={`absolute inset-0 bg-gradient-to-br ${theme.gradient} opacity-35 mix-blend-multiply`} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/88 via-black/65 to-black/45" />
-          <div className="absolute inset-0 paper-texture opacity-35 mix-blend-multiply" />
-        </div>
+      <section className="relative overflow-hidden py-20 md:py-28 px-6">
+        <div className="absolute inset-0 -z-10 bg-[#FBF6EA]" />
+        <div className="absolute inset-0 -z-10 paper-grid opacity-55" />
+        <div className="absolute inset-0 -z-10 paper-texture opacity-50 mix-blend-multiply" />
 
         <WashiTape
           color="pink"
@@ -69,30 +66,52 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
           className="absolute -top-2 right-[8%] z-20"
         />
 
-        <div className="relative max-w-5xl mx-auto">
-          <nav className="flex items-center gap-2 font-hand text-lg text-white/75 mb-8">
-            <Link href="/" className="hover:text-white">inicio</Link>
+        <div className="relative max-w-6xl mx-auto">
+          <nav className="flex items-center gap-2 font-hand text-lg text-text-secondary mb-8">
+            <Link href="/" className="hover:text-primary">inicio</Link>
             <span>·</span>
-            <Link href="/temas" className="hover:text-white">temas</Link>
+            <Link href="/temas" className="hover:text-primary">temas</Link>
             <span>·</span>
-            <span className="text-white">{theme.name.toLowerCase()}</span>
+            <span className="text-text-primary">{theme.name.toLowerCase()}</span>
           </nav>
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <div
-              className="polaroid flex items-center justify-center flex-shrink-0"
-              style={{ transform: "rotate(-4deg)" }}
-            >
-              <div className="w-24 h-24 md:w-32 md:h-32 bg-[#EFE9DC] rounded-[2px] flex items-center justify-center">
-                <span className="text-6xl md:text-7xl">{theme.emoji}</span>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
+            {/* Theme photo as polaroid */}
+            <div className="md:col-span-5 flex justify-center md:justify-start">
+              <div
+                className="relative polaroid"
+                style={{ transform: "rotate(-3deg)" }}
+              >
+                <WashiTape
+                  color="pink"
+                  rotate={-10}
+                  width={120}
+                  height={24}
+                  className="absolute -top-3 left-1/2 -translate-x-1/2 z-10"
+                />
+                <div className="relative aspect-[4/5] w-[260px] md:w-[320px] overflow-hidden bg-[#EFE9DC] rounded-[2px]">
+                  <Image
+                    src={theme.image}
+                    alt={theme.name}
+                    fill
+                    priority
+                    sizes="320px"
+                    className="object-cover"
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-t ${theme.gradient} opacity-15 mix-blend-multiply`} />
+                </div>
+                <p className="absolute bottom-3 left-0 right-0 text-center font-hand text-lg text-text-primary/80">
+                  universo {theme.name.toLowerCase()}
+                </p>
               </div>
             </div>
-            <div className="text-center md:text-left text-white">
-              <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
+
+            <div className="md:col-span-7 text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start gap-3 mb-4 flex-wrap">
                 <HandStar className="w-5 h-5" color="#E0B252" />
                 {theme.popular && (
                   <span
                     className="px-3 py-1 bg-accent-pink text-white text-[11px] font-bold"
-                    style={{ transform: "rotate(-3deg)" }}
+                    style={{ transform: "rotate(-3deg)", boxShadow: "0 2px 6px rgba(42,45,37,0.18)" }}
                   >
                     POPULAR
                   </span>
@@ -100,38 +119,34 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
                 {theme.trending && (
                   <span
                     className="px-3 py-1 bg-red-500 text-white text-[11px] font-bold"
-                    style={{ transform: "rotate(-3deg)" }}
+                    style={{ transform: "rotate(-3deg)", boxShadow: "0 2px 6px rgba(42,45,37,0.18)" }}
                   >
                     TENDENCIA
                   </span>
                 )}
-                <p className="font-hand text-xl text-white/95 -rotate-1">
+                <p className="font-hand text-xl text-primary/80 -rotate-1">
                   tema {theme.name.toLowerCase()}
                 </p>
               </div>
-              <h1
-                className="font-display text-[44px] md:text-[68px] font-light leading-[0.95] tracking-[-0.03em] mb-3 text-balance text-white"
-                style={{
-                  WebkitTextStroke: "0.7px rgba(42,45,37,0.45)",
-                  textShadow:
-                    "0 2px 18px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.8)",
-                }}
-              >
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-5xl md:text-6xl">{theme.emoji}</span>
+              </div>
+              <h1 className="font-display text-[44px] md:text-[68px] font-light leading-[0.95] tracking-[-0.03em] mb-3 text-balance text-text-primary">
                 {theme.name}
               </h1>
-              <p className="text-lg text-white/90 max-w-lg mb-4 leading-[1.6]">
+              <p className="text-lg text-text-primary/75 max-w-lg mb-5 leading-[1.6]">
                 {theme.description}
               </p>
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
                 <span
                   className="px-4 py-2 font-hand text-base text-text-primary"
-                  style={{ background: "#FFF3A8", transform: "rotate(-2deg)", boxShadow: "0 3px 10px rgba(0,0,0,0.2)" }}
+                  style={{ background: "#FFF3A8", transform: "rotate(-2deg)", boxShadow: "0 3px 10px rgba(42,45,37,0.15)" }}
                 >
                   {theme.ageRange}
                 </span>
                 <span
                   className="px-4 py-2 font-hand text-base text-text-primary"
-                  style={{ background: "#FFDBE6", transform: "rotate(1.5deg)", boxShadow: "0 3px 10px rgba(0,0,0,0.2)" }}
+                  style={{ background: "#FFDBE6", transform: "rotate(1.5deg)", boxShadow: "0 3px 10px rgba(42,45,37,0.15)" }}
                 >
                   {themeProducts.length} imprimibles listos
                 </span>

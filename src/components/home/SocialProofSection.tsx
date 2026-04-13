@@ -102,12 +102,23 @@ export function SocialProofSection() {
                   className="object-cover"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/85 via-black/45 to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5 md:bottom-8 md:left-10 md:right-auto md:max-w-lg text-white">
-                  <p className="font-display text-lg md:text-2xl italic font-normal leading-snug drop-shadow-lg mb-2">
+                  <p
+                    className="font-display text-lg md:text-2xl italic font-normal leading-snug mb-2 text-white"
+                    style={{
+                      WebkitTextStroke: "0.4px rgba(42,45,37,0.5)",
+                      textShadow: "0 2px 14px rgba(0,0,0,0.65), 0 0 2px rgba(0,0,0,0.85)",
+                    }}
+                  >
                     &ldquo;{QUOTES[0].quote}&rdquo;
                   </p>
-                  <p className="font-hand text-xl text-white/95 drop-shadow">{QUOTES[0].who}</p>
+                  <p
+                    className="font-hand text-xl text-white"
+                    style={{ textShadow: "0 2px 10px rgba(0,0,0,0.65)" }}
+                  >
+                    {QUOTES[0].who}
+                  </p>
                 </div>
               </div>
               <p className="absolute bottom-3 left-0 right-0 text-center font-hand text-xl text-text-primary/80">

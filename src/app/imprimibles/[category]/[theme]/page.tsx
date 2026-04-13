@@ -52,9 +52,10 @@ export default async function CategoryThemePage({
 
   return (
     <>
-      <section className={`relative overflow-hidden py-24 md:py-28 px-6 bg-gradient-to-br ${theme.gradient}`}>
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="absolute inset-0 paper-texture opacity-40 mix-blend-multiply" />
+      <section className="relative overflow-hidden py-20 md:py-24 px-6">
+        <div className="absolute inset-0 -z-10 bg-[#FBF6EA]" />
+        <div className="absolute inset-0 -z-10 paper-grid opacity-55" />
+        <div className="absolute inset-0 -z-10 paper-texture opacity-50 mix-blend-multiply" />
 
         <WashiTape
           color="pink"
@@ -71,20 +72,20 @@ export default async function CategoryThemePage({
           className="absolute -top-2 right-[8%] z-20"
         />
 
-        <div className="relative max-w-5xl mx-auto text-center text-white">
-          <nav className="flex items-center justify-center gap-2 font-hand text-lg text-white/80 mb-8">
-            <Link href="/" className="hover:text-white">inicio</Link>
+        <div className="relative max-w-5xl mx-auto text-center">
+          <nav className="flex items-center justify-center gap-2 font-hand text-lg text-text-secondary mb-8">
+            <Link href="/" className="hover:text-primary">inicio</Link>
             <span>·</span>
-            <Link href="/imprimibles" className="hover:text-white">imprimibles</Link>
+            <Link href="/imprimibles" className="hover:text-primary">imprimibles</Link>
             <span>·</span>
-            <Link href={`/imprimibles/${cat.id}`} className="hover:text-white">{cat.shortName.toLowerCase()}</Link>
+            <Link href={`/imprimibles/${cat.id}`} className="hover:text-primary">{cat.shortName.toLowerCase()}</Link>
             <span>·</span>
-            <span className="text-white">{theme.name.toLowerCase()}</span>
+            <span className="text-text-primary">{theme.name.toLowerCase()}</span>
           </nav>
 
           <div className="flex items-center justify-center gap-4 mb-6">
             <HandStar className="w-5 h-5" color="#E0B252" />
-            <p className="font-hand text-xl md:text-2xl text-white/95 -rotate-1">
+            <p className="font-hand text-xl md:text-2xl text-primary/80 -rotate-1">
               {cat.shortName.toLowerCase()} · tema {theme.name.toLowerCase()}
             </p>
             <HandStar className="w-5 h-5" color="#E54CA2" />
@@ -99,24 +100,14 @@ export default async function CategoryThemePage({
                 <Image src={cat.iconImage} alt={cat.name} width={64} height={64} className="object-cover" />
               </div>
             </div>
-            <span className="text-4xl md:text-5xl drop-shadow-lg rotate-[6deg]">{theme.emoji}</span>
+            <span className="text-4xl md:text-5xl rotate-[6deg]">{theme.emoji}</span>
           </div>
 
-          <h1
-            className="font-display text-[36px] md:text-[56px] font-light leading-[0.95] tracking-[-0.03em] mb-3 text-balance text-white"
-            style={{
-              WebkitTextStroke: "0.7px rgba(42,45,37,0.45)",
-              textShadow:
-                "0 2px 18px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.8)",
-            }}
-          >
+          <h1 className="font-display text-[36px] md:text-[56px] font-light leading-[0.95] tracking-[-0.03em] mb-3 text-balance text-text-primary">
             {cat.name} de{" "}
-            <span className="italic font-normal">{theme.name}</span>
+            <span className="italic font-normal text-gradient-primary">{theme.name}</span>
           </h1>
-          <p
-            className="text-base md:text-lg text-white/92 max-w-2xl mx-auto leading-[1.6]"
-            style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
-          >
+          <p className="text-base md:text-lg text-text-primary/75 max-w-2xl mx-auto leading-[1.6]">
             {cat.description}
           </p>
         </div>

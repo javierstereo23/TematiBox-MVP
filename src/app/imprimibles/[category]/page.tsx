@@ -42,9 +42,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   return (
     <>
-      <section className={`relative overflow-hidden py-24 md:py-32 px-6 bg-gradient-to-br ${cat.gradient}`}>
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="absolute inset-0 paper-texture opacity-40 mix-blend-multiply" />
+      <section className="relative overflow-hidden py-20 md:py-28 px-6">
+        <div className="absolute inset-0 -z-10 bg-[#FBF6EA]" />
+        <div className="absolute inset-0 -z-10 paper-grid opacity-55" />
+        <div className="absolute inset-0 -z-10 paper-texture opacity-50 mix-blend-multiply" />
 
         <WashiTape
           color="pink"
@@ -61,52 +62,41 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           className="absolute -top-2 right-[10%] z-20"
         />
 
-        <div className="relative max-w-5xl mx-auto text-center text-white">
-          <nav className="flex items-center justify-center gap-2 text-sm text-white/75 mb-8 font-hand text-lg">
-            <Link href="/" className="hover:text-white">inicio</Link>
+        <div className="relative max-w-5xl mx-auto text-center">
+          <nav className="flex items-center justify-center gap-2 mb-8 font-hand text-lg text-text-secondary">
+            <Link href="/" className="hover:text-primary">inicio</Link>
             <span>·</span>
-            <Link href="/imprimibles" className="hover:text-white">imprimibles</Link>
+            <Link href="/imprimibles" className="hover:text-primary">imprimibles</Link>
             <span>·</span>
-            <span className="text-white">{cat.shortName.toLowerCase()}</span>
+            <span className="text-text-primary">{cat.shortName.toLowerCase()}</span>
           </nav>
 
           <div className="flex items-center justify-center gap-3 mb-6">
             <HandStar className="w-6 h-6" color="#E0B252" />
-            <p className="font-hand text-2xl md:text-3xl text-white/95 -rotate-1">
+            <p className="font-hand text-2xl md:text-3xl text-primary/80 -rotate-1">
               {cat.shortName.toLowerCase()} · con su nombre
             </p>
             <HandStar className="w-6 h-6" color="#E54CA2" />
           </div>
 
-          {/* Polaroid with icon */}
           <div
             className="inline-block polaroid mb-8"
-            style={{ transform: "rotate(-2deg)", background: "#FFFDF8" }}
+            style={{ transform: "rotate(-2deg)" }}
           >
             <div className="w-24 h-24 md:w-32 md:h-32 bg-[#EFE9DC] rounded-[2px] overflow-hidden">
               <Image src={cat.iconImage} alt={cat.name} width={128} height={128} className="object-cover" />
             </div>
           </div>
 
-          <h1
-            className="font-display text-[46px] md:text-[72px] font-light leading-[0.92] tracking-[-0.03em] mb-5 text-balance text-white"
-            style={{
-              WebkitTextStroke: "0.7px rgba(42,45,37,0.45)",
-              textShadow:
-                "0 2px 18px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.8)",
-            }}
-          >
+          <h1 className="font-display text-[46px] md:text-[72px] font-light leading-[0.92] tracking-[-0.03em] mb-5 text-balance text-text-primary">
             {cat.name}
           </h1>
-          <p
-            className="text-base md:text-lg text-white/92 max-w-2xl mx-auto mb-8 leading-[1.6]"
-            style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
-          >
+          <p className="text-base md:text-lg text-text-primary/75 max-w-2xl mx-auto mb-8 leading-[1.6]">
             {cat.longDescription}
           </p>
           <div
             className="inline-flex items-baseline gap-3 bg-[#FFF3A8] text-text-primary px-5 py-2.5"
-            style={{ transform: "rotate(-2deg)", boxShadow: "0 6px 16px rgba(0,0,0,0.2)" }}
+            style={{ transform: "rotate(-2deg)", boxShadow: "0 6px 16px rgba(42,45,37,0.15)" }}
           >
             <span className="font-hand text-base text-text-primary/65 line-through">
               {formatPrice(cat.originalPrice)}
