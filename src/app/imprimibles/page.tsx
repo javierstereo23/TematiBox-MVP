@@ -24,19 +24,11 @@ function getCategoryShowcase(catId: DigitalCategoryId | string): string | null {
 export default function ImprimiblesPage() {
   return (
     <>
-      {/* HERO scrapbook con foto de persona real como polaroid grande */}
+      {/* HERO scrapbook — papel cream + polaroid con foto, sin fondo oscuro */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/social-proof/mom-daughter-phone.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/55 to-black/30" />
-        </div>
+        <div className="absolute inset-0 -z-10 bg-[#FBF6EA]" />
+        <div className="absolute inset-0 -z-10 paper-grid opacity-55" />
+        <div className="absolute inset-0 -z-10 paper-texture opacity-50 mix-blend-multiply" />
 
         {/* Corner tapes */}
         <WashiTape
@@ -54,79 +46,91 @@ export default function ImprimiblesPage() {
           className="absolute -top-2 right-[8%] z-20"
         />
 
-        <div className="relative max-w-7xl mx-auto px-6 py-24 md:py-32">
-          <div className="max-w-2xl text-white">
-            <div className="flex items-center gap-3 mb-6">
-              <HandStar className="w-6 h-6" color="#E0B252" />
-              <p className="font-hand text-2xl md:text-3xl text-white/95 -rotate-1">
-                el catálogo completo
+        <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+            {/* LEFT — copy on cream paper, DARK text */}
+            <div className="lg:col-span-7">
+              <div className="flex items-center gap-3 mb-6">
+                <HandStar className="w-6 h-6" color="#E0B252" />
+                <p className="font-hand text-2xl md:text-3xl text-primary/80 -rotate-1">
+                  el catálogo completo
+                </p>
+              </div>
+
+              <h1 className="font-display text-[46px] sm:text-[60px] md:text-[80px] font-light leading-[0.92] tracking-[-0.03em] mb-4 text-text-primary text-balance">
+                Imprimibles que se sienten{" "}
+                <span className="italic font-normal text-gradient-primary">
+                  hechos a mano.
+                </span>
+              </h1>
+
+              <p className="font-hand text-2xl md:text-3xl text-primary/80 -rotate-[0.5deg] mb-6">
+                + llegan en 30 segundos.
               </p>
+
+              <p className="text-lg md:text-xl text-text-primary/75 leading-[1.65] max-w-xl mb-8">
+                Del cumple al cuaderno del cole, cada archivo lo personalizamos con el nombre del
+                chico o la chica. Descarga al instante, imprimís las veces que necesites.
+              </p>
+
+              {/* Post-it proof row */}
+              <div className="flex flex-wrap items-center gap-4">
+                <div
+                  className="px-4 py-2 rotate-[-2deg]"
+                  style={{ background: "#FFF3A8", boxShadow: "0 4px 12px rgba(42,45,37,0.12)" }}
+                >
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-display text-2xl text-text-primary font-normal">30s</span>
+                    <span className="font-hand text-sm text-text-primary/80">al instante</span>
+                  </div>
+                </div>
+                <div
+                  className="px-4 py-2 rotate-[1.5deg]"
+                  style={{ background: "#FFDBE6", boxShadow: "0 4px 12px rgba(42,45,37,0.12)" }}
+                >
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-display text-2xl text-text-primary font-normal">2k+</span>
+                    <span className="font-hand text-sm text-text-primary/80">familias</span>
+                  </div>
+                </div>
+                <div
+                  className="px-4 py-2 rotate-[-1deg]"
+                  style={{ background: "#D9E8D3", boxShadow: "0 4px 12px rgba(42,45,37,0.12)" }}
+                >
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-display text-2xl text-text-primary font-normal">∞</span>
+                    <span className="font-hand text-sm text-text-primary/80">reimprimís</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <h1
-              className="font-display text-[46px] sm:text-[60px] md:text-[80px] font-light leading-[0.92] tracking-[-0.03em] mb-5 text-white text-balance"
-              style={{
-                WebkitTextStroke: "0.7px rgba(42,45,37,0.45)",
-                textShadow:
-                  "0 2px 18px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.8)",
-              }}
-            >
-              Imprimibles que se sienten{" "}
-              <span
-                className="italic font-normal text-accent-pink"
-                style={{
-                  WebkitTextStroke: "0.7px rgba(42,45,37,0.55)",
-                  textShadow:
-                    "0 2px 18px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.85)",
-                }}
-              >
-                hechos a mano.
-              </span>
-            </h1>
-
-            <p
-              className="font-hand text-2xl md:text-3xl text-white/95 -rotate-[0.5deg] mb-6"
-              style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
-            >
-              + llegan en 30 segundos.
-            </p>
-
-            <p
-              className="text-lg md:text-xl text-white/90 leading-[1.65] max-w-xl mb-8"
-              style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
-            >
-              Del cumple al cuaderno del cole, cada archivo lo personalizamos con el nombre del
-              chico o la chica. Descarga al instante, imprimís las veces que necesites.
-            </p>
-
-            {/* Post-it proof row */}
-            <div className="flex flex-wrap items-center gap-4">
+            {/* RIGHT — photo as polaroid, tilted */}
+            <div className="lg:col-span-5 relative">
               <div
-                className="px-4 py-2 rotate-[-2deg]"
-                style={{ background: "#FFF3A8", boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
+                className="relative polaroid"
+                style={{ transform: "rotate(-2.5deg)" }}
               >
-                <div className="flex items-baseline gap-2">
-                  <span className="font-display text-2xl text-text-primary font-normal">30s</span>
-                  <span className="font-hand text-sm text-text-primary/80">al instante</span>
+                <WashiTape
+                  color="pink"
+                  rotate={-10}
+                  width={140}
+                  height={26}
+                  className="absolute -top-3 left-1/2 -translate-x-1/2 z-10"
+                />
+                <div className="relative aspect-[4/5] overflow-hidden bg-[#EFE9DC] rounded-[2px]">
+                  <Image
+                    src="/images/social-proof/mom-daughter-phone.png"
+                    alt=""
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover"
+                  />
                 </div>
-              </div>
-              <div
-                className="px-4 py-2 rotate-[1.5deg]"
-                style={{ background: "#FFDBE6", boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
-              >
-                <div className="flex items-baseline gap-2">
-                  <span className="font-display text-2xl text-text-primary font-normal">2k+</span>
-                  <span className="font-hand text-sm text-text-primary/80">familias</span>
-                </div>
-              </div>
-              <div
-                className="px-4 py-2 rotate-[-1deg]"
-                style={{ background: "#D9E8D3", boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
-              >
-                <div className="flex items-baseline gap-2">
-                  <span className="font-display text-2xl text-text-primary font-normal">∞</span>
-                  <span className="font-hand text-sm text-text-primary/80">reimprimís</span>
-                </div>
+                <p className="absolute bottom-3 left-0 right-0 text-center font-hand text-lg text-text-primary/80">
+                  eligiendo su invitación
+                </p>
               </div>
             </div>
           </div>
