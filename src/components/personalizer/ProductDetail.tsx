@@ -72,6 +72,19 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
       value: product.price,
       items: [{ item_id: product.id, item_name: product.title, item_category: product.primaryCategory, price: product.price }],
     });
+
+    // Pull stored exit-intent coupon if present
+    let couponCode: string | undefined;
+    try {
+      const raw = localStorage.getItem("tematibox.coupon");
+      if (raw) {
+        const parsed = JSON.parse(raw) as { code?: string };
+        if (parsed?.code) couponCode = parsed.code;
+      }
+    } catch {
+      /* noop */
+    }
+
     try {
       const res = await fetch("/api/checkout/preference", {
         method: "POST",
@@ -81,6 +94,7 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
           title: product.title,
           price: product.price,
           image: product.image,
+          couponCode,
           personalization: {
             name: pers.name!.trim(),
             age: Number(pers.age),

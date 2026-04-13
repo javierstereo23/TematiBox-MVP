@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { CartProvider } from "@/components/CartProvider";
 import { CartDrawer } from "@/components/CartDrawer";
 import { ChatBot } from "@/components/ChatBot";
+import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { Analytics } from "@/components/Analytics";
 import { OrganizationJsonLd } from "@/components/seo/ProductJsonLd";
 
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <Footer />
           <CartDrawer />
           <ChatBot />
+          <ExitIntentPopup />
         </CartProvider>
       </body>
     </html>

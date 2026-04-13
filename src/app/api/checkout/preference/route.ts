@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
 
 // Mercado Pago Preference API integration
 // If MP_ACCESS_TOKEN is missing, respond with { mlFallback: true } so the
@@ -9,6 +10,7 @@ interface CheckoutBody {
   title: string;
   price: number;
   image?: string;
+  couponCode?: string;
   personalization?: {
     name: string;
     age: number;
@@ -38,6 +40,33 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
+  // Apply coupon discount if provided and valid
+  let finalPrice = Number(body.price);
+  let appliedCoupon: { code: string; percent_off: number } | null = null;
+  if (body.couponCode) {
+    try {
+      const supabase = await createClient();
+      const { data: coupon } = await supabase
+        .from("coupons")
+        .select("code, percent_off, times_used, max_uses, valid_until")
+        .eq("code", body.couponCode.trim().toUpperCase())
+        .maybeSingle();
+
+      const usable =
+        coupon &&
+        coupon.times_used < coupon.max_uses &&
+        (!coupon.valid_until || new Date(coupon.valid_until).getTime() > Date.now());
+
+      if (usable) {
+        const discount = Math.round((finalPrice * coupon.percent_off) / 100);
+        finalPrice = Math.max(finalPrice - discount, 1);
+        appliedCoupon = { code: coupon.code, percent_off: coupon.percent_off };
+      }
+    } catch (err) {
+      console.warn("coupon lookup failed, proceeding without discount", err);
+    }
+  }
+
   const persNote = body.personalization
     ? `Personalizacion: ${body.personalization.name} (${body.personalization.age} años)` +
       (body.personalization.eventDate ? ` | Fecha: ${body.personalization.eventDate}` : "") +
@@ -53,15 +82,16 @@ export async function POST(req: Request) {
     const client = new MercadoPagoConfig({ accessToken: token });
     const preference = new Preference(client);
 
+    const couponSuffix = appliedCoupon ? ` · cupón ${appliedCoupon.code}` : "";
     const prefBody = {
       items: [
         {
           id: body.productId,
-          title: body.title.slice(0, 256),
+          title: (body.title + couponSuffix).slice(0, 256),
           description: persNote.slice(0, 256) || "Imprimible digital personalizable",
           picture_url: body.image && body.image.startsWith("http") ? body.image : undefined,
           quantity: 1,
-          unit_price: Number(body.price),
+          unit_price: finalPrice,
           currency_id: "ARS",
           category_id: "art",
         },
@@ -75,6 +105,8 @@ export async function POST(req: Request) {
       metadata: {
         product_id: body.productId,
         personalization_note: persNote,
+        coupon_code: appliedCoupon?.code || null,
+        discount_pct: appliedCoupon?.percent_off || 0,
       },
       statement_descriptor: "TEMATIBOX",
       ...(isPublic && {
@@ -92,6 +124,8 @@ export async function POST(req: Request) {
       sandbox_init_point: result.sandbox_init_point,
       preference_id: result.id,
       mode: isTest ? "sandbox" : "production",
+      final_price: finalPrice,
+      coupon_applied: appliedCoupon,
     });
   } catch (e: unknown) {
     const err = e as { message?: string; status?: number; cause?: unknown; error?: string };
