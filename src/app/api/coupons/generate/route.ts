@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { sendEmail } from "@/lib/email/send";
+import { couponEmail } from "@/lib/email/templates";
 
 function randomCode(len = 8) {
   const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -75,6 +77,12 @@ export async function POST(req: Request) {
     event_type: "coupon_created",
     metadata: { source, code, percent_off: 10 },
   });
+
+  // Fire-and-forget email delivery
+  const tpl = couponEmail({ code, percent: 10 });
+  sendEmail({ to: email, subject: tpl.subject, html: tpl.html }).catch((e) =>
+    console.warn("[coupon email] failed", e)
+  );
 
   return NextResponse.json({
     code,
