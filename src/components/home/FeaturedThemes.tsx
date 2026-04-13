@@ -72,7 +72,6 @@ export function FeaturedThemes() {
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className={`absolute inset-0 bg-gradient-to-t ${t.gradient} opacity-15 mix-blend-multiply`} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
 
                     {t.logoImage && (
                       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-1/3 flex items-center justify-center">
@@ -95,7 +94,7 @@ export function FeaturedThemes() {
                       </span>
                     )}
 
-                    {/* Age post-it — upper-left, always legible */}
+                    {/* Age post-it — upper-left */}
                     <span
                       className="absolute top-3 left-3 px-2.5 py-1 font-hand text-sm text-text-primary"
                       style={{
@@ -106,22 +105,16 @@ export function FeaturedThemes() {
                     >
                       {t.ageRange}
                     </span>
+                  </div>
 
-                    {/* Stronger bottom gradient for title legibility */}
-                    <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 via-black/50 to-transparent" />
-
-                    <div className="absolute bottom-0 left-0 right-0 p-3">
-                      <h3
-                        className="font-display text-white text-xl md:text-[22px] font-normal leading-tight"
-                        style={{
-                          WebkitTextStroke: "0.55px rgba(42,45,37,0.5)",
-                          textShadow:
-                            "0 2px 14px rgba(0,0,0,0.6), 0 0 2px rgba(0,0,0,0.9)",
-                        }}
-                      >
-                        {t.name}
-                      </h3>
-                    </div>
+                  {/* Title on cream polaroid caption — dark text, fully legible */}
+                  <div className="pt-3 pb-1 px-1">
+                    <h3 className="font-display text-xl md:text-[22px] font-normal text-text-primary leading-tight group-hover:text-primary transition-colors">
+                      {t.name}
+                    </h3>
+                    <p className="font-hand text-base text-primary/70 -rotate-[0.5deg] line-clamp-1 mt-0.5">
+                      {t.description.split(".")[0]}
+                    </p>
                   </div>
                 </Link>
               </motion.div>
