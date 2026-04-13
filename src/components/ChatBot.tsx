@@ -29,28 +29,44 @@ function getDesignersOnline(): number {
   return 1 + Math.floor(Math.random() * 2);
 }
 
-function ProductCard({ product }: { product: RealProduct }) {
+function ChatProductCard({
+  product,
+  onClick,
+}: {
+  product: RealProduct;
+  onClick: () => void;
+}) {
   return (
     <Link
       href={`/producto/${product.slug}`}
-      className="group shrink-0 w-36 rounded-2xl overflow-hidden bg-bg-white border border-border-light hover:border-primary hover:shadow-md transition-all flex flex-col"
+      onClick={onClick}
+      prefetch
+      className="group shrink-0 w-40 bg-[#FFFDF8] border border-text-primary/15 hover:border-primary hover:-translate-y-1 transition-all flex flex-col cursor-pointer"
+      style={{ boxShadow: "0 4px 14px -4px rgba(42,45,37,0.12)" }}
     >
-      <div className="relative aspect-square bg-[#FAF6EE] overflow-hidden">
+      <div className="relative aspect-square bg-[#EFE9DC] overflow-hidden">
         <Image
           src={product.image}
           alt={product.title}
           fill
-          sizes="144px"
+          sizes="160px"
           className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
         />
       </div>
       <div className="p-2.5 flex-1 flex flex-col">
-        <p className="text-[11px] font-semibold text-text-primary line-clamp-2 leading-tight mb-1.5 min-h-[28px]">
-          {product.title}
+        <p className="font-hand text-sm text-text-primary line-clamp-2 leading-tight mb-1.5 min-h-[32px]">
+          {product.title.replace(/imprimible/gi, "").trim()}
         </p>
-        {product.price && (
-          <p className="text-xs font-bold text-primary mt-auto">{formatPrice(product.price)}</p>
-        )}
+        <div className="mt-auto flex items-center justify-between gap-1">
+          {product.price && (
+            <span className="font-display text-base font-medium text-text-primary leading-none">
+              {formatPrice(product.price)}
+            </span>
+          )}
+          <span className="font-hand text-sm text-primary group-hover:text-primary-dark">
+            ver →
+          </span>
+        </div>
       </div>
     </Link>
   );
@@ -285,11 +301,20 @@ export function ChatBot() {
                         </div>
                       </div>
                       {matched.length > 0 && (
-                        <div className="flex gap-2 overflow-x-auto pb-1 pl-1 -mx-1 scrollbar-thin">
-                          {matched.map((p) => (
-                            <ProductCard key={p.id} product={p} />
-                          ))}
-                        </div>
+                        <>
+                          <p className="font-hand text-sm text-primary/75 pl-1 -rotate-[0.5deg]">
+                            tocá para ver el producto →
+                          </p>
+                          <div className="flex gap-2 overflow-x-auto pb-2 pl-1 -mx-1 scrollbar-thin">
+                            {matched.map((p) => (
+                              <ChatProductCard
+                                key={p.id}
+                                product={p}
+                                onClick={() => setOpen(false)}
+                              />
+                            ))}
+                          </div>
+                        </>
                       )}
                     </div>
                   );
