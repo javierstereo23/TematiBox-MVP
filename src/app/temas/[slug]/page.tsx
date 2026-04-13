@@ -10,6 +10,7 @@ import { getProductsByTheme } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { WashiTape } from "@/components/scrapbook/WashiTape";
 import { HandStar } from "@/components/scrapbook/HandDrawn";
+import { TrackView } from "@/components/TrackView";
 
 export function generateStaticParams() {
   return themes.map((t) => ({ slug: t.slug }));
@@ -46,6 +47,10 @@ export default async function ThemeDetailPage({ params }: { params: Promise<{ sl
 
   return (
     <>
+      <TrackView
+        event="view_theme"
+        params={{ theme_slug: theme.slug, theme_name: theme.name, product_count: themeProducts.length }}
+      />
       <section className="relative overflow-hidden py-20 md:py-28 px-6">
         <div className="absolute inset-0 -z-10 bg-[#FBF6EA]" />
         <div className="absolute inset-0 -z-10 paper-grid opacity-55" />

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { products, type RealProduct } from "@/data/products";
 import { formatPrice } from "@/data/themes";
+import { track, identifyUser } from "@/components/Analytics";
 
 type Msg = {
   role: "user" | "assistant";
@@ -98,7 +99,10 @@ export function ChatBot() {
   }, [messages, streaming]);
 
   useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 100);
+    if (open) {
+      setTimeout(() => inputRef.current?.focus(), 100);
+      track("chat_open");
+    }
   }, [open]);
 
   async function send() {
@@ -218,6 +222,8 @@ export function ChatBot() {
       } catch {
         /* noop */
       }
+      identifyUser(email);
+      track("coupon_claimed", { source: "chatbot", percent_off: data.percent_off });
       // Inject a message from Vale confirming
       setMessages((prev) => [
         ...prev,

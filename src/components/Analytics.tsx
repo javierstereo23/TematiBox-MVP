@@ -65,11 +65,16 @@ fbq('track', 'PageView');`}
 
 type TrackableEvent =
   | "view_item"
+  | "view_category"
+  | "view_theme"
   | "add_to_cart"
   | "begin_checkout"
   | "purchase"
   | "search"
-  | "whatsapp_click";
+  | "whatsapp_click"
+  | "coupon_claimed"
+  | "chat_open"
+  | "abandoned_cart";
 
 export function track(event: TrackableEvent, params: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
@@ -77,16 +82,35 @@ export function track(event: TrackableEvent, params: Record<string, unknown> = {
   if (window.gtag) {
     window.gtag("event", event, params);
   }
-  // Meta Pixel — map to standard events
+  // Meta Pixel — map to standard events, fall back to Custom for non-standard ones
   if (window.fbq) {
-    const map: Record<TrackableEvent, string> = {
+    const map: Partial<Record<TrackableEvent, string>> = {
       view_item: "ViewContent",
+      view_category: "ViewContent",
+      view_theme: "ViewContent",
       add_to_cart: "AddToCart",
       begin_checkout: "InitiateCheckout",
       purchase: "Purchase",
       search: "Search",
       whatsapp_click: "Contact",
+      coupon_claimed: "Lead",
+      chat_open: "Contact",
+      abandoned_cart: "AddToCart",
     };
-    window.fbq("track", map[event], params);
+    const standard = map[event];
+    if (standard) window.fbq("track", standard, params);
+    else window.fbq("trackCustom", event, params);
+  }
+}
+
+// Advanced Matching — fire once with the user's email so Meta can match
+// the pixel activity to their actual account (improves audience match rate).
+export function identifyUser(email: string) {
+  if (typeof window === "undefined") return;
+  if (window.fbq) {
+    window.fbq("init", process.env.NEXT_PUBLIC_META_PIXEL_ID || "", { em: email.trim().toLowerCase() });
+  }
+  if (window.gtag) {
+    window.gtag("set", { user_id: email.trim().toLowerCase() });
   }
 }

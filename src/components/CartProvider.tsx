@@ -1,7 +1,8 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, ReactNode } from "react";
 import type { Personalization } from "@/data/themes";
+import { track } from "@/components/Analytics";
 
 export type CartItemKind = "combo" | "digital";
 
@@ -40,6 +41,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const abandonTimerRef = useRef<number | null>(null);
+  const abandonFiredRef = useRef(false);
 
   useEffect(() => {
     try {
@@ -54,6 +57,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch {}
+
+    // Abandoned cart: 10 min after the last add without checkout
+    if (abandonTimerRef.current) window.clearTimeout(abandonTimerRef.current);
+    if (items.length > 0 && !abandonFiredRef.current) {
+      abandonTimerRef.current = window.setTimeout(
+        () => {
+          abandonFiredRef.current = true;
+          track("abandoned_cart", {
+            items: items.length,
+            value: items.reduce((s, i) => s + i.price * i.quantity, 0),
+          });
+        },
+        10 * 60 * 1000
+      );
+    }
+    if (items.length === 0) abandonFiredRef.current = false;
+    return () => {
+      if (abandonTimerRef.current) window.clearTimeout(abandonTimerRef.current);
+    };
   }, [items, hydrated]);
 
   const addItem = useCallback((item: Omit<CartItem, "quantity">) => {

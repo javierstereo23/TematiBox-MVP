@@ -11,6 +11,7 @@ import { getProductsByCategory, getProductCountByCategory } from "@/data/product
 import { ProductCard } from "@/components/ProductCard";
 import { WashiTape } from "@/components/scrapbook/WashiTape";
 import { HandStar } from "@/components/scrapbook/HandDrawn";
+import { TrackView } from "@/components/TrackView";
 
 export function generateStaticParams() {
   return digitalCategories.map((c) => ({ category: c.id }));
@@ -42,6 +43,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   return (
     <>
+      <TrackView
+        event="view_category"
+        params={{ category_id: cat.id, category_name: cat.name, product_count: allProducts.length }}
+      />
       <section className="relative overflow-hidden py-20 md:py-28 px-6">
         <div className="absolute inset-0 -z-10 bg-[#FBF6EA]" />
         <div className="absolute inset-0 -z-10 paper-grid opacity-55" />

@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { WashiTape } from "@/components/scrapbook/WashiTape";
 import { HandStar, HandArrow } from "@/components/scrapbook/HandDrawn";
+import { track, identifyUser } from "@/components/Analytics";
 
 const STORAGE_KEY_DISMISSED = "tematibox.exit_intent_dismissed_at";
 const STORAGE_KEY_COUPON = "tematibox.coupon";
@@ -112,6 +113,8 @@ export function ExitIntentPopup() {
       } catch {
         /* noop */
       }
+      identifyUser(trimmed);
+      track("coupon_claimed", { source: "exit_intent", percent_off: data.percent_off });
     } catch {
       setError("Error de conexión. Probá de nuevo.");
     } finally {
