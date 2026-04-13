@@ -35,8 +35,8 @@ export function SectionHeader({
         <HandStar className="w-5 h-5 opacity-70" color="#E0B252" />
       </div>
 
-      {/* Title — Fraunces display */}
-      <h2 className="font-display text-[34px] sm:text-[44px] md:text-[58px] font-light text-text-primary leading-[0.96] tracking-[-0.028em] text-balance max-w-4xl">
+      {/* Title — Fraunces display, medium weight for legibility */}
+      <h2 className="font-display text-[34px] sm:text-[44px] md:text-[58px] font-medium text-text-primary leading-[0.96] tracking-[-0.028em] text-balance max-w-4xl">
         {circleWord ? (
           renderWithCircle(title, circleWord, circleColor)
         ) : (
