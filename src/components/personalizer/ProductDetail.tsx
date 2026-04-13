@@ -14,6 +14,7 @@ import { track } from "@/components/Analytics";
 import { WashiTape } from "@/components/scrapbook/WashiTape";
 import { HandStar, HandArrow } from "@/components/scrapbook/HandDrawn";
 import { CREAM_BLUR } from "@/lib/images/placeholder";
+import { LivePreview } from "@/components/personalizer/LivePreview";
 
 interface Props {
   product: RealProduct;
@@ -303,36 +304,15 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
             </div>
           )}
 
-          {/* Live preview when personalized — post-it style */}
-          {showPreview && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.94, rotate: -3 }}
-              animate={{ opacity: 1, scale: 1, rotate: -1.5 }}
-              transition={{ duration: 0.4 }}
-              className="mb-6 p-5 relative"
-              style={{
-                background: "#FFF3A8",
-                boxShadow: "0 10px 28px -8px rgba(42,45,37,0.25)",
-              }}
-            >
-              <p className="font-hand text-lg text-primary/75 -rotate-[0.5deg] mb-1">
-                tu diseño va a decir:
-              </p>
-              <p className="font-display text-2xl md:text-3xl text-text-primary leading-tight">
-                <span className="italic font-normal">{displayName}</span>
-                {displayAge !== "—" && (
-                  <span className="text-text-secondary">, {displayAge} años</span>
-                )}
-              </p>
-              {pers.eventDate && (
-                <p className="font-hand text-base text-text-primary/75 mt-2">
-                  {new Date(pers.eventDate + "T12:00:00").toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" })}
-                  {pers.eventTime && ` · ${pers.eventTime}`}
-                  {pers.venue && ` · ${pers.venue}`}
-                </p>
-              )}
-            </motion.div>
-          )}
+          {/* Live preview rendering the name over the product */}
+          <LivePreview
+            product={product}
+            name={pers.name || ""}
+            age={pers.age ?? ""}
+            eventDate={pers.eventDate || null}
+            venue={pers.venue || null}
+            categoryShortName={category?.shortName}
+          />
 
           {/* Personalization form — paper card */}
           <div
