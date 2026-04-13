@@ -1,237 +1,281 @@
 # Análisis financiero Tematibox — estado actual + plan 20x
 
 _Última actualización: 2026-04-13_
-_Fuente de datos: scrape de los PDPs de Mercado Libre (seller DBEDICIONES, custId 257195099)_
-
-> ⚠️ **Nota sobre la data**: de los 396 productos del catálogo, logramos
-> enriquecer 60 (15%) con `sold` y `rating` reales por PDP antes de que
-> ML active su anti-bot (redirect a account-verification en 336 casos).
-> Los análisis absolutos son **conservadores** — asumimos que los 60
-> productos enriquecidos son los más visibles/con tráfico (los que ML
-> muestra sin rate-limit). Para números exactos hace falta CSV del
-> tablero de vendedor o token de ML API.
+_Fuente: 6 reportes de facturación oficiales de Mercado Libre (Nov 2025 - Abr 2026), 1.224 filas de cargos deduplicadas en 578 ventas únicas._
+_Datasets: `data-import/ml-sales-6mo.json` (sales row-level) + `src/data/products.json` (catálogo)._
 
 ---
 
-## 1. Estado actual — lo que ya sabemos con certeza
+## 1. Topline — últimos 6 meses (datos duros)
 
-### Facturación histórica observable (de los 60 productos medidos)
+| Métrica | Valor | Nota |
+|---|---|---|
+| **Ventas únicas** | 578 | ≈ 96 ventas/mes promedio |
+| **Unidades vendidas** | 593 | ticket unitario ≈ ventas (1:1) |
+| **Revenue bruto (GMV)** | **$5.031.815 ARS** | antes de comisiones |
+| **Comisiones ML** | $1.379.903 (27.4%) | mayor al 14.5% nominal — incluye envío subsidiado y cargos por unidad |
+| **Revenue neto** | **$3.651.912 ARS** | después de ML, antes de costos propios |
+| **Ticket promedio** | **$8.706** | consistente con el catálogo |
+| **Compradores únicos** | 546 | 94.9% comprador único, solo 5.1% recompra |
+| **Productos con al menos 1 venta** | 150 / 396 | **246 productos (62%) no vendieron ni una unidad en 6 meses** |
+
+**Run rate anual (extrapolado):** ~$10M ARS gross / ~$7.3M ARS neto.
+
+---
+
+## 2. Trend mensual
+
+| Mes | Ventas | Units | GMV | MoM |
+|---|---|---|---|---|
+| Nov 2025 | 69 | 71 | $805K | — |
+| Dic 2025 | 98 | 99 | $723K | **-10.3%** |
+| Ene 2026 | 113 | 124 | **$1.094K** | **+51.3%** 🚀 |
+| Feb 2026 | 122 | 123 | $954K | -12.8% |
+| Mar 2026 | 106 | 106 | $858K | -10.0% |
+| Abr 2026 (13 días) | 70 | 70 | $599K | extrapolado **$1.38M** mes completo |
+
+**Insight**:
+- **Enero fue el spike real** (+51% MoM) — vuelta al cole + cumples de verano.
+- **Desde enero hay caída sostenida** (-13%, -10%). No estacional — es un **signal de que el top producto está madurando**.
+- **April en curso va a superar enero** si mantiene el ritmo diario de los 13 primeros días (~$46K/día × 30 = $1.38M). Si se confirma, es **el mejor mes de los últimos 6**.
+
+---
+
+## 3. Concentración — la regla 80/20 a full
+
+De los 150 productos que vendieron al menos 1 unidad:
+
+| Top N | Revenue acumulado | % del total |
+|---|---|---|
+| **Top 1 producto** | $1.111.135 | **22.1%** |
+| Top 5 productos | $1.783.402 | 35.4% |
+| Top 10 productos | $2.369.707 | 47.1% |
+| Top 20 productos | $3.155.496 | 62.7% |
+| **Top 50 productos** | $4.055.608 | **80.6%** |
+
+### El producto estrella: "Imprimible Guerreras K-pop Etiquetas Fideos Ramen Soda Pop"
+- **148 unidades vendidas** en 6 meses
+- **$1.11M ARS revenue** (22% del negocio con UN SOLO producto)
+- **Top-1 de ML por ingresos cada mes desde diciembre**
+- Trayectoria mensual: Nov $68K → Dic $158K → **Ene $285K (pico)** → Feb $278K → Mar $210K → Abr $113K (13 días).
+- Rating 4.8, badge "MÁS VENDIDO · 7º en Kits Imprimibles para Fiestas"
+
+### Top 10 del semestre
+1. **Guerreras K-Pop Etiquetas Ramen** — 148u, $1.11M
+2. **Super Kit Guerreras K-Pop** — 13u, $196K
+3. *Bikini Victoria's Secret* — 1u, $175K ⚠️ (no es imprimible, ruido)
+4. **Topper Roba un Brainrot** — 25u, $163K
+5. **Stranger Things Colorear** — 21u, $138K
+6. **Kawaii Etiquetas Ramen K-Pop** — 16u, $136K
+7. *Lona Victoria's Secret* — 1u, $123K ⚠️ (ruido)
+8. **Italian Brainrot Colorear** — 17u, $111K
+9. **Kit 127 Argentina HD** — 9u, $111K
+10. *producto sin título* — 2u, $105K ⚠️
+
+⚠️ **Hay ~$400K (8%) de revenue de items NO-imprimibles** (bikini, lona, conjuntos, etc.) que son ventas personales viejas del seller en su cuenta ML. Si filtramos el ruido, el negocio real imprimible es **~$4.6M ARS brutos** en 6 meses.
+
+---
+
+## 4. Lo que vende: temas y categorías
+
+### Por categoría ML
+| Categoría | Ventas | Revenue | Share |
+|---|---|---|---|
+| **Kits Imprimibles para Fiestas** | 561 | $4.50M | **89.4%** |
+| Trajes de Baño | 1 | $175K | 3.5% ⚠️ ruido |
+| Lonas Playeras | 1 | $123K | 2.5% ⚠️ ruido |
+| Ebooks | 4 | $47K | 0.9% |
+| Otros (invitaciones, separadores, dijes, etc.) | 11 | $83K | 1.7% |
+
+**89% del revenue viene de UNA categoría ML: Kits Imprimibles para Fiestas.** El resto es cola larga.
+
+### Por tema (lectura del catálogo)
+- **Guerreras K-Pop** concentra ~30-35% del revenue total (Top 1 + Super Kit + Kawaii Etiquetas + Invitación + Etiquetas Ramen Personalizadas + Mega Pack).
+- **Stranger Things** (~5%), **Italian Brainrot** (~5%), **Argentina/Futbol** (~3%).
+- **Cumples de verano (toppers, banderines, cotillón)** generan volumen consistente todo el semestre.
+
+---
+
+## 5. Geografía
+
+| Provincia | Ventas | Revenue | % |
+|---|---|---|---|
+| **Buenos Aires** | 240 | $2.15M | **42.8%** |
+| **CABA** | 99 | $881K | 17.5% |
+| Santa Fe | 41 | $406K | 8.1% |
+| Sin dato | 39 | $324K | 6.4% |
+| Córdoba | 41 | $311K | 6.2% |
+| Mendoza | 17 | $137K | 2.7% |
+| Entre Ríos | 14 | $119K | 2.4% |
+| Resto del país (24 provincias) | 87 | $698K | 13.9% |
+
+**AMBA (BA + CABA) = 60% del revenue.** Tu ICP son las mamás de colegios privados de zona norte / CABA — coincide perfecto con la data.
+
+---
+
+## 6. Día de la semana
+
+| Día | Ventas | Revenue |
+|---|---|---|
+| Domingo | 64 | $540K |
+| Lunes | 82 | $650K |
+| Martes | 81 | $616K |
+| Miércoles | 80 | $722K |
+| **Jueves** | 98 | $779K |
+| **Viernes** | 91 | $877K 🏆 |
+| **Sábado** | 82 | $848K |
+
+**Viernes + Sábado = $1.73M (34% del revenue) en 2/7 del tiempo.** Concentración fuerte en fin de semana → timing ideal para email push los jueves a la tarde.
+
+---
+
+## 7. Retención — el gran problema (y la gran oportunidad)
 
 | Métrica | Valor |
 |---|---|
-| Unidades vendidas (histórico) | **347** |
-| Revenue observado | **$3.0M ARS** |
-| Ticket promedio | **$8.670** |
-| Productos con al menos 1 venta | 60 de 60 muestreados |
-| Rating promedio | **4.91 / 5** |
-| Reviews totales | 168 |
+| Compradores únicos | 546 |
+| **One-time (1 compra)** | 518 (94.9%) |
+| **Repeat (2+ compras)** | 28 (5.1%) |
+| Top repeat: ANDREDOM70 | 4 compras |
+| CARMIGLIORE, BOLANCLAUDIA | 3 compras cada uno |
 
-**Extrapolación conservadora al catálogo total (396 productos):**
-- Si los 60 muestreados son los **top-15% vendedores** → estimado total ≈ 500-700 unidades, **$4M-$6M ARS** histórico.
-- Si los 60 son una muestra neutra → estimado total ≈ 2.300 unidades, **$20M ARS** histórico.
-- La verdad probablemente está cerca de **$6M-$10M ARS** de revenue histórico en ML.
+**95% de los compradores no vuelven.** Si con lifecycle emails lográs llevar ese número a **20% repeat** (benchmark ecom ARG: 15-25%):
 
-**Run rate mensual estimado** (asumiendo negocio activo ~18 meses): **$330K-$550K ARS/mes**.
+- 518 one-time × 15% reactivación = **78 repeat adicionales**
+- × ticket $8.706 = **$676K ARS recuperables/6 meses**
+- **+13% revenue sin adquirir un solo cliente nuevo**
 
-### Calidad de producto
-
-- **4.91/5 promedio** es excelente. El problema no es producto — es volumen.
-- **168 reviews** para 42 productos = **4 reviews por producto promedio**. Baja cantidad pero alto rating → ventana clara para push de reviews.
+Este es el juego más barato que tenés. La infra ya está lista (task #61).
 
 ---
 
-## 2. Qué está funcionando — los 3 hits
+## 8. Plan 20x — calibrado con data real
 
-### 🥇 Guerreras K-Pop (144 unidades, $1.15M ARS, 13 productos)
+**Baseline**: $5.03M / 6mo = $839K/mes gross, $608K/mes neto (post-ML).
+**Target 20x**: ~$16.8M/mes gross o **~$200M/año**.
 
-- **El producto estrella**: "Imprimible Guerreras K-pop Etiquetas Fideos Ramen Soda Pop" → **100 vendidos**, rating 4.8, etiquetado como **"MÁS VENDIDO · 7º en Kits Imprimibles para Fiestas"**.
-- El tema representa **38%** del revenue observado con solo **22%** de los productos muestreados.
-- 13 productos del tema, ticket promedio $8.900.
+### Palanca 1 — Depurar ruido del catálogo + focus Guerreras K-Pop (impacto alto, 3h)
 
-### 🥈 Italian Brainrot (88 unidades, $612K ARS, 6 productos)
+**Problema**: top product concentra 22% — si cae, cae todo.
+**Solución**:
+- Crear **15 productos derivados** de Guerreras K-Pop en 30 días (invitación, kit cotillón, photocards, souvenirs variados, toppers extras, banderines).
+- Cada producto derivado captura ~10-15% del volumen del original → **+$170-250K/mes**.
+- Remover ruido no-imprimible (bikini, lonas) → mejor relevancia ML.
 
-- **Segundo viral**: "Imprimible Italian Brainrot Para Colorear + Stickers Regalo" → **50 vendidos**.
-- Tema relativamente nuevo (emergió 2025-2026) y ya factura. Señal clarísima de que **capturar tendencias temprano vale oro**.
-- 6 productos, ticket $6.950 — más barato que K-pop pero volumen alto.
+### Palanca 2 — Activar el 62% dormido del catálogo
 
-### 🥉 K-Pop Generic + Stranger Things (62 unidades, $584K combinado)
+**Problema**: 246 productos sin ventas. 239 sin tema asignado (clasificación bloqueada).
+**Solución**:
+- Clasificar los 239 productos sin tema con Claude Haiku (1h).
+- Publicar en el sitio propio con SEO (ya hecho) → catch long-tail orgánico.
+- Si 30% de esos 246 productos generan 1 venta/mes → **+74 ventas/mes × $8.7K = +$644K/mes**.
 
-- K-Pop genérico (8 productos, $339K): amplía el umbrella "coreano" más allá de Guerreras.
-- Stranger Things (9 productos, $244K): el evergreen de Netflix que no muere.
+### Palanca 3 — Lifecycle emails (infra lista, 4h de config)
 
-### Top categorías (por revenue observado)
-
-| Categoría | Productos medidos | Unidades | Revenue | Avg ticket |
-|---|---|---|---|---|
-| **Etiquetas** | 8 | 123 | **$1.05M** | $8.520 |
-| **Colorear** | 10 | 71 | $490K | $6.900 |
-| **Toppers** | 6 | 45 | $316K | $7.010 |
-| **Cliparts** | 5 | 19 | $193K | $10.200 |
-| **Stickers** | 6 | 23 | $187K | $8.120 |
-
-**Insight**: Etiquetas = **35% del revenue con 13% del catálogo**. Colorear mueve volumen pero ticket chico. Cliparts tiene el ticket más alto pero volumen bajo.
-
----
-
-## 3. Qué NO está funcionando — los gaps
-
-### Catálogo sin tema (60% del inventario)
-
-- **239 productos (60%)** no tienen tema asignado → problema crítico de descubribilidad.
-- Si alguien busca "Bluey" o "Stranger Things", estos 239 productos no aparecen por tema.
-- **Acción**: clasificar tema sí o sí. Ya está el data model; falta el pase manual o con Claude sobre los títulos.
-
-### Concentración de riesgo
-
-- **Top 5 temas cubren 55% del catálogo temático** (86 de 157 productos temáticos).
-- Los otros 29 temas solo 45%.
-- Si Guerreras K-Pop se cae de tendencia (pasará), **cae 38% del revenue** sin backup inmediato.
-
-### Pricing plano
-
-- **85% del catálogo está entre $5K-$10K** — sin tiers premium claros.
-- **0% productos descontados** — ningún promo activa, ningún bundle.
-- Hay 5 productos "premium" >$50K pero son **no-imprimibles** (vestido, monopatín, zapatillas — ruido de catálogo de ML viejo que hay que depurar).
-
-### Cero reviews con foto
-
-- 168 reviews totales, todas texto. **Cero UGC con foto** en ML → desconfianza.
-- Ahora ya tenés 4 fotos reales de tus hijos usando productos → **pedirles a los próximos 50 compradores que dejen foto con cupón de 10% OFF**.
-
-### Único badge "MÁS VENDIDO"
-
-- De 60 productos muestreados, **solo 1 tiene badge oficial de ML**. Los badges de ML mueven conversión 2-3x.
-- Objetivo: concentrar inversión en los top 5 productos para ganarles badge.
-
----
-
-## 4. Plan 20x — cómo pasamos de $400K/mes a $8M/mes ARS
-
-### Palanca 1 · Multiplicador de catálogo x2 (quick win, mes 1-2)
-
-- **Clasificar los 239 productos sin tema** → recuperás descubribilidad inmediata.
-  - Si 40% de esos productos tienen 5 ventas mensuales cada uno → **+$2M/mes**.
-- **Depurar los 5 productos no-imprimibles** (vestido, zapatillas, etc.) → mejor señal de relevancia a ML.
-- **ROI**: baja de precio marginal, upside 5-8x en 60 días.
-
-### Palanca 2 · Doblar la apuesta en hits + crear competidores internos (mes 1-3)
-
-- **Guerreras K-Pop tiene 13 productos** → llevalo a 30 (más categorías: invitaciones, cotillón, toppers, stickers, mega-kit, photocards, souvenirs, banderines).
-- **Italian Brainrot tiene 6** → 20 productos en 60 días.
-- **Nueva cohorte**: identificar 3 tendencias emergentes por mes (nanobanana + watchlist cultural) y drop 5 productos por tendencia en <48h.
-- **ROI**: en temas que ya ganan, cada producto nuevo captura ~5-10% del volumen del anterior. 15 productos nuevos × $70K cada uno = **+$1M/mes**.
-
-### Palanca 3 · Pricing tier nuevo (mes 2)
-
-Actualmente todo es $6.9K-$10.9K. Introducir:
-
-| Tier | Precio | Qué es | Expected contribution |
-|---|---|---|---|
-| **Mini** | $3.900 | 1 imprimible single, agarra impulsivo | +15% unidades, +5% revenue |
-| **Core** (actual) | $6.9-$10.9K | Lo que ya tenés | Mantiene |
-| **Combo** | $14.900 | 3 imprimibles del mismo tema | +10% ticket promedio, +20% AOV |
-| **Mega Kit** | $24.900 | Todo un cumple (invitación + toppers + banderines + souvenirs + colorear) | +30% AOV en cohort 10% compradores |
-| **B2B** | $49.900+ | Para colegios / eventos corporativos | Nuevo segmento |
-
-**Ticket promedio esperado**: sube de $8.670 a **~$13.500** (+55%).
-
-### Palanca 4 · Cerrar el loop de email + cupones (infra ya construida, mes 1)
-
-Ya tenés:
-- ✅ Exit-intent popup con 10% OFF
-- ✅ ChatBot con captura de email + cupón
-- ✅ MP webhook que cierra el loop
-- ✅ Resend templates para cupón y order confirmation
-
-**Falta (ya task creada #61)**: lifecycle cron con 5 emails más:
-- Día +1 post-compra: pedido de review (con cupón de 15% OFF para la próxima si dejan foto)
-- Día +3 abandoned cart: recuperación con 10% extra
-- Día +7: cross-sell con 1 producto relevante
-- Día +30: win-back con 20% OFF y novedades del mes
+**Problema**: 95% one-time buyers. No mandamos nada después de la compra.
+**Solución**: activar task #61. Los 5 touchpoints:
+- Día +1 post-compra → review request con cupón 15% OFF próxima
+- Día +3 abandoned cart → recovery con 10%
+- Día +7 → cross-sell 1 producto del mismo tema
+- Día +30 → win-back con 20% OFF novedades
 - Newsletter mensual editorial
 
-**ROI**: captura email de 30% del tráfico → 15% abre → 5% compra con cupón → **+20% LTV**.
+**Impacto**: +13% revenue via recompra (ver sección 7) = **+$110K/mes base + escala con el volumen**.
 
-### Palanca 5 · Canal Tematibox.com (propio) vs ML (mes 2-4)
+### Palanca 4 — Pricing tier nuevo (1 semana)
 
-- ML cobra **14% de comisión + 0% de data propia** (no ves emails, no podés remarketear).
-- Tematibox Digital (el sitio) tiene **0% comisión, 100% data**.
-- Actualmente ML = 100% del revenue. **Objetivo**: redirigir 40% del tráfico orgánico al sitio propio en 6 meses.
-- Palancas: SEO on-page (✅ hecho), sitemap (✅), lifecycle emails, ads con retargeting (next).
+**Problema**: 73% de ventas concentradas en $5K-$8K. Ticket plano.
+**Solución**:
+- **Combo** ($14.900): invitación + etiquetas + toppers del mismo tema → captura a quien arma cumple completo
+- **Mega Kit** ($24.900): 8-10 piezas para un evento entero
+- **B2B** ($49.900+): pack 50 invitaciones para actos escolares
 
-Si el sitio captura **$300K/mes** mes 6 → **~$100K/mes en comisiones ML recuperadas** + lista de email propia.
+**Si el 15% de compradores suben a Combo** → ticket promedio pasa de $8.7K a **$11.5K** (+32%). Sobre el volumen actual: **+$160K/mes**.
 
-### Palanca 6 · Ads con audiencias custom (mes 3+)
+### Palanca 5 — Canal propio (Tematibox.com) en paralelo a ML
 
-Infra ya lista:
-- ✅ Meta Pixel con advanced matching
-- ✅ Eventos `view_category`, `view_theme`, `abandoned_cart`, `coupon_claimed`
-- Falta: cuenta publicitaria + creative + budget
+**Problema**: 100% dependencia de ML. 27% se va en comisiones.
+**Solución**:
+- Ya está deployada la web con checkout MP, chatbot, SEO, email capture.
+- Redirigir tráfico desde IG + post-compra ML a tematibox.com.
+- Si el canal propio captura **30% del volumen ML en 6 meses** = $250K/mes, ahorrás $70K/mes en comisiones = **margen neto +$320K/mes potencial**.
 
-Con lista de email de ~2.000 usuarios → lookalike audience en Meta.
+### Palanca 6 — Ads con audiencias remarketing
 
-**Target sprint ads** (presupuesto $50K/mes):
-- **CPA target**: $1.500 (ticket $8.670 = 17% CAC)
-- **Escala**: $50K → 33 compras/mes → **+$280K/mes** directo
-- **Break-even** en el mes 2 si mantenés retention.
+**Problema**: tráfico orgánico limita el crecimiento.
+**Solución**:
+- Meta Pixel con advanced matching ya instalado.
+- 546 emails de clientes reales → **lookalike audience 1-3%** potente.
+- Budget inicial $50K/mes:
+  - CPA target $1.500 (ticket $8.700 = 17% CAC)
+  - $50K → 33 nuevas compras/mes → **+$287K/mes directo**
+  - Con lifecycle (palanca 3) se amortiza en 2 meses.
 
-### Palanca 7 · UGC + contenido (mes 2+)
+### Palanca 7 — B2B eventos escolares (mes 4+)
 
-Ya tenés 4 fotos UGC reales. Plan:
-- Cada compra pide UGC con cupón 15% OFF
-- Estimado 5% acepta → ~3 fotos nuevas/semana con volumen actual
-- Escala a feed IG + landing sections + reviews con foto
-- **Target**: 50 UGC reales en 3 meses para reemplazar el 100% de las AI stock.
+**Problema**: nicho corporativo/institucional sin explorar.
+**Solución**:
+- Pack de 50 invitaciones + cotillón + souvenirs personalizados para acto escolar.
+- $80K-$150K por evento.
+- Outbound a coordinadoras de Northlands, Lincoln, St. Andrew's (ya los citás en el copy).
+- 2 eventos/mes × $100K = **+$200K/mes**.
 
-### Palanca 8 · B2B / eventos corporativos (mes 4+)
+### Palanca 8 — Capturar tendencias <48h (Italian Brainrot playbook)
 
-- Segmento nuevo: colegios privados (Northlands, Lincoln, St. Andrew's — ya los tenemos en copy).
-- Producto: **pack de 50 invitaciones + etiquetas + souvenirs** para acto escolar, $80K-$150K por evento.
-- 1 colegio / mes × 2 eventos = **$150K-$300K/mes** adicional.
-- Canal: outbound directo a coordinadoras de eventos / centros de padres.
-
----
-
-## 5. Proyección con los 8 multiplicadores
-
-| Mes | Canal ML | Canal propio | Ads retargeting | B2B | **Total** | vs hoy |
-|---|---|---|---|---|---|---|
-| Hoy | $400K | $0 | $0 | $0 | **$400K** | 1x |
-| Mes 2 | $600K | $50K | $0 | $0 | **$650K** | 1.6x |
-| Mes 3 | $800K | $150K | $80K | $0 | **$1.03M** | 2.6x |
-| Mes 6 | $1.2M | $400K | $280K | $150K | **$2.03M** | 5x |
-| Mes 9 | $1.8M | $800K | $500K | $300K | **$3.4M** | **8.5x** |
-| Mes 12 | $2.5M | $1.6M | $900K | $500K | **$5.5M** | **13.7x** |
-| Mes 18 | $3.5M | $3M | $1.5M | $800K | **$8.8M** | **22x** |
-
-**20x se cumple a los 18 meses** con ejecución disciplinada, sin físicos, sin nuevos canales externos.
+**Observación**: Italian Brainrot entró en dic y ya vende $111K en 6 meses con solo 6 productos. K-Pop explotó también en 2025.
+**Solución**: proceso editorial para identificar la próxima viral:
+- Watchlist (Netflix estrenos, TikTok trending, K-pop debuts)
+- Pipeline nanobanana → 5 productos en <48h
+- Si 2 tendencias/año peguen como Brainrot = **+$200K/año cada una**.
 
 ---
 
-## 6. Qué NO hacer
+## 9. Proyección calibrada
 
-- **No bajar precios** para competir con Etsy / sellers chicos de IG. La narrativa "hecho a mano" justifica premium.
-- **No abrir categoría físicos todavía** — riesgo de logística + capital de trabajo. Ya acordado, queda pendiente.
-- **No migrar a CRM externo** (HubSpot, Customer.io) hasta pasar 2.000 usuarios activos/mes. Hasta ahí, Supabase + Resend alcanza.
-- **No diversificar temas más allá de las 3 cabezas (K-Pop, Brainrot, Stranger Things)** hasta tener 30+ productos en cada una. Foco > amplitud.
+**Con baseline real de $839K/mes:**
+
+| Mes | Canal ML | Canal propio | Ads | B2B | Combos/ticket | **Total** | vs hoy |
+|---|---|---|---|---|---|---|---|
+| Hoy | $839K | $0 | $0 | $0 | — | **$839K** | 1x |
+| Mes 2 | $950K | $80K | $0 | $0 | — | **$1.03M** | 1.2x |
+| Mes 3 | $1.1M | $180K | $100K | $0 | +$80K | **$1.46M** | 1.7x |
+| Mes 6 | $1.5M | $450K | $350K | $200K | +$200K | **$2.7M** | **3.2x** |
+| Mes 9 | $2.0M | $900K | $600K | $350K | +$320K | **$4.2M** | **5x** |
+| Mes 12 | $2.8M | $1.8M | $1.1M | $500K | +$520K | **$6.7M** | **8x** |
+| Mes 18 | $4.0M | $3.5M | $2.0M | $800K | +$800K | **$11.1M** | **13x** |
+| Mes 24 | $5.5M | $5.5M | $3.0M | $1.2M | +$1.2M | **$16.4M** | **19.5x** ≈ **20x** |
+
+**20x se alcanza entre mes 20 y 24**, no 18. Más realista con la data dura.
 
 ---
 
-## 7. Top 5 acciones de esta semana
+## 10. Qué NO está funcionando (y hay que arreglar)
 
-1. **Clasificar los 239 productos sin tema** (5h de trabajo con Claude o manual).
-2. **Duplicar Guerreras K-Pop a 25 productos** (crear 12 nuevos de invitación, cotillón, photocards).
-3. **Activar cron de lifecycle emails** (task #61, infra lista, 4h).
-4. **Depurar los 5 productos ruido del catálogo** (vestido, monopatín, etc.).
-5. **Pedir CSV del tablero ML (últimos 6 meses)** → con esa data refino este doc con números duros.
+1. **246 productos muertos** (62% del catálogo sin 1 venta en 6 meses) — clasificar + relanzar o despublicar.
+2. **Riesgo de concentración**: Top 1 producto = 22%. Si Guerreras K-Pop pasa de moda, derrumbe.
+3. **95% one-time buyers** sin lifecycle emails = revenue dejando la mesa.
+4. **Ticket plano**: 73% en $5K-$8K. Sin tiers premium capturables.
+5. **Ruido no-imprimible** (bikini, lonas) ensucia categoría ML y señal de relevancia.
+6. **Tendencia negativa Feb-Mar-Abr**: el top product está saturando. Urge diversificar antes de que caiga.
 
 ---
 
-## 8. Qué necesitamos para precisión total
+## 11. Top 5 acciones de esta semana
 
-- [ ] **CSV export del panel de vendedor ML** — últimos 6 meses de ventas con día / producto / comprador.
-- [ ] **Token de ML API** (`client_id` + `access_token`) — para query automatizado y pull incremental.
-- [ ] **Costos mensuales** (nanobanana, Vercel, Supabase, Anthropic, Resend) — para margen real.
-- [ ] **Tiempo promedio de personalización** por producto → costo laboral por unidad.
+1. **Activar lifecycle emails** (task #61, infra lista, 4h) → +$110K/mes baseline.
+2. **Clasificar los 239 productos sin tema** con Claude Haiku → descubribilidad activa.
+3. **Crear 10 productos derivados de Guerreras K-Pop** en el sitio propio (no ML por ahora) para testear qué más pega.
+4. **Remover 5-8 items no-imprimibles** del catálogo ML (bikini, lona, monopatín, etc.).
+5. **Implementar Combo y Mega Kit** en el sitio propio con pricing tier nuevo.
 
-Con esto podemos pasar de **proyecciones direccionales** a **forecast con bandas de confianza** y dashboard financiero en `/admin/finance`.
+Con eso cerramos el mes 2 en ~$1M/mes limpio.
+
+---
+
+## 12. Para el próximo refinement
+
+- [ ] Costos mensuales totales (Vercel, Supabase, Anthropic, Resend, nanobanana) → calcular margen neto real.
+- [ ] Tiempo promedio de personalización manual por producto → costo laboral por unidad.
+- [ ] Data del sitio propio (tematibox.com) una vez que arranque a vender → cross-channel view.
+- [ ] Costo promedio de comprador (CAC) una vez que corran ads → validar unit economics.
+- [ ] Revisión mensual de este doc con data nueva de ML.
