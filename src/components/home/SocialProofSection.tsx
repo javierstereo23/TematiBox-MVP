@@ -26,31 +26,32 @@ const QUOTES = [
   },
 ];
 
+// Real UGC from team's own kids — authentic, full permission
 const IMAGE_CARDS = [
   {
-    src: "/images/social-proof/birthday-kids.png",
-    alt: "Cumple con amigas",
-    note: "el cumple de Mía ✨",
+    src: "/images/social-proof/ugc/ugc-kids-02.jpg",
+    alt: "Hijos del equipo coloreando un imprimible de Stranger Things",
+    note: "Eddie Munson en proceso",
     rotate: -1.5,
     tape: "pink" as const,
   },
   {
-    src: "/images/social-proof/kid-coloring.png",
-    alt: "Tarde de colorear",
+    src: "/images/social-proof/ugc/ugc-kids-03.jpg",
+    alt: "Tarde de colorear con marcadores",
     note: "tarde de domingo",
     rotate: 1.2,
     tape: "mustard" as const,
   },
   {
-    src: "/images/social-proof/mom-park.png",
-    alt: "Mamá armando el cumple",
-    note: "mientras toma un café",
+    src: "/images/social-proof/ugc/ugc-kids-04.jpg",
+    alt: "Detalle del dibujo personalizado",
+    note: "así queda impreso",
     rotate: -0.8,
     tape: "sage" as const,
   },
   {
     src: "/images/social-proof/school-desk.png",
-    alt: "Útiles escolares",
+    alt: "Útiles escolares con etiquetas",
     note: "vuelta al cole, listo",
     rotate: 1.0,
     tape: "blue" as const,
@@ -95,14 +96,14 @@ export function SocialProofSection() {
             <div className="polaroid relative">
               <div className="relative aspect-[16/9] overflow-hidden bg-[#EFE9DC] rounded-[2px]">
                 <Image
-                  src="/images/social-proof/mom-daughter-phone.png"
-                  alt="Familia compartiendo una invitación personalizada"
+                  src="/images/social-proof/ugc/ugc-kids-01.jpg"
+                  alt="Tres chicos coloreando imprimibles en casa"
                   fill
                   sizes="(max-width: 1280px) 100vw, 1024px"
                   className="object-cover"
                   priority
                 />
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/85 via-black/45 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-black/85 via-black/45 to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5 md:bottom-8 md:left-10 md:right-auto md:max-w-lg text-white">
                   <p
                     className="font-display text-lg md:text-2xl italic font-normal leading-snug mb-2 text-white"
@@ -111,18 +112,18 @@ export function SocialProofSection() {
                       textShadow: "0 2px 14px rgba(0,0,0,0.65), 0 0 2px rgba(0,0,0,0.85)",
                     }}
                   >
-                    &ldquo;{QUOTES[0].quote}&rdquo;
+                    Una tarde cualquiera en casa: los chicos del equipo probando el catálogo.
                   </p>
                   <p
                     className="font-hand text-xl text-white"
                     style={{ textShadow: "0 2px 10px rgba(0,0,0,0.65)" }}
                   >
-                    {QUOTES[0].who}
+                    foto real · sin filtros
                   </p>
                 </div>
               </div>
               <p className="absolute bottom-3 left-0 right-0 text-center font-hand text-xl text-text-primary/80">
-                Lucía y Mía, agosto 2025
+                detrás del equipo de Tematibox
               </p>
             </div>
           </motion.div>
