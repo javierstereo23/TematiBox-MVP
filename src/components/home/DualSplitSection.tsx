@@ -88,16 +88,32 @@ export function DualSplitSection() {
                       <span className="inline-block px-3 py-1 bg-white/15 backdrop-blur-sm border border-white/25 text-[11px] font-bold tracking-wide w-fit mb-4 font-hand !text-sm">
                         {card.chip}
                       </span>
-                      <h3 className="font-display text-4xl md:text-5xl font-light leading-[0.95] mb-2">
+                      <h3
+                        className="font-display text-4xl md:text-5xl font-light leading-[0.95] mb-2 text-white"
+                        style={{
+                          WebkitTextStroke: "0.6px rgba(42,45,37,0.55)",
+                          textShadow:
+                            "0 2px 14px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.9)",
+                        }}
+                      >
                         {card.title}
                       </h3>
-                      <p className="font-hand text-2xl text-white/90 mb-3 -rotate-1">
+                      <p
+                        className="font-hand text-2xl text-white mb-3 -rotate-1"
+                        style={{ textShadow: "0 2px 10px rgba(0,0,0,0.6)" }}
+                      >
                         {card.handNote}
                       </p>
-                      <p className="text-sm md:text-base leading-relaxed max-w-md mb-5 text-white/90">
+                      <p
+                        className="text-sm md:text-base leading-relaxed max-w-md mb-5 text-white"
+                        style={{ textShadow: "0 1px 6px rgba(0,0,0,0.65)" }}
+                      >
                         {card.copy}
                       </p>
-                      <div className="inline-flex items-center gap-2 font-semibold group-hover:gap-3 transition-all">
+                      <div
+                        className="inline-flex items-center gap-2 font-semibold text-white group-hover:gap-3 transition-all"
+                        style={{ textShadow: "0 1px 6px rgba(0,0,0,0.6)" }}
+                      >
                         {card.cta}
                         <HandArrow className="w-6 h-4 -rotate-6" color="#FFFFFF" />
                       </div>

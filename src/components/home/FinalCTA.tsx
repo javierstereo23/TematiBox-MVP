@@ -43,8 +43,12 @@ export function FinalCTA() {
           </div>
 
           <h2
-            className="font-display text-[40px] md:text-[64px] font-light leading-[0.95] tracking-[-0.03em] mb-6 drop-shadow-lg text-balance"
-            style={{ textShadow: "0 2px 16px rgba(0,0,0,0.35)" }}
+            className="font-display text-[40px] md:text-[64px] font-light leading-[0.95] tracking-[-0.03em] mb-6 text-balance text-white"
+            style={{
+              WebkitTextStroke: "0.7px rgba(42,45,37,0.45)",
+              textShadow:
+                "0 2px 18px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.8)",
+            }}
           >
             Personalizá el imprimible{" "}
             <span className="italic font-normal">perfecto para él.</span>

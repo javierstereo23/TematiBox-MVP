@@ -89,8 +89,12 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           </div>
 
           <h1
-            className="font-display text-[46px] md:text-[72px] font-light leading-[0.92] tracking-[-0.03em] mb-5 text-balance"
-            style={{ textShadow: "0 2px 16px rgba(0,0,0,0.35)" }}
+            className="font-display text-[46px] md:text-[72px] font-light leading-[0.92] tracking-[-0.03em] mb-5 text-balance text-white"
+            style={{
+              WebkitTextStroke: "0.7px rgba(42,45,37,0.45)",
+              textShadow:
+                "0 2px 18px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.8)",
+            }}
           >
             {cat.name}
           </h1>
