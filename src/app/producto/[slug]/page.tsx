@@ -8,6 +8,7 @@ import {
 import { getThemeBySlug, getDigitalCategory } from "@/data/themes";
 import { ProductDetail } from "@/components/personalizer/ProductDetail";
 import { ProductJsonLd } from "@/components/seo/ProductJsonLd";
+import { cleanTitle, seoTitle, seoDescription, seoKeywords } from "@/lib/seo/product";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -17,10 +18,28 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const p = getProductBySlug(slug);
   if (!p) return { title: "Producto no encontrado" };
+  const category = getDigitalCategory(p.primaryCategory);
+  const theme = p.primaryTheme ? getThemeBySlug(p.primaryTheme) : undefined;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tematibox.com";
+  const ogImg = p.image.startsWith("http") ? p.image : `${siteUrl}${p.image}`;
   return {
-    title: `${p.title} | Tematibox`,
-    description: `${p.title}. Personalizable con el nombre del chico. Descarga al instante.`,
-    openGraph: { images: [p.image] },
+    title: seoTitle(p, category),
+    description: seoDescription(p, category, theme),
+    keywords: seoKeywords(p, category, theme),
+    alternates: { canonical: `${siteUrl}/producto/${p.slug}` },
+    openGraph: {
+      type: "website",
+      title: seoTitle(p, category),
+      description: seoDescription(p, category, theme),
+      images: [{ url: ogImg, width: 1200, height: 1200, alt: cleanTitle(p.title) }],
+      locale: "es_AR",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seoTitle(p, category),
+      description: seoDescription(p, category, theme),
+      images: [ogImg],
+    },
   };
 }
 
@@ -48,7 +67,6 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
     <section className="py-10 md:py-14 px-6">
       <ProductJsonLd product={product} theme={theme} category={category} />
       <div className="max-w-6xl mx-auto">
-        {/* Scrapbook-style back link — prominent */}
         <Link
           href={backHref}
           className="inline-flex items-center gap-2 font-hand text-xl text-primary hover:text-primary-dark mb-6 group"
@@ -65,7 +83,7 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
           volver a {backLabel}
         </Link>
 
-        <nav className="flex items-center gap-2 font-hand text-base text-text-secondary mb-8 flex-wrap">
+        <nav className="flex items-center gap-2 font-hand text-base text-text-secondary mb-8 flex-wrap" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-primary">inicio</Link>
           <span>·</span>
           <Link href="/imprimibles" className="hover:text-primary">imprimibles</Link>
@@ -77,8 +95,18 @@ export default async function ProductoPage({ params }: { params: Promise<{ slug:
               </Link>
             </>
           )}
+          {theme && (
+            <>
+              <span>·</span>
+              <Link href={`/temas/${theme.slug}`} className="hover:text-primary">
+                {theme.name.toLowerCase()}
+              </Link>
+            </>
+          )}
           <span>·</span>
-          <span className="text-text-primary truncate max-w-[300px]">{product.title.replace(/imprimible/gi, "").trim().toLowerCase()}</span>
+          <span className="text-text-primary truncate max-w-[300px]">
+            {cleanTitle(product.title).toLowerCase()}
+          </span>
         </nav>
         <ProductDetail product={product} theme={theme} category={category} related={related} />
       </div>

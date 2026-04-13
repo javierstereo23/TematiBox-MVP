@@ -15,6 +15,7 @@ import { WashiTape } from "@/components/scrapbook/WashiTape";
 import { HandStar, HandArrow } from "@/components/scrapbook/HandDrawn";
 import { CREAM_BLUR } from "@/lib/images/placeholder";
 import { LivePreview } from "@/components/personalizer/LivePreview";
+import { cleanTitle } from "@/lib/seo/product";
 
 interface Props {
   product: RealProduct;
@@ -275,9 +276,9 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
             )}
           </div>
 
-          {/* Title — Fraunces display */}
-          <h1 className="font-display text-3xl md:text-[44px] font-light text-text-primary mb-2 leading-[1.05] tracking-[-0.02em]">
-            {product.title}
+          {/* Title — Fraunces display, cleaned */}
+          <h1 className="font-display text-3xl md:text-[44px] font-medium text-text-primary mb-2 leading-[1.05] tracking-[-0.02em]">
+            {cleanTitle(product.title)}
           </h1>
           <p className="font-hand text-xl text-primary/75 -rotate-[0.5deg] mb-5">
             con el nombre del chico o la chica
