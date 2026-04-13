@@ -2,14 +2,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { digitalCategories, themes, type DigitalCategoryId } from "@/data/themes";
 import { products } from "@/data/products";
+import { WashiTape } from "@/components/scrapbook/WashiTape";
+import { HandStar } from "@/components/scrapbook/HandDrawn";
 
 export const metadata = {
   title: "Imprimibles personalizados",
   description:
-    "Invitaciones digitales, libros para colorear, material escolar, cliparts y etiquetas personalizados con el nombre de tu hijo.",
+    "Invitaciones digitales, libros para colorear, material escolar, cliparts y etiquetas personalizados con el nombre del chico.",
 };
 
-// Pick a representative product image per category (the first one with good quality)
+const CAT_TILTS = [-1.4, 0.8, -0.6, 1.2, -0.4, 0.6, -1.0, 0.4, -0.8, 1.0, -0.6];
+const CAT_TAPES = ["pink", "mustard", "sage", "blue", "cream"] as const;
+
 function getCategoryShowcase(catId: DigitalCategoryId | string): string | null {
   const match = products.find(
     (p) => p.primaryCategory === catId && p.image && p.themes.length > 0
@@ -20,7 +24,7 @@ function getCategoryShowcase(catId: DigitalCategoryId | string): string | null {
 export default function ImprimiblesPage() {
   return (
     <>
-      {/* HERO editorial con imagen lateral */}
+      {/* HERO scrapbook con foto de persona real como polaroid grande */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -31,141 +35,186 @@ export default function ImprimiblesPage() {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/82 via-black/55 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/55 to-black/30" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 py-24 md:py-36">
+        {/* Corner tapes */}
+        <WashiTape
+          color="pink"
+          rotate={-12}
+          width={180}
+          height={30}
+          className="absolute -top-1 left-[6%] z-20"
+        />
+        <WashiTape
+          color="mustard"
+          rotate={8}
+          width={150}
+          height={28}
+          className="absolute -top-2 right-[8%] z-20"
+        />
+
+        <div className="relative max-w-7xl mx-auto px-6 py-24 md:py-32">
           <div className="max-w-2xl text-white">
-            {/* Editorial eyebrow */}
-            <div className="flex items-center gap-4 mb-8">
-              <span className="font-display italic text-white/75 text-sm">N.º 02</span>
-              <span className="h-px w-10 bg-white/40" />
-              <span className="text-[11px] font-bold tracking-[0.22em] uppercase text-white/85">
-                Catálogo de Imprimibles
-              </span>
+            <div className="flex items-center gap-3 mb-6">
+              <HandStar className="w-6 h-6" color="#E0B252" />
+              <p className="font-hand text-2xl md:text-3xl text-white/95 -rotate-1">
+                el catálogo completo
+              </p>
             </div>
 
             <h1
-              className="font-display text-[44px] sm:text-[56px] md:text-[72px] font-light leading-[0.95] tracking-[-0.03em] mb-6 text-white"
-              style={{ textShadow: "0 2px 16px rgba(0,0,0,0.35)" }}
+              className="font-display text-[46px] sm:text-[60px] md:text-[80px] font-light leading-[0.92] tracking-[-0.03em] mb-5 text-white text-balance"
+              style={{ textShadow: "0 2px 16px rgba(0,0,0,0.4)" }}
             >
               Imprimibles que se sienten{" "}
-              <span className="italic font-normal">hechos a mano.</span>
+              <span className="italic font-normal text-accent-pink">hechos a mano.</span>
             </h1>
 
             <p
-              className="text-lg md:text-xl text-white/92 leading-[1.6] max-w-xl mb-10"
+              className="font-hand text-2xl md:text-3xl text-white/95 -rotate-[0.5deg] mb-6"
               style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
             >
-              Del cumple al cuaderno del cole, cada archivo lo personalizamos con el nombre de tu hijo.
-              Descarga en 30 segundos y lo imprimís las veces que necesites.
+              + llegan en 30 segundos.
             </p>
 
-            {/* Trust band — hairline dividers, Fraunces numerals */}
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-4 pt-7 border-t border-white/25 max-w-[36rem]">
-              <div className="flex items-baseline gap-2">
-                <span className="font-display text-3xl font-normal text-white">30s</span>
-                <span className="text-[11px] uppercase tracking-wider text-white/80">
-                  entrega al instante
-                </span>
+            <p
+              className="text-lg md:text-xl text-white/90 leading-[1.65] max-w-xl mb-8"
+              style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}
+            >
+              Del cumple al cuaderno del cole, cada archivo lo personalizamos con el nombre del
+              chico o la chica. Descarga al instante, imprimís las veces que necesites.
+            </p>
+
+            {/* Post-it proof row */}
+            <div className="flex flex-wrap items-center gap-4">
+              <div
+                className="px-4 py-2 rotate-[-2deg]"
+                style={{ background: "#FFF3A8", boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
+              >
+                <div className="flex items-baseline gap-2">
+                  <span className="font-display text-2xl text-text-primary font-normal">30s</span>
+                  <span className="font-hand text-sm text-text-primary/80">al instante</span>
+                </div>
               </div>
-              <div className="h-8 w-px bg-white/25 hidden sm:block" />
-              <div className="flex items-baseline gap-2">
-                <span className="font-display text-3xl font-normal text-white">2k+</span>
-                <span className="text-[11px] uppercase tracking-wider text-white/80">
-                  mamás confían
-                </span>
+              <div
+                className="px-4 py-2 rotate-[1.5deg]"
+                style={{ background: "#FFDBE6", boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
+              >
+                <div className="flex items-baseline gap-2">
+                  <span className="font-display text-2xl text-text-primary font-normal">2k+</span>
+                  <span className="font-hand text-sm text-text-primary/80">familias</span>
+                </div>
               </div>
-              <div className="h-8 w-px bg-white/25 hidden sm:block" />
-              <div className="flex items-baseline gap-2">
-                <span className="font-display text-3xl font-normal text-white">∞</span>
-                <span className="text-[11px] uppercase tracking-wider text-white/80">
-                  reimprimís las veces que quieras
-                </span>
+              <div
+                className="px-4 py-2 rotate-[-1deg]"
+                style={{ background: "#D9E8D3", boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
+              >
+                <div className="flex items-baseline gap-2">
+                  <span className="font-display text-2xl text-text-primary font-normal">∞</span>
+                  <span className="font-hand text-sm text-text-primary/80">reimprimís</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CATEGORÍAS con foto de producto real */}
-      <section className="py-20 md:py-24 px-6 bg-bg">
+      {/* CATEGORÍAS como polaroids grandes */}
+      <section className="relative py-24 md:py-32 px-6 overflow-hidden">
+        <div className="absolute inset-0 -z-10 bg-[#FBF6EA]" />
+        <div className="absolute inset-0 -z-10 paper-grid opacity-60" />
+        <div className="absolute inset-0 -z-10 paper-texture opacity-50 mix-blend-multiply" />
+
         <div className="max-w-7xl mx-auto">
-          <div className="max-w-2xl mb-12 md:mb-14">
-            <p className="inline-block text-xs font-bold text-primary tracking-widest uppercase mb-3">
-              Elegí tu categoría
-            </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-text-primary text-balance">
+          <div className="max-w-3xl mb-16">
+            <div className="flex items-center gap-3 mb-4">
+              <WashiTape color="pink" rotate={-6} width={46} height={18} />
+              <p className="font-hand text-xl md:text-2xl text-primary/80 -rotate-[0.5deg]">
+                elegí tu categoría
+              </p>
+              <HandStar className="w-5 h-5 opacity-70" color="#E0B252" />
+            </div>
+            <h2 className="font-display text-[36px] md:text-[56px] font-light text-text-primary leading-[0.96] tracking-[-0.028em] text-balance">
               Explorá los{" "}
-              <span className="font-display italic font-normal text-gradient-primary">
+              <span className="italic font-normal text-gradient-primary">
                 {digitalCategories.length} tipos.
               </span>
             </h2>
-            <p className="text-text-secondary text-base md:text-lg mt-4">
-              Cada categoría tiene diseños personalizables con el nombre del chico y los datos del evento.
+            <p className="text-text-primary/70 text-base md:text-lg mt-5 leading-[1.65]">
+              Cada categoría tiene diseños personalizables con el nombre del chico o la chica y los
+              datos del evento.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
             {digitalCategories.map((cat, idx) => {
               const showcase = getCategoryShowcase(cat.id);
-              const isFeatured = idx === 0 || cat.badge === "Mejor valor";
+              const tilt = CAT_TILTS[idx % CAT_TILTS.length];
+              const tape = CAT_TAPES[idx % CAT_TAPES.length];
               return (
-                <Link
+                <div
                   key={cat.id}
-                  href={`/imprimibles/${cat.id}`}
-                  className={`group relative rounded-3xl overflow-hidden bg-bg-white border border-border-light card-hover flex flex-col ${
-                    isFeatured ? "sm:col-span-2 lg:col-span-1 lg:row-span-1" : ""
-                  }`}
+                  style={{ transform: `rotate(${tilt}deg)` }}
+                  className="relative transition-transform duration-300 hover:!rotate-0 hover:-translate-y-2"
                 >
-                  {/* Product showcase (real image from catalog) */}
-                  <div className="relative aspect-[4/3] overflow-hidden bg-[#FAF6EE]">
-                    {showcase ? (
-                      <Image
-                        src={showcase}
-                        alt={cat.name}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
-                      />
-                    ) : (
-                      <Image
-                        src={cat.iconImage}
-                        alt={cat.name}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-contain p-8"
-                      />
-                    )}
+                  <WashiTape
+                    color={tape}
+                    rotate={tilt > 0 ? -18 : 18}
+                    width={90}
+                    height={22}
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 z-20"
+                  />
+                  <Link href={`/imprimibles/${cat.id}`} className="group block polaroid">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-[#EFE9DC] rounded-[2px]">
+                      {showcase ? (
+                        <Image
+                          src={showcase}
+                          alt={cat.name}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : (
+                        <Image
+                          src={cat.iconImage}
+                          alt={cat.name}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-contain p-8"
+                        />
+                      )}
 
-                    {/* Icon badge esquina */}
-                    <div className="absolute top-3 left-3 w-11 h-11 rounded-xl overflow-hidden bg-white/90 backdrop-blur-sm shadow-md border border-white/40">
-                      <Image src={cat.iconImage} alt="" width={44} height={44} className="object-cover" />
+                      <div className="absolute top-3 left-3 w-11 h-11 rounded-[4px] overflow-hidden bg-white/90 backdrop-blur-sm shadow border border-white/50">
+                        <Image src={cat.iconImage} alt="" width={44} height={44} className="object-cover" />
+                      </div>
+
+                      {cat.badge && (
+                        <span
+                          className="absolute top-3 right-3 bg-accent-pink text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5"
+                          style={{ transform: "rotate(6deg)", boxShadow: "0 3px 8px rgba(0,0,0,0.2)" }}
+                        >
+                          {cat.badge}
+                        </span>
+                      )}
                     </div>
 
-                    {cat.badge && (
-                      <span className="absolute top-3 right-3 bg-primary text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full shadow-lg">
-                        {cat.badge}
+                    <div className="pt-5 pb-2 px-2">
+                      <h3 className="font-display text-2xl md:text-3xl font-normal text-text-primary mb-1 leading-tight group-hover:text-primary transition-colors">
+                        {cat.name}
+                      </h3>
+                      <p className="font-hand text-lg text-primary/75 mb-3 -rotate-[0.5deg]">
+                        personalizable con el nombre
+                      </p>
+                      <p className="text-sm text-text-secondary leading-relaxed mb-4">
+                        {cat.longDescription.split(".")[0]}.
+                      </p>
+                      <span className="inline-flex items-center gap-2 font-hand text-xl text-primary group-hover:text-primary-dark">
+                        ver diseños →
                       </span>
-                    )}
-                  </div>
-
-                  {/* Copy */}
-                  <div className="p-6 md:p-7 flex-1 flex flex-col">
-                    <h3 className="text-xl md:text-2xl font-extrabold text-text-primary mb-2 group-hover:text-primary transition-colors">
-                      {cat.name}
-                    </h3>
-                    <p className="text-sm text-text-secondary leading-relaxed mb-5 flex-1">
-                      {cat.longDescription.split(".")[0]}.
-                    </p>
-                    <div className="inline-flex items-center gap-2 text-primary text-sm font-semibold group-hover:gap-3 transition-all">
-                      <span>Ver diseños</span>
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                      </svg>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               );
             })}
           </div>
@@ -173,54 +222,68 @@ export default function ImprimiblesPage() {
       </section>
 
       {/* O entrá por tema */}
-      <section className="py-20 md:py-24 px-6 bg-bg-white border-t border-border-light">
+      <section className="relative py-24 md:py-28 px-6 overflow-hidden">
+        <div className="absolute inset-0 -z-10 bg-white" />
+
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
             <div>
-              <p className="inline-block text-xs font-bold text-primary tracking-widest uppercase mb-3">
-                O entrá por tema
-              </p>
-              <h2 className="text-2xl md:text-4xl font-extrabold text-text-primary text-balance max-w-md">
+              <div className="flex items-center gap-3 mb-4">
+                <WashiTape color="mustard" rotate={-6} width={46} height={18} />
+                <p className="font-hand text-xl md:text-2xl text-primary/80 -rotate-[0.5deg]">
+                  o entrá por tema
+                </p>
+              </div>
+              <h2 className="font-display text-[32px] md:text-[48px] font-light text-text-primary leading-[0.96] tracking-[-0.025em] text-balance max-w-md">
                 Lo que le hace{" "}
-                <span className="font-display italic font-normal text-gradient-primary">
+                <span className="italic font-normal text-gradient-primary">
                   brillar los ojos.
                 </span>
               </h2>
             </div>
             <Link
               href="/temas"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark group self-start md:self-auto"
+              className="font-hand text-2xl text-primary hover:text-primary-dark"
             >
-              Ver los {themes.length} temas
-              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
+              ver los {themes.length} temas →
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
-            {themes.slice(0, 12).map((t) => (
-              <Link
-                key={t.slug}
-                href={`/temas/${t.slug}`}
-                className="group rounded-xl overflow-hidden bg-bg border border-border-light card-hover"
-              >
-                <div className="relative aspect-square">
-                  <Image
-                    src={t.image}
-                    alt={t.name}
-                    fill
-                    sizes="(max-width: 768px) 33vw, 16vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 md:gap-6">
+            {themes.slice(0, 12).map((t, i) => {
+              const tilt = CAT_TILTS[i % CAT_TILTS.length] * 0.8;
+              const tape = CAT_TAPES[i % CAT_TAPES.length];
+              return (
+                <div
+                  key={t.slug}
+                  style={{ transform: `rotate(${tilt}deg)` }}
+                  className="relative transition-transform duration-300 hover:!rotate-0 hover:-translate-y-1"
+                >
+                  <WashiTape
+                    color={tape}
+                    rotate={tilt > 0 ? -20 : 20}
+                    width={50}
+                    height={14}
+                    className="absolute -top-1.5 left-1/2 -translate-x-1/2 z-20"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${t.gradient} opacity-15 mix-blend-multiply`} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-                  <div className="absolute bottom-2 left-2 right-2">
-                    <p className="text-white text-xs font-bold drop-shadow truncate">{t.name}</p>
-                  </div>
+                  <Link href={`/temas/${t.slug}`} className="group block polaroid !p-2 !pb-6">
+                    <div className="relative aspect-square overflow-hidden bg-[#EFE9DC] rounded-[2px]">
+                      <Image
+                        src={t.image}
+                        alt={t.name}
+                        fill
+                        sizes="(max-width: 768px) 33vw, 16vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className={`absolute inset-0 bg-gradient-to-t ${t.gradient} opacity-15 mix-blend-multiply`} />
+                    </div>
+                    <p className="absolute bottom-1 left-0 right-0 text-center font-hand text-sm text-text-primary truncate px-2">
+                      {t.name.toLowerCase()}
+                    </p>
+                  </Link>
                 </div>
-              </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

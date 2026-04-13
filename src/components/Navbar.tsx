@@ -12,12 +12,20 @@ export function Navbar() {
   const { totalItems, openCart } = useCart();
 
   return (
-    <nav className="fixed top-0 inset-x-0 z-50 glass-light">
+    <nav
+      className="fixed top-0 inset-x-0 z-50"
+      style={{
+        background: "rgba(251, 246, 234, 0.92)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        borderBottom: "1px solid rgba(42, 45, 37, 0.08)",
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center gap-3 md:gap-6">
         <Link href="/" className="flex items-center gap-2 group shrink-0">
           <span className="text-2xl">🎁</span>
-          <span className="text-xl font-bold tracking-tight text-text-primary hidden sm:inline">
-            temati<span className="text-gradient-primary">box</span>
+          <span className="font-display text-2xl font-normal text-text-primary hidden sm:inline leading-none">
+            temati<span className="italic text-gradient-primary">box</span>
           </span>
         </Link>
 
@@ -27,8 +35,8 @@ export function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-6">
-          <Link href="/temas" className="text-sm font-medium text-text-secondary hover:text-primary transition-colors whitespace-nowrap">Temas</Link>
-          <Link href="/imprimibles" className="text-sm font-medium text-text-secondary hover:text-primary transition-colors whitespace-nowrap">Imprimibles</Link>
+          <Link href="/temas" className="font-hand text-xl text-text-primary/75 hover:text-primary transition-colors whitespace-nowrap">temas</Link>
+          <Link href="/imprimibles" className="font-hand text-xl text-text-primary/75 hover:text-primary transition-colors whitespace-nowrap">imprimibles</Link>
         </div>
 
         <div className="flex items-center gap-1 md:gap-2 ml-auto md:ml-0">
@@ -52,7 +60,11 @@ export function Navbar() {
             {totalItems > 0 && (<span className="absolute -top-0.5 -right-0.5 w-5 h-5 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center">{totalItems > 9 ? "9+" : totalItems}</span>)}
           </button>
 
-          <Link href="/imprimibles" className="hidden lg:inline-flex btn-primary !py-2.5 !px-4 !text-xs whitespace-nowrap">
+          <Link
+            href="/imprimibles"
+            className="hidden lg:inline-flex items-center gap-2 px-4 py-2.5 bg-text-primary text-[#FBF6EA] text-xs font-semibold whitespace-nowrap rounded-[4px] transition-all hover:translate-x-[-1px] hover:translate-y-[-1px]"
+            style={{ boxShadow: "3px 3px 0 0 #E54CA2" }}
+          >
             Ver imprimibles
           </Link>
 
@@ -73,10 +85,29 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-bg-white border-t border-border-light px-6 py-4 space-y-3">
-          <Link href="/temas" className="block py-2 text-sm font-medium text-text-secondary hover:text-primary" onClick={() => setMobileOpen(false)}>Explorar temas</Link>
-          <Link href="/imprimibles" className="block py-2 text-sm font-medium text-text-secondary hover:text-primary" onClick={() => setMobileOpen(false)}>Imprimibles</Link>
-          <Link href="/imprimibles" className="btn-primary w-full !text-sm mt-2" onClick={() => setMobileOpen(false)}>Ver imprimibles</Link>
+        <div className="md:hidden bg-[#FBF6EA] border-t border-text-primary/10 px-6 py-5 space-y-3">
+          <Link
+            href="/temas"
+            className="block py-2 font-hand text-xl text-text-primary hover:text-primary"
+            onClick={() => setMobileOpen(false)}
+          >
+            explorar temas
+          </Link>
+          <Link
+            href="/imprimibles"
+            className="block py-2 font-hand text-xl text-text-primary hover:text-primary"
+            onClick={() => setMobileOpen(false)}
+          >
+            imprimibles
+          </Link>
+          <Link
+            href="/imprimibles"
+            className="inline-flex items-center justify-center w-full px-5 py-3 bg-text-primary text-[#FBF6EA] font-semibold text-sm rounded-[4px]"
+            style={{ boxShadow: "4px 4px 0 0 #E54CA2" }}
+            onClick={() => setMobileOpen(false)}
+          >
+            Ver imprimibles →
+          </Link>
         </div>
       )}
     </nav>

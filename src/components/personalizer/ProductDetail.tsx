@@ -11,6 +11,8 @@ import { formatPrice, getDiscount } from "@/data/themes";
 import { useCart } from "@/components/CartProvider";
 import { waLink } from "@/lib/config";
 import { track } from "@/components/Analytics";
+import { WashiTape } from "@/components/scrapbook/WashiTape";
+import { HandStar, HandArrow } from "@/components/scrapbook/HandDrawn";
 
 interface Props {
   product: RealProduct;
@@ -138,7 +140,7 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
     router.push("/checkout");
   }
 
-  const displayName = pers.name?.trim() || "Tu hijo";
+  const displayName = pers.name?.trim() || "su nombre";
   const displayAge = pers.age !== "" && pers.age !== undefined ? pers.age : "—";
   const showPreview = (pers.name?.trim().length ?? 0) > 0;
 
@@ -154,53 +156,71 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
           >
-            {/* Editorial frame */}
-            <div className="relative rounded-[32px] overflow-hidden bg-[#FAF6EE] shadow-[0_40px_80px_-30px_rgba(42,45,37,0.22)] border border-border-light aspect-square">
-              <Image
-                src={product.image}
-                alt={product.title}
-                fill
-                sizes="(max-width: 1024px) 100vw, 58vw"
-                className="object-contain p-4 md:p-8"
-                priority
-              />
+            {/* Big polaroid frame */}
+            <WashiTape
+              color="pink"
+              rotate={-10}
+              width={140}
+              height={26}
+              className="absolute -top-3 left-1/2 -translate-x-1/2 z-20"
+            />
+            <div className="polaroid relative" style={{ transform: "rotate(-1deg)" }}>
+              <div className="relative overflow-hidden bg-[#EFE9DC] rounded-[2px] aspect-square">
+                <Image
+                  src={product.image}
+                  alt={product.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  className="object-contain p-4 md:p-8"
+                  priority
+                />
 
-              {/* Floating meta top-left */}
-              <div className="absolute top-5 left-5 flex items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-sm rounded-full pl-1 pr-3 py-1 shadow-sm border border-border-light">
-                  <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
-                  <span className="text-[10px] font-bold text-text-primary tracking-widest uppercase">
-                    Disponible ahora
-                  </span>
-                </span>
-              </div>
-
-              {/* Discount badge top-right */}
-              {discount !== null && discount > 0 && (
-                <div className="absolute top-5 right-5">
-                  <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary text-white font-bold text-sm shadow-lg rotate-[8deg]">
-                    -{discount}%
+                {/* Floating meta top-left */}
+                <div className="absolute top-4 left-4 flex items-center gap-2">
+                  <span
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FFF3A8] text-text-primary"
+                    style={{ transform: "rotate(-3deg)", boxShadow: "0 3px 8px rgba(0,0,0,0.15)" }}
+                  >
+                    <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
+                    <span className="font-hand text-base">disponible ahora</span>
                   </span>
                 </div>
-              )}
+
+                {/* Discount badge top-right */}
+                {discount !== null && discount > 0 && (
+                  <div className="absolute top-4 right-4">
+                    <span
+                      className="inline-flex items-center justify-center w-14 h-14 bg-accent-pink text-white font-bold text-sm"
+                      style={{
+                        transform: "rotate(8deg)",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.25)",
+                        borderRadius: "50%",
+                      }}
+                    >
+                      -{discount}%
+                    </span>
+                  </div>
+                )}
+              </div>
+              <p className="absolute bottom-3 left-0 right-0 text-center font-hand text-lg text-text-primary/80">
+                hecho a mano por el equipo
+              </p>
             </div>
 
             {/* Caption below image */}
-            <div className="mt-4 flex items-center justify-between text-xs text-text-secondary">
-              <p className="flex items-center gap-2">
-                <svg className="w-3.5 h-3.5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-                <span>Hecho a mano por el equipo</span>
+            <div className="mt-6 flex items-center justify-between text-xs text-text-secondary">
+              <p className="flex items-center gap-2 font-hand text-base text-primary/75">
+                <HandStar className="w-4 h-4" color="#E0B252" />
+                diseñado a pedido
               </p>
               {product.mlPermalink && (
                 <a
                   href={product.mlPermalink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="italic hover:text-primary underline-offset-4 hover:underline"
+                  className="font-hand text-base text-primary/75 hover:text-primary underline decoration-dotted underline-offset-4"
                 >
-                  Ver también en ML ↗
+                  ver también en ML ↗
                 </a>
               )}
             </div>
@@ -237,10 +257,13 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
             )}
           </div>
 
-          {/* Title — editorial Fraunces */}
-          <h1 className="font-display text-3xl md:text-[44px] font-semibold text-text-primary mb-4 leading-[1.05] tracking-tight">
+          {/* Title — Fraunces display */}
+          <h1 className="font-display text-3xl md:text-[44px] font-light text-text-primary mb-2 leading-[1.05] tracking-[-0.02em]">
             {product.title}
           </h1>
+          <p className="font-hand text-xl text-primary/75 -rotate-[0.5deg] mb-5">
+            con el nombre del chico o la chica
+          </p>
 
           {/* Rating + sold */}
           {product.rating !== null && (
@@ -255,22 +278,28 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
               {product.sold !== null && (
                 <>
                   <span className="w-1 h-1 rounded-full bg-text-tertiary" />
-                  <span className="text-text-secondary">{product.sold} mamás lo compraron</span>
+                  <span className="font-hand text-lg text-text-secondary">
+                    lo compraron {product.sold} familias
+                  </span>
                 </>
               )}
             </div>
           )}
 
-          {/* Live preview when personalized */}
+          {/* Live preview when personalized — post-it style */}
           {showPreview && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.94, rotate: -3 }}
+              animate={{ opacity: 1, scale: 1, rotate: -1.5 }}
               transition={{ duration: 0.4 }}
-              className="mb-6 p-5 rounded-2xl bg-gradient-to-br from-primary/5 via-primary-bg to-[#F0ECE3] border border-primary/15"
+              className="mb-6 p-5 relative"
+              style={{
+                background: "#FFF3A8",
+                boxShadow: "0 10px 28px -8px rgba(42,45,37,0.25)",
+              }}
             >
-              <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-1.5">
-                Tu diseño va a decir
+              <p className="font-hand text-lg text-primary/75 -rotate-[0.5deg] mb-1">
+                tu diseño va a decir:
               </p>
               <p className="font-display text-2xl md:text-3xl text-text-primary leading-tight">
                 <span className="italic font-normal">{displayName}</span>
@@ -279,7 +308,7 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
                 )}
               </p>
               {pers.eventDate && (
-                <p className="text-sm text-text-secondary mt-2 italic">
+                <p className="font-hand text-base text-text-primary/75 mt-2">
                   {new Date(pers.eventDate + "T12:00:00").toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" })}
                   {pers.eventTime && ` · ${pers.eventTime}`}
                   {pers.venue && ` · ${pers.venue}`}
@@ -288,13 +317,23 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
             </motion.div>
           )}
 
-          {/* Personalization form — editorial */}
-          <div className="bg-bg-white rounded-3xl border border-border-light p-6 md:p-7 mb-5 shadow-sm">
+          {/* Personalization form — paper card */}
+          <div
+            className="bg-[#FFFDF8] border border-text-primary/15 p-6 md:p-7 mb-5 relative"
+            style={{ boxShadow: "0 6px 20px -8px rgba(42,45,37,0.14)" }}
+          >
+            <WashiTape
+              color="mustard"
+              rotate={-8}
+              width={80}
+              height={22}
+              className="absolute -top-3 left-6 z-10"
+            />
             <div className="mb-5">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-2">
-                01 · Personalizalo
+              <p className="font-hand text-xl text-primary/75 -rotate-[0.5deg] mb-1">
+                01 · personalizalo
               </p>
-              <h2 className="font-display text-xl text-text-primary leading-tight">
+              <h2 className="font-display text-2xl font-normal text-text-primary leading-tight">
                 Hacelo <span className="italic font-normal text-primary">único</span>
               </h2>
             </div>
@@ -362,27 +401,41 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
           </div>
 
           {/* Price + CTA */}
-          <div className="bg-bg-white rounded-3xl border border-border-light p-6 md:p-7 mb-5 shadow-sm">
+          <div
+            className="bg-[#FFFDF8] border border-text-primary/15 p-6 md:p-7 mb-5 relative"
+            style={{ boxShadow: "0 6px 20px -8px rgba(42,45,37,0.14)" }}
+          >
+            <WashiTape
+              color="pink"
+              rotate={6}
+              width={80}
+              height={22}
+              className="absolute -top-3 right-6 z-10"
+            />
             <div className="mb-5">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-2">
-                02 · Pagá
+              <p className="font-hand text-xl text-primary/75 -rotate-[0.5deg] mb-1">
+                02 · pagá
               </p>
               <div className="flex items-end justify-between">
                 <div>
                   {product.originalPrice && (
-                    <span className="text-sm text-text-tertiary line-through">
+                    <span className="font-hand text-base text-text-tertiary line-through">
                       {formatPrice(product.originalPrice)}
                     </span>
                   )}
                   <div className="flex items-baseline gap-2">
-                    <span className="font-display text-4xl md:text-5xl font-semibold text-text-primary">
+                    <span className="font-display text-4xl md:text-5xl font-normal text-text-primary">
                       {product.price ? formatPrice(product.price) : "—"}
                     </span>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-accent-green">En tu email</p>
-                  <p className="text-sm font-semibold text-text-primary">En 30 segundos</p>
+                  <p className="font-hand text-lg text-accent-green leading-tight">
+                    en tu email
+                  </p>
+                  <p className="font-hand text-base text-text-primary/80">
+                    en 30 segundos
+                  </p>
                 </div>
               </div>
             </div>
@@ -390,16 +443,15 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
             <button
               onClick={handleBuyNow}
               disabled={!isValid || paying}
-              className="group w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-sky-500 hover:bg-sky-600 disabled:bg-text-tertiary/30 disabled:cursor-not-allowed text-white font-bold text-base transition-all disabled:opacity-60 mb-3"
+              className="group w-full flex items-center justify-center gap-2 px-6 py-4 bg-text-primary text-[#FBF6EA] font-semibold text-base transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-[4px] hover:translate-x-[-2px] hover:translate-y-[-2px] disabled:hover:translate-x-0 disabled:hover:translate-y-0 mb-4"
+              style={{ boxShadow: isValid && !paying ? "6px 6px 0 0 #E54CA2" : "3px 3px 0 0 rgba(42,45,37,0.2)" }}
             >
               {paying ? (
                 "Redirigiendo a Mercado Pago..."
               ) : isValid ? (
                 <>
-                  Comprar ahora con Mercado Pago
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
+                  Comprar con Mercado Pago
+                  <HandArrow className="w-5 h-3 opacity-80" color="currentColor" />
                 </>
               ) : (
                 "Completá nombre y edad"
@@ -408,71 +460,85 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
             <button
               onClick={handleAddCart}
               disabled={!isValid}
-              className="w-full px-6 py-3 rounded-2xl bg-bg text-text-primary border border-border hover:border-primary hover:text-primary font-semibold text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full px-6 py-3 bg-[#FBF6EA] text-text-primary border border-text-primary/20 hover:border-primary hover:text-primary font-semibold text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed rounded-[4px]"
             >
               Agregar al carrito
             </button>
 
-            <p className="text-[11px] text-text-tertiary text-center mt-4 leading-relaxed">
-              Pagás una vez. Descargás las veces que necesites.
+            <p className="font-hand text-base text-text-secondary text-center mt-4 -rotate-[0.5deg]">
+              pagás una vez · descargás las veces que necesites
             </p>
           </div>
 
-          {/* Trust signals — editorial row */}
-          <div className="bg-gradient-to-br from-primary-bg to-[#F0ECE3] rounded-3xl p-6 mb-5">
-            <ul className="space-y-3 text-sm">
+          {/* Trust signals — post-it */}
+          <div
+            className="p-6 mb-5 relative"
+            style={{
+              background: "#D9E8D3",
+              transform: "rotate(-0.5deg)",
+              boxShadow: "0 8px 22px -8px rgba(42,45,37,0.22)",
+            }}
+          >
+            <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
-                <span className="shrink-0 w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center mt-0.5">
-                  <svg className="w-3 h-3 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                  </svg>
-                </span>
+                <HandStar className="w-5 h-5 shrink-0 mt-0.5" color="#6B7257" />
                 <div>
-                  <p className="font-semibold text-text-primary">Llega en menos de 30 segundos</p>
-                  <p className="text-xs text-text-secondary leading-relaxed">A tu email apenas se confirma el pago. No esperás envío físico.</p>
+                  <p className="font-display text-lg font-normal text-text-primary leading-tight">
+                    Llega en menos de 30 segundos
+                  </p>
+                  <p className="font-hand text-base text-text-primary/75 -rotate-[0.3deg]">
+                    a tu email, sin esperar envío físico
+                  </p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="shrink-0 w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center mt-0.5">
-                  <svg className="w-3 h-3 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                  </svg>
-                </span>
+                <HandStar className="w-5 h-5 shrink-0 mt-0.5" color="#E0B252" />
                 <div>
-                  <p className="font-semibold text-text-primary">Personalizado a mano</p>
-                  <p className="text-xs text-text-secondary leading-relaxed">Nuestras diseñadoras integran el nombre y datos al diseño.</p>
+                  <p className="font-display text-lg font-normal text-text-primary leading-tight">
+                    Personalizado a mano
+                  </p>
+                  <p className="font-hand text-base text-text-primary/75 -rotate-[0.3deg]">
+                    el nombre y los datos los integra nuestro equipo
+                  </p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="shrink-0 w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center mt-0.5">
-                  <svg className="w-3 h-3 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                  </svg>
-                </span>
+                <HandStar className="w-5 h-5 shrink-0 mt-0.5" color="#E54CA2" />
                 <div>
-                  <p className="font-semibold text-text-primary">Imprimís las veces que necesites</p>
-                  <p className="text-xs text-text-secondary leading-relaxed">El archivo queda tuyo. Impresora hogareña o imprenta.</p>
+                  <p className="font-display text-lg font-normal text-text-primary leading-tight">
+                    Reimprimís las veces que quieras
+                  </p>
+                  <p className="font-hand text-base text-text-primary/75 -rotate-[0.3deg]">
+                    el archivo queda tuyo · imprenta u hogareña
+                  </p>
                 </div>
               </li>
             </ul>
           </div>
 
           {/* WhatsApp CTA */}
-          <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-bg-white border border-border-light">
+          <div
+            className="flex items-center gap-3 px-5 py-4 bg-[#FFFDF8] border border-text-primary/15 rounded-[4px]"
+            style={{ boxShadow: "0 4px 12px -4px rgba(42,45,37,0.1)" }}
+          >
             <div className="shrink-0 w-10 h-10 rounded-full bg-green-50 flex items-center justify-center">
               <svg className="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-text-primary">¿Dudas antes de comprar?</p>
-              <p className="text-xs text-text-secondary">Te responde Daniela en minutos</p>
+              <p className="font-display text-lg font-normal text-text-primary leading-tight">
+                ¿Dudas antes de comprar?
+              </p>
+              <p className="font-hand text-base text-text-secondary">
+                te responde Daniela en minutos
+              </p>
             </div>
             <a
               href={waLink(`Hola! Tengo una consulta sobre ${product.title}`)}
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0 px-4 py-2 rounded-full bg-green-600 hover:bg-green-700 text-white text-xs font-semibold transition-colors"
+              className="shrink-0 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold rounded-[4px] transition-colors"
             >
               Chatear
             </a>
@@ -480,22 +546,22 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
         </motion.div>
       </div>
 
-      {/* RELATED — editorial cross-sell */}
+      {/* RELATED — polaroid cross-sell */}
       {related.length > 0 && (
-        <section className="mt-24 md:mt-32 pt-16 border-t border-border-light">
-          <div className="flex items-end justify-between mb-10">
+        <section className="mt-24 md:mt-32 pt-16 border-t border-text-primary/10">
+          <div className="flex items-end justify-between mb-12">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-widest text-primary mb-3">
-                Combinalo con
+              <p className="font-hand text-2xl text-primary/75 -rotate-[0.5deg] mb-2">
+                combinalo con
               </p>
-              <h2 className="font-display text-3xl md:text-4xl text-text-primary leading-tight max-w-xl">
+              <h2 className="font-display text-3xl md:text-4xl font-light text-text-primary leading-[1.05] max-w-xl">
                 {theme ? (
                   <>
-                    Más de <span className="italic font-normal">{theme.name}</span>
+                    Más de <span className="italic font-normal text-gradient-primary">{theme.name}</span>
                   </>
                 ) : (
                   <>
-                    Te <span className="italic font-normal">también</span> va a gustar
+                    Te <span className="italic font-normal text-gradient-primary">también</span> va a gustar
                   </>
                 )}
               </h2>
@@ -503,42 +569,54 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
             {theme && (
               <Link
                 href={`/temas/${theme.slug}`}
-                className="hidden md:inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary-dark group"
+                className="hidden md:inline-flex items-center gap-1.5 font-hand text-xl text-primary hover:text-primary-dark"
               >
-                Ver todo {theme.name}
-                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
+                ver todo {theme.name} →
               </Link>
             )}
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {related.slice(0, 8).map((r) => (
-              <Link
-                key={r.id}
-                href={`/producto/${r.slug}`}
-                className="group block rounded-2xl overflow-hidden bg-bg-white border border-border-light hover:border-primary/30 hover:shadow-xl transition-all"
-              >
-                <div className="relative aspect-square bg-[#FAF6EE] overflow-hidden">
-                  <Image
-                    src={r.image}
-                    alt={r.title}
-                    fill
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 md:gap-8">
+            {related.slice(0, 8).map((r, i) => {
+              const tilt = [-1.4, 0.8, -0.6, 1.2][i % 4];
+              const tape = (["pink", "mustard", "sage", "blue"] as const)[i % 4];
+              return (
+                <div
+                  key={r.id}
+                  style={{ transform: `rotate(${tilt}deg)` }}
+                  className="relative transition-transform duration-300 hover:!rotate-0 hover:-translate-y-2"
+                >
+                  <WashiTape
+                    color={tape}
+                    rotate={tilt > 0 ? -18 : 18}
+                    width={56}
+                    height={18}
+                    className="absolute -top-2 left-1/2 -translate-x-1/2 z-20"
                   />
+                  <Link href={`/producto/${r.slug}`} className="group block polaroid">
+                    <div className="relative aspect-square overflow-hidden bg-[#EFE9DC] rounded-[2px]">
+                      <Image
+                        src={r.image}
+                        alt={r.title}
+                        fill
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                        className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="pt-3 pb-1 px-1">
+                      <p className="font-hand text-lg text-text-primary line-clamp-2 leading-tight group-hover:text-primary transition-colors">
+                        {r.title.replace(/imprimible/gi, "").replace(/^\s*-\s*/, "").trim()}
+                      </p>
+                      {r.price && (
+                        <p className="font-display text-lg font-normal text-text-primary mt-1 leading-none">
+                          {formatPrice(r.price)}
+                        </p>
+                      )}
+                    </div>
+                  </Link>
                 </div>
-                <div className="p-4">
-                  <p className="text-sm font-semibold text-text-primary line-clamp-2 group-hover:text-primary transition-colors min-h-[40px] leading-tight">
-                    {r.title}
-                  </p>
-                  {r.price && (
-                    <p className="text-sm font-bold text-text-primary mt-2">{formatPrice(r.price)}</p>
-                  )}
-                </div>
-              </Link>
-            ))}
+              );
+            })}
           </div>
         </section>
       )}
