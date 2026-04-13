@@ -13,6 +13,7 @@ import { waLink } from "@/lib/config";
 import { track } from "@/components/Analytics";
 import { WashiTape } from "@/components/scrapbook/WashiTape";
 import { HandStar, HandArrow } from "@/components/scrapbook/HandDrawn";
+import { CREAM_BLUR } from "@/lib/images/placeholder";
 
 interface Props {
   product: RealProduct;
@@ -185,6 +186,8 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
                   alt={product.title}
                   fill
                   sizes="(max-width: 1024px) 100vw, 58vw"
+                  placeholder="blur"
+                  blurDataURL={CREAM_BLUR}
                   className="object-contain p-4 md:p-8"
                   priority
                 />
@@ -620,6 +623,8 @@ export function ProductDetail({ product, theme, category, related = [] }: Props)
                         alt={r.title}
                         fill
                         sizes="(max-width: 768px) 50vw, 25vw"
+                        placeholder="blur"
+                        blurDataURL={CREAM_BLUR}
                         className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>

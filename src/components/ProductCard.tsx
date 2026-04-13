@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import type { RealProduct } from "@/data/products";
 import { formatPrice, getDiscount, getThemeBySlug, getDigitalCategory } from "@/data/themes";
 import { WashiTape } from "@/components/scrapbook/WashiTape";
+import { CREAM_BLUR } from "@/lib/images/placeholder";
 
 // Deterministic tilt based on slug so layout is stable across renders
 function tiltFromSlug(slug: string): number {
@@ -62,6 +63,8 @@ export function ProductCard({ product, index = 0 }: Props) {
             alt={product.title}
             fill
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+            placeholder="blur"
+            blurDataURL={CREAM_BLUR}
             className="object-contain p-2 transition-transform duration-500 group-hover:scale-[1.04]"
           />
           {category && (

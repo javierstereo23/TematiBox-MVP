@@ -12,6 +12,7 @@ import {
   HandStar,
   HandScribble,
 } from "@/components/scrapbook/HandDrawn";
+import { CREAM_BLUR } from "@/lib/images/placeholder";
 
 // Three curated products as polaroids in the collage
 const COLLAGE_SLUGS = [
@@ -187,6 +188,8 @@ export function HeroSection() {
                         alt={collage[0].title}
                         fill
                         sizes="300px"
+                        placeholder="blur"
+                        blurDataURL={CREAM_BLUR}
                         className="object-cover"
                         priority
                       />
@@ -212,6 +215,8 @@ export function HeroSection() {
                         alt={collage[1].title}
                         fill
                         sizes="250px"
+                        placeholder="blur"
+                        blurDataURL={CREAM_BLUR}
                         className="object-cover"
                       />
                     </div>
@@ -236,6 +241,8 @@ export function HeroSection() {
                         alt={collage[2].title}
                         fill
                         sizes="230px"
+                        placeholder="blur"
+                        blurDataURL={CREAM_BLUR}
                         className="object-cover"
                       />
                     </div>

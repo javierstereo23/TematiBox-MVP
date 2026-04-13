@@ -12,6 +12,8 @@ const TESTIMONIALS = [
     name: "Lucía",
     meta: "Mamá de Mía (4), Pilar",
     handNote: "4 años, cumple Bluey",
+    initials: "LC",
+    avatarGradient: "from-[#E54CA2] via-[#F59042] to-[#E0B252]",
     tape: "pink" as const,
     bg: "#FFF3A8",
     rotate: -1.5,
@@ -22,6 +24,8 @@ const TESTIMONIALS = [
     name: "Florencia",
     meta: "Mamá de Bauti y Juana, San Isidro",
     handNote: "etiquetas + invitaciones",
+    initials: "FG",
+    avatarGradient: "from-[#2E5BB8] via-[#4DA5C3] to-[#9DA295]",
     tape: "blue" as const,
     bg: "#FFDBE6",
     rotate: 1.2,
@@ -32,6 +36,8 @@ const TESTIMONIALS = [
     name: "Verónica",
     meta: "Mamá de Tomás (11), Recoleta",
     handNote: "stickers + colorear",
+    initials: "VR",
+    avatarGradient: "from-[#6B7257] via-[#E0B252] to-[#F59042]",
     tape: "mustard" as const,
     bg: "#D9E8D3",
     rotate: -0.8,
@@ -87,14 +93,22 @@ export function TestimonialsSection() {
                   <blockquote className="font-display italic text-lg md:text-xl text-text-primary leading-snug mb-6">
                     &ldquo;{t.quote}&rdquo;
                   </blockquote>
-                  <div className="pt-5 border-t border-text-primary/15">
-                    <p className="font-hand text-2xl text-text-primary leading-tight">
-                      — {t.name}
-                    </p>
-                    <p className="text-xs text-text-primary/65 mt-1">{t.meta}</p>
-                    <p className="font-hand text-base text-primary/70 mt-2 -rotate-1">
-                      {t.handNote}
-                    </p>
+                  <div className="pt-5 border-t border-text-primary/15 flex items-center gap-3">
+                    <div
+                      className={`shrink-0 w-12 h-12 rounded-full bg-gradient-to-br ${t.avatarGradient} flex items-center justify-center text-white font-display font-medium text-base tracking-wide`}
+                      style={{ boxShadow: "0 4px 10px -2px rgba(42,45,37,0.22)" }}
+                    >
+                      {t.initials}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-hand text-2xl text-text-primary leading-tight">
+                        — {t.name}
+                      </p>
+                      <p className="text-xs text-text-primary/65 leading-tight">{t.meta}</p>
+                      <p className="font-hand text-base text-primary/70 mt-1 -rotate-1">
+                        {t.handNote}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </motion.div>

@@ -7,6 +7,7 @@ import { products } from "@/data/products";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { SectionHeader } from "@/components/scrapbook/SectionHeader";
 import { WashiTape } from "@/components/scrapbook/WashiTape";
+import { CREAM_BLUR } from "@/lib/images/placeholder";
 
 const TILTS = [-1.4, 0.8, -0.6, 1.2, -0.4, 0.6, -1.0, 0.4, -0.8, 1.0, -0.6];
 const TAPES = ["pink", "mustard", "sage", "blue", "cream"] as const;
@@ -65,6 +66,8 @@ export function DigitalShowcase() {
                           alt={cat.name}
                           fill
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          placeholder="blur"
+                          blurDataURL={CREAM_BLUR}
                           className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
                         />
                       ) : (
@@ -73,6 +76,8 @@ export function DigitalShowcase() {
                           alt={cat.name}
                           fill
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          placeholder="blur"
+                          blurDataURL={CREAM_BLUR}
                           className="object-contain p-8"
                         />
                       )}

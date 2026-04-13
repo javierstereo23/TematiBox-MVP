@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { ThemeData } from "@/data/themes";
 import { WashiTape } from "@/components/scrapbook/WashiTape";
+import { CREAM_BLUR } from "@/lib/images/placeholder";
 
 interface ThemeCardProps {
   theme: ThemeData;
@@ -34,6 +35,8 @@ export function ThemeCard({ theme, index = 0 }: ThemeCardProps) {
             alt={theme.name}
             fill
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+            placeholder="blur"
+            blurDataURL={CREAM_BLUR}
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className={`absolute inset-0 bg-gradient-to-t ${theme.gradient} opacity-20 mix-blend-multiply`} />

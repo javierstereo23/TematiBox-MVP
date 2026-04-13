@@ -7,6 +7,7 @@ import { themes } from "@/data/themes";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeader } from "@/components/scrapbook/SectionHeader";
 import { WashiTape } from "@/components/scrapbook/WashiTape";
+import { CREAM_BLUR } from "@/lib/images/placeholder";
 
 const FEATURED_SLUGS = [
   "bluey",
@@ -69,6 +70,8 @@ export function FeaturedThemes() {
                       alt={t.name}
                       fill
                       sizes="(max-width: 768px) 50vw, 25vw"
+                      placeholder="blur"
+                      blurDataURL={CREAM_BLUR}
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className={`absolute inset-0 bg-gradient-to-t ${t.gradient} opacity-15 mix-blend-multiply`} />
